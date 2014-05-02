@@ -1,0 +1,664 @@
+\documentclass[10pt]{beamer}
+
+\usetheme[compress]{PaloAlto}
+\usecolortheme{sidebartab}
+%\logo{\includegraphics[width=1cm]{../Rlogo-5.png}}
+
+\usepackage[brazilian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[scaled]{beramono} % truetype: Bistream Vera Sans Mono
+%\usepackage{inconsolata}
+
+\setbeamertemplate{footline}[frame number] % mostra o numero dos slides
+\setbeamertemplate{navigation symbols}{} % retira a barra de navegacao
+
+\usepackage{xspace}
+\providecommand{\eg}{\textit{e.g.}\xspace}
+\providecommand{\ie}{\textit{i.e.}\xspace}
+%\providecommand{\R}{\texttt{R}\xspace}
+
+\title[Módulo II\\ Descritiva]{Introdução ao uso do software R}
+\author[]{Fernando de Pol Mayer\inst{1} \and %\url{fernandomayer@gmail.com} \and
+Rodrigo Sant'Ana\inst{2}} %\\ \url{oc.rodrigosantana@gmail.com}}
+\date{26 e 27 de Novembro, 2012}
+\institute{
+  \inst{1}%
+  Universidade Federal de Santa Catarina (UFSC) \\
+  Departamento de Ecologia e Zoologia (ECZ/CCB) \\
+  \url{fernando.mayer@gmail.com}
+  \and
+  \inst{2}%
+  Instituto Albatroz \\
+  \url{oc.rodrigosantana@gmail.com}
+}
+\logo{\includegraphics[width=1cm]{../Rlogo-5}}
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Sumário}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\AtBeginSubsection[]
+{
+  \begin{frame}
+    \frametitle{Sumário}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+\begin{document}
+
+<<setup, include=FALSE, cache=FALSE>>=
+# smaller font size for chunks
+opts_chunk$set(size = "small",
+               prompt = TRUE,
+               comment = NA,
+               tidy = FALSE,
+               cache = TRUE,
+               fig.align = "center",
+               fig.width = 5,
+               fig.height = 5)
+thm <- knit_theme$get("beamer2")
+knit_theme$set(thm)
+options(width = 65, digits = 5, continue = "  ")
+@
+
+\begin{frame}
+\maketitle
+%\titlepage
+\end{frame}
+
+\begin{frame}{Sumário}
+\tableofcontents
+\end{frame}
+
+\section{Importação de dados}
+
+\begin{frame}[fragile=singleslide]{Antes de importar para o R}
+\begin{itemize}
+\item Se houverem valores perdidos, preencha com \texttt{NA}s
+\item A matriz de dados deve formar um bloco só. Se houverem colunas de
+  diferentes comprimentos, preencha com \texttt{NA}s
+\item Salve o arquivo como ``valores separados por vírgula''
+  (\texttt{.csv}), mas atenção:
+    \begin{itemize}
+    \item Se o separador de decimal for ``\texttt{,}'', o separador de
+      campos será ``\texttt{;}'' automaticamente (o que é mais comum nos
+      sistemas em português).
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+%% \begin{frame}[fragile=singleslide]{O editor de scripts}
+%% \begin{itemize}
+%% \item Para criar rotinas computacionais é necessário utilizar um editor
+%%   de scripts.
+%% \item Clique em \texttt{Arquivo > Novo script}. Salve com a extensão
+%%   \texttt{.R}.
+%% \item Para enviar comandos diretamente para o console, selecione-os e
+%%   aperte \texttt{Ctrl + R}.
+%% \item Para adicionar comentários ao script, utiliza-se o símbolo
+%%   \texttt{\#} antes do texto e/ou comandos. O que estiver depois do
+%%   símbolo não será interpretado pelo R. Portanto:
+%% \begin{verbatim}
+%% 2 + 2     # esta linha será executada
+%% # 2 + 2     esta linha não será executada
+%% \end{verbatim}
+%% \end{itemize}
+%% \end{frame}
+
+\begin{frame}[fragile=singleslide]{A função \texttt{read.table()}}
+O método mais comum de importação de dados para o R, é utilizando a
+função \texttt{read.table()}. Para importar um arquivo \texttt{.csv}
+faça:
+<<>>=
+dados <- read.table("crabs.csv", header = T, sep = ";",
+                    dec = ",")
+@
+Argumentos:
+\begin{itemize}
+\item \verb|"crabs.csv"|: nome do arquivo
+\item \texttt{header = T}: significa que a primeira linha do arquivo deve
+  ser inrpretada como os nomes das colunas
+\item \texttt{sep = ";"}: o separador de colunas (também pode ser
+  \verb|"\t"| para tabulação e \verb|""| para espaços)
+\item \texttt{dec = ","}: o separador de decimais
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Estrutura dos dados importados}
+A função \texttt{str()} serve para demonstrar a estrutura de um objeto,
+como o nome das colunas e suas classes:
+<<>>=
+str(dados)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Estrutura dos dados importados}
+Para visualizar as 10 primeiras linhas do data frame:
+<<>>=
+head(dados, 10) # ou: dados[1:10,]
+@
+\end{frame}
+
+% \begin{frame}[fragile=singleslide]{Estrutura dos dados importados}
+% Alternativamente, o editor de dados pode ser utilizado para
+% visualização:
+% \begin{verbatim}
+% > edit(dados)
+% \end{verbatim}
+% Note que qualquer alteração aqui não terá efeito ao menos que este
+% comando seja associado a um objeto:
+% \begin{verbatim}
+% > dados <- edit(dados)
+% \end{verbatim}
+% O comando \texttt{fix()} tem o mesmo efeito que o anterior
+% (\textit{i.e.} armazena as alterações feitas no objeto \texttt{dados}):
+% \begin{verbatim}
+% > fix(dados)
+% \end{verbatim}
+% \end{frame}
+
+\section{Estatística descrtiva}
+
+\begin{frame}[fragile=singleslide]{Medidas de centro}
+Média (utilizando a coluna \texttt{CL}):
+<<>>=
+mean(dados$CL) # ou sum(dados$CL)/length(dados$CL)
+@
+Média (utilizando a coluna \texttt{BD}):
+<<>>=
+mean(dados$BD)
+@
+Observe que a presença de \texttt{NA}s interfere no resultado. O
+argumento \texttt{na.rm} pode ser utilizado para que o cálculo seja
+feito sem os \texttt{NA}s:
+<<>>=
+mean(dados$BD, na.rm=T)
+@
+O argumento \texttt{na.rm} é utilizado também em outras funções como
+\texttt{median()}, \texttt{sum()} e \texttt{var()}
+\end{frame}
+
+% \begin{frame}[fragile=singleslide]{Medidas de centro}
+% Mediana (coluna \texttt{CL}):
+% \begin{verbatim}
+% > median(dados$lage, na.rm=T)
+% [1] 400
+% \end{verbatim}
+% Ponto médio:
+% \begin{verbatim}
+% > (max(dados$lage, na.rm=T) +
+% +     min(dados$lage, na.rm=T))/2
+% [1] 103550
+% \end{verbatim}
+% \end{frame}
+
+\begin{frame}[fragile=singleslide]{Medidas de variação}
+Desvio padrão (coluna \texttt{CL}):
+<<>>=
+sd(dados$CL)
+@
+Variância:
+<<>>=
+var(dados$CL) # sd(dados$CL)^2
+@
+Coeficiente de variação:
+<<>>=
+sd(dados$CL)/mean(dados$CL)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Medidas de posição relativa}
+Quartis:
+<<>>=
+quantile(dados$CL)
+@
+Decis:
+<<>>=
+quantile(dados$CL, probs = seq(0, 1, 0.1))
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Sumários}
+A função \texttt{summary()} resume os dados de forma lógica:
+<<>>=
+summary(dados$CL)
+@
+\texttt{1st Qu.} e \texttt{3rd Qu.} se referem ao $1^{o}$ e $3^{o}$
+quartis. Se houverem \texttt{NA}s, eles também serão contados:
+<<>>=
+summary(dados$BD)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Sumários}
+A função \texttt{summary()} pode ser utilizada para resumir todo o data frame:
+<<>>=
+summary(dados)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Tabelas de contingência}
+A função \texttt{table()} é usada para formar tabelas de contingência:
+<<>>=
+table(dados$especie)
+@
+Pode também ser utilizada para a contagem de combinações de fatores:
+<<>>=
+table(dados$especie, dados$sexo)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{As funções \texttt{*apply()}}
+A função \texttt{lapply()} retorna uma lista com os resultados de uma
+função aplicada a elemento(s) de um data frame:
+<<>>=
+lapply(dados[, 3:7], mean) # na.rm = T para lidar com NAs
+@
+\texttt{sapply()} simplifica os resultados em um vetor:
+<<>>=
+sapply(dados[, 3:7], mean, na.rm = T)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{As funções \texttt{*apply()}}
+\texttt{sapply()} simplifica os resultados em um vetor:
+<<>>=
+sapply(dados[, 3:7], mean, na.rm = T)
+@
+\texttt{apply()} aplica a função especificada por linha (\texttt{1}) ou
+coluna (\texttt{2}):
+<<>>=
+apply(dados[, 3:7], 2, mean, na.rm=T)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{As funções \texttt{*apply()}}
+A função \texttt{tapply()} aplica a função (\texttt{mean}) a um vetor
+(\texttt{dados\$CL}) para cada combinação dos níveis dos fatores
+(\texttt{list()}):
+<<>>=
+tapply(dados$CL, list(dados$especie, dados$sexo), mean)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{A função \texttt{aggregate()} (``tabela dinâmica'')}
+A função \texttt{aggregate()} agrega valores utilizando uma função, de
+acordo com uma lista de fatores especificados:
+<<>>=
+aggregate(cbind(FL, RW, CL, CW, BD) ~ especie + sexo,
+          data = dados, median, na.rm=T)
+@
+\end{frame}
+
+\section{Análise gráfica}
+
+\begin{frame}[fragile=singleslide]{Gráficos}
+Os comandos para gráficos se dividem em três grupos:
+\begin{itemize}
+\item \textbf{Alto-nível}: são as funções que criam novos gráficos, com
+  eixos, títulos, etc. Exemplo: \texttt{plot()}, \texttt{hist()},
+  \texttt{barplot()}
+\item \textbf{Baixo-nível}: funções que adicionam mais informações
+  (pontos, linhas, texto, etc.) a um gráfico já existente Exemplo:
+  \texttt{lines()}, \texttt{points()}, \texttt{legend()}
+\item \textbf{Interativo}: funções que permitem adicionar ou extrair
+  informações a um gráfico já existente, de modo interativo. Exemplo:
+  \texttt{locator()}
+\end{itemize}
+Ainda existem uma série de parâmetros gráficos que podem ser manipulados
+e customizados.
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Gráficos}{Terminologia}
+\begin{figure}[htp]
+\centering
+\includegraphics[height=0.95\textheight]{fig8m}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Gráficos}{Regiões do gráfico}
+\begin{figure}[htp]
+\centering
+\includegraphics[height=0.95\textheight]{fig1m}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Gráficos}{Regiões de múltiplos
+    gráficos}
+\begin{figure}[htp]
+\centering
+\includegraphics[height=0.95\textheight]{fig2m}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Gráficos}{Sistema de coordenadas}
+\begin{figure}[htp]
+\centering
+\includegraphics[height=0.95\textheight]{fig3m}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Gráficos}{Tipos de linhas
+    (\texttt{lty})}
+\begin{figure}[htp]
+\centering
+\includegraphics[height=1\textheight]{fig4m}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Gráficos}{Tipos de pontos (\texttt{pch})}
+\begin{figure}[htp]
+\centering
+\includegraphics[height=1\textheight]{fig5m}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Gráficos}{Tipos de plot (\texttt{type})}
+\begin{figure}[htp]
+\centering
+\includegraphics[height=0.95\textheight]{fig6m}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Gráficos}{Expressões matemáticas
+    (\texttt{expression()})}
+\begin{figure}[htp]
+\centering
+\includegraphics[height=0.95\textheight]{fig7m}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{A função \texttt{plot()}}
+A função \texttt{plot()} é uma \textbf{função genérica}. Os gráficos serão
+representados de forma diferente dependendo da \textbf{classe} dos
+objetos. A forma geral desta função é:
+<<eval=FALSE>>=
+plot(x, y, ...)
+@
+Note que \texttt{y} não precisa ser necessariamente especificado. O
+mesmo resultado pode ser obtido em formato de \textbf{fórmula}:
+<<eval=FALSE>>=
+plot(y ~ x, data, ...)
+@
+Onde lê-se ``\texttt{y} descrito utilizando-se \texttt{x}'', ou
+``\texttt{y} em função de \texttt{x}''
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{A função \texttt{plot()}}
+<<out.width=".7\\textwidth">>=
+plot(dados)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{A função \texttt{plot()}}
+<<out.width=".7\\textwidth">>=
+plot(dados$CL)     # uma variável
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{A função \texttt{plot()}}
+<<out.width=".49\\textwidth", fig.show="hold">>=
+plot(dados$CL, dados$CW)    # duas variáveis, ou:
+plot(CW ~ CL, data = dados) # mesmo resultado
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{A função \texttt{plot()}}
+<<out.width=".7\\textwidth">>=
+plot(dados$especie, dados$CL)  # fator, numérico
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{A função \texttt{boxplot()}}
+Os \textbf{boxplots} são úteis para revelar o centro, a dispersão e a
+distribuição dos dados, além de \textbf{outliers}. São construídos da
+seguinte forma:
+\begin{itemize}
+\item A linha central mais escura representa a mediana. Os extremos da
+  caixa são o $1^{o}$ ($q1$) e o $3^{o}$ ($q3$) quartis.
+\item As linhas que se extendem das caixas são definidas como:
+\begin{displaymath}
+q1-1,5\cdot IQR\ \qquad \mathrm{e}\ \qquad q3+1,5\cdot IQR
+\end{displaymath}
+onde $IQR$ é o intervalo inter-quartil. As linhas vão até os valores
+máximo e mínimo que ainda se encontram dentro deste intervalo.
+\end{itemize}
+\end{frame}
+
+% \begin{frame}[fragile=singleslide]{(Adicionando novas colunas)}
+% Calcule a CPUE das três espécies:
+% \begin{verbatim}
+% dados$u.lage <- (dados$lage*1000)/dados$eff
+% dados$u.branca <- (dados$branca*1000)/dados$eff
+% dados$u.bandolim <- (dados$bandolim*1000)/dados$eff
+% \end{verbatim}
+% \end{frame}
+
+\begin{frame}[fragile=singleslide]{A função \texttt{boxplot()}}
+<<out.width=".7\\textwidth">>=
+boxplot(dados[, 3:7])
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{A função \texttt{boxplot()}}
+<<out.width=".49\\textwidth", fig.show="hold">>=
+boxplot(CL ~ especie, data = dados)        # um fator
+boxplot(CL ~ especie + sexo, data = dados) # dois fatores
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{A função \texttt{hist()}}
+Na função \texttt{hist()}, dois argumentos controlam a configuração das
+classes:
+\begin{center}
+\begin{table}[h!]
+\begin{tabular}{c|c}
+\hline
+Argumentos & resultado \\
+\hline
+\texttt{include.lowest = T, right = T} & \texttt{[a,b], ..., (c,d]} \\
+\texttt{include.lowest = F, right = T} & \texttt{(a,b], ..., (c,d]} \\
+\texttt{include.lowest = F, right = F} & \texttt{[a,b), ..., [c,d)} \\
+\texttt{include.lowest = T, right = F} & \texttt{[a,b), ..., [c,d]} \\
+\hline
+\end{tabular}
+\end{table}
+\end{center}
+O argumento \texttt{breaks} também pode ser utilizado para especificar
+as ``quebras'' das classes.
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{A função \texttt{hist()}}
+<<out.width=".7\\textwidth">>=
+hist(dados$CL)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{A função \texttt{hist()}}
+<<out.width=".49\\textwidth", fig.show="hold">>=
+hist(dados$CL, breaks = seq(10, 50, 1)) # ou
+hist(dados$CL, nclass = 40)             # aproximado
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{A função \texttt{hist()}}
+A função \texttt{hist()}, além de produzir histogramas também retorna
+uma lista com as uma série de informações:
+<<out.width=".6\\textwidth", fig.keep="none">>=
+h <- hist(dados$CL)
+h
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{A função \texttt{hist()}}
+<<out.width=".49\\textwidth", fig.show="hold">>=
+hist(dados$CL)           # contagem
+hist(dados$CL, freq = F) # densidade
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{A função \texttt{barplot()}}
+A função \texttt{barplot()} gera gráficos de barra a partir de uma
+tabela
+<<out.width=".45\\textwidth">>=
+table(dados$especie)
+barplot(table(dados$especie))
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{A função \texttt{barplot()}}
+<<out.width=".4\\textwidth", fig.show="hold">>=
+table(dados$especie, dados$sexo)
+barplot(table(dados$especie, dados$sexo))
+barplot(table(dados$especie, dados$sexo), beside = T)
+@
+\end{frame}
+
+                                % ADICIONAR: Controle sobre os graficos
+
+\subsection{Argumentos gráficos}
+
+\begin{frame}[fragile=singleslide]{Argumentos gráficos}
+  Os principais argumentos que servem uma grande quantidade de funções
+  gráficas são
+  \begin{itemize}
+  \item \texttt{xlab}, \texttt{ylab}: (\verb|"caracter"|) alteram o nome
+    dos eixos (\texttt{x} e \texttt{y} \texttt{lab}el)
+  \item \texttt{xlim}, \texttt{ylim}: (\verb|c(min, max)|) alteram os
+    limites dos eixos (\texttt{x} e \texttt{y} \texttt{lim}its)
+  \item \texttt{main}: (\verb|"caracter"|) altera o título do gráfico
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Argumentos gráficos}
+<<out.width=".55\\textwidth">>=
+plot(dados$CL, dados$CW,
+     xlab = "Comprimento da carapaça (cm)",
+     ylab = "Largura da carapaça (cm)",
+     main = "Relação entre CL e CW")
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Argumentos gráficos}
+<<out.width=".55\\textwidth">>=
+hist(dados$CL, main = "", xlim = c(0, 60),
+     xlab = "Comprimento da carapaça (cm)",
+     ylab = "Frequência")
+@
+\end{frame}
+
+\subsection{Outros pacotes gráficos}
+
+\begin{frame}[fragile=singleslide]{Ouros pacotes gráficos}
+Além do pacote de gráficos padrão do R, \textbf{graphics}, existem
+outros que incorporam opções mais avançadas
+\begin{itemize}
+\item \textbf{lattice} (mais antigo)
+\item \textbf{ggplot2} (mais recente)
+\end{itemize}
+\end{frame}
+
+% \section{Programação}
+
+% \begin{frame}{Programação}
+% \setbeamercovered{dynamic} % para shades depois do pause
+%   \begin{itemize}
+%   \item Por quê programar?
+%     \begin{itemize}
+%     \item Evitar repetições desnecessárias de análises ou cálculos que
+%       são repetidos com frequência.
+%     \item Fica documentado as etapas que você realizou para chegar a um
+%       resultado.
+%     \item Fácil recuperação e modificação de programas.
+%     \end{itemize}\pause
+%   \item Como programar?
+%     \begin{itemize}
+%     \item Criando programas! (Scripts, rotinas, \textbf{algoritmos}).
+%     \item Crie uma sequência lógica de comandos que devem ser executados
+%       em ordem.
+%     \item Utilize as ferramentas básicas da programação:
+%       \textbf{estruturas de repetição} (\texttt{for()}) e
+%       \textbf{estruturas de seleção} (\texttt{if()}).
+%     \end{itemize}
+%   \end{itemize}
+% \end{frame}
+
+% \begin{frame}[fragile=singleslide]{Estrutura de repetição
+%     \texttt{for()}}
+%   \begin{itemize}
+%   \item Serve para repetir um ou mais comandos diversas vezes.
+%   \item Exemplo: cálculo de notas de uma disciplina.
+%   \end{itemize}
+% \begin{verbatim}
+% # importa os dados
+% notas <- read.table("notas.csv", header = TRUE,
+%                     sep=";", dec=",")
+% # cria uma nova coluna para armazenar os resultados
+% notas$media <- 0
+% # estrutura de repetição
+% for(i in 1:30){
+%     notas$media[i] <- sum(notas[i, c("prova1",
+%                                      "prova2",
+%                                      "prova3")])/3
+% }
+% \end{verbatim}
+% \end{frame}
+
+% \begin{frame}[fragile=singleslide]{Estrutura de repetição
+%     \texttt{for()}}
+%   \begin{itemize}
+%   \item Inserindo pesos para as provas: prova 1 = 4, prova 2 = 3, prova
+%     3 = 3.
+%   \end{itemize}
+% \begin{verbatim}
+% # estrutura de repetição
+% for(i in 1:30){
+%     pesos <- notas[i, c("prova1", "prova2", "prova3")]
+%     * c(4,3,3)
+%     notas$media[i] <- sum(pesos)/10
+% }
+% \end{verbatim}
+% \end{frame}
+
+% \begin{frame}[fragile=singleslide]{Estrutura de seleção \texttt{if()}}
+%   \begin{itemize}
+%   \item Adicionando a condição do aluno de acordo com a nota.
+%   \end{itemize}
+% \begin{verbatim}
+% # nova coluna para armazenar os resultados
+% notas$situacao <- NA
+% # estrutura de repetição
+% for(i in 1:30){
+%     pesos <- notas[i, c("prova1", "prova2", "prova3")] *
+%         c(4,3,3)
+%     notas$media[i] <- sum(pesos)/10
+%     # estrutura de seleção
+%     if(notas$media[i] >= 7){
+%         notas$situacao[i] <- "aprovado"
+%     } else{
+%         notas$situacao[i] <- "reprovado"
+%     }
+% }
+% \end{verbatim}
+% \end{frame}
+
+%% \begin{frame}[fragile=singleslide]{O modo de R --- Vetorização}
+%%   \begin{itemize}
+%%   \item Através do processo de vetorização do R, o mesmo algoritmo pode
+%%     ser simplificado em duas etapas.
+%%   \end{itemize}
+%% \begin{verbatim}
+
+%% \end{verbatim}
+%% \end{frame}
+
+
+\end{document}

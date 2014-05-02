@@ -1,0 +1,248 @@
+%PDF-1.4
+%Å‚Å„ÅœÅ”\r
+1 0 obj
+<<
+/CreationDate (D:20100127044959)
+/ModDate (D:20100127044959)
+/Title (R Graphics Output)
+/Producer (R 2.10.1)
+/Creator (R)
+>>
+endobj
+2 0 obj
+<<
+/Type /Catalog
+/Pages 3 0 R
+>>
+endobj
+5 0 obj
+<<
+/Type /Page
+/Parent 3 0 R
+/Contents 6 0 R
+/Resources 4 0 R
+>>
+endobj
+6 0 obj
+<<
+/Length 7 0 R
+>>
+stream
+q
+Q q
+BT
+0.000 0.000 0.000 rg
+/F7 1 Tf 9.00 0.00 -0.00 9.00 141.30 90.70 Tm (expression\(z[i] == sqrt\(x[i]^2 + y[i]^2\)\)) Tj
+ET
+BT
+/F12 1 Tf 12.00 0.00 -0.00 12.00 222.79 108.87 Tm (z) Tj
+ET
+BT
+/F12 1 Tf 8.00 0.00 -0.00 8.00 228.11 106.98 Tm (i) Tj
+ET
+BT
+/F16 1 Tf 12.00 0.00 -0.00 12.00 233.30 108.87 Tm (=) Tj
+ET
+0.000 0.000 0.000 RG
+0.75 w
+[] 0 d
+1 J
+1 j
+10.00 M
+242.85 111.55 m
+244.28 112.22 l
+245.71 105.84 l
+247.62 120.76 l
+280.62 120.76 l
+S
+BT
+/F12 1 Tf 12.00 0.00 -0.00 12.00 248.70 108.87 Tm (x) Tj
+ET
+BT
+/F12 1 Tf 8.00 0.00 -0.00 8.00 254.70 105.84 Tm (i) Tj
+ET
+BT
+/F12 1 Tf 8.00 0.00 -0.00 8.00 254.70 113.19 Tm (2) Tj
+ET
+BT
+/F16 1 Tf 12.00 0.00 -0.00 12.00 261.07 108.87 Tm (+) Tj
+ET
+BT
+/F12 1 Tf 12.00 0.00 -0.00 12.00 270.03 108.87 Tm (y) Tj
+ET
+BT
+/F12 1 Tf 8.00 0.00 -0.00 8.00 276.03 105.84 Tm (i) Tj
+ET
+BT
+/F12 1 Tf 8.00 0.00 -0.00 8.00 276.03 113.19 Tm (2) Tj
+ET
+BT
+/F7 1 Tf 9.00 0.00 -0.00 9.00 119.70 191.50 Tm (expression\(hat\(beta\) == \(X^t * X\)^{-1} * X^t * y\)) Tj
+ET
+BT
+/F16 1 Tf 12.00 0.00 -0.00 12.00 215.04 209.50 Tm (b) Tj
+ET
+BT
+/F12 1 Tf 12.00 0.00 -0.00 12.00 215.52 215.63 Tm (^) Tj
+ET
+BT
+/F16 1 Tf 12.00 0.00 -0.00 12.00 224.59 209.50 Tm (=) Tj
+ET
+BT
+/F16 1 Tf 15.00 0.00 -0.00 15.00 234.14 209.50 Tm (\() Tj
+ET
+BT
+/F12 1 Tf 12.00 0.00 -0.00 12.00 239.14 209.50 Tm (X) Tj
+ET
+BT
+/F12 1 Tf 8.00 0.00 -0.00 8.00 247.80 214.63 Tm (t) Tj
+ET
+BT
+/F12 1 Tf 12.00 0.00 -0.00 12.00 250.02 209.50 Tm (X) Tj
+ET
+BT
+/F16 1 Tf 15.00 0.00 -0.00 15.00 258.69 209.50 Tm (\)) Tj
+ET
+BT
+/F16 1 Tf 8.00 0.00 -0.00 8.00 263.68 214.63 Tm (-) Tj
+ET
+BT
+/F12 1 Tf 8.00 0.00 -0.00 8.00 268.07 214.63 Tm (1) Tj
+ET
+BT
+/F12 1 Tf 12.00 0.00 -0.00 12.00 272.07 209.50 Tm (X) Tj
+ET
+BT
+/F12 1 Tf 8.00 0.00 -0.00 8.00 280.74 214.63 Tm (t) Tj
+ET
+BT
+/F12 1 Tf 12.00 0.00 -0.00 12.00 282.96 209.50 Tm (y) Tj
+ET
+BT
+/F7 1 Tf 9.00 0.00 -0.00 9.00 119.70 292.30 Tm (expression\(bar\(x\) == sum\(frac\(x[i], n\), i==1, n\)\)) Tj
+ET
+BT
+/F12 1 Tf 12.00 0.00 -0.00 12.00 232.39 317.94 Tm (x) Tj
+ET
+232.39 324.93 m
+238.39 324.93 l
+S
+BT
+/F16 1 Tf 12.00 0.00 -0.00 12.00 241.36 317.94 Tm (=) Tj
+ET
+BT
+/F16 1 Tf 15.00 0.00 -0.00 15.00 250.91 316.91 Tm (Â) Tj
+ET
+BT
+/F12 1 Tf 8.00 0.00 -0.00 8.00 250.95 308.63 Tm (i) Tj
+ET
+BT
+/F16 1 Tf 8.00 0.00 -0.00 8.00 253.17 308.63 Tm (=) Tj
+ET
+BT
+/F12 1 Tf 8.00 0.00 -0.00 8.00 257.56 308.63 Tm (1) Tj
+ET
+BT
+/F12 1 Tf 8.00 0.00 -0.00 8.00 254.26 329.38 Tm (n) Tj
+ET
+BT
+/F12 1 Tf 12.00 0.00 -0.00 12.00 263.38 327.79 Tm (x) Tj
+ET
+BT
+/F12 1 Tf 8.00 0.00 -0.00 8.00 269.38 325.90 Tm (i) Tj
+ET
+BT
+/F12 1 Tf 12.00 0.00 -0.00 12.00 264.49 308.77 Tm (n) Tj
+ET
+263.38 320.98 m
+271.61 320.98 l
+S
+BT
+/F7 1 Tf 9.00 0.00 -0.00 9.00 100.80 393.10 Tm (expression\(paste\("Temperature \(", degree, "C\) in 2003"\)\)) Tj
+ET
+BT
+/F12 1 Tf 12.00 0.00 -0.00 12.00 190.20 410.84 Tm [(T) 70 (emperature \()] TJ
+ET
+BT
+/F16 1 Tf 12.00 0.00 -0.00 12.00 257.66 410.84 Tm (∞) Tj
+ET
+BT
+/F12 1 Tf 12.00 0.00 -0.00 12.00 262.46 410.84 Tm (C\) in 2003) Tj
+ET
+0.745 0.745 0.745 RG
+0.00 0.00 504.00 504.00 re S
+Q
+endstream
+endobj
+7 0 obj
+3007
+endobj
+3 0 obj
+<<
+/Type /Pages
+/Kids [
+5 0 R
+]
+/Count 1
+/MediaBox [0 0 504 504]
+>>
+endobj
+4 0 obj
+<<
+/ProcSet [/PDF /Text]
+/Font <</F7 9 0 R /F12 10 0 R /F16 11 0 R >>
+/ExtGState << >>
+>>
+endobj
+8 0 obj
+<<
+/Type /Encoding
+/BaseEncoding /WinAnsiEncoding
+/Differences [ 45/minus 96/quoteleft
+144/dotlessi /grave /acute /circumflex /tilde /macron /breve /dotaccent
+/dieresis /.notdef /ring /cedilla /.notdef /hungarumlaut /ogonek /caron /space]
+>>
+endobj
+9 0 obj <<
+/Type /Font
+/Subtype /Type1
+/Name /F7
+/BaseFont /Courier
+/Encoding 8 0 R
+>> endobj
+10 0 obj <<
+/Type /Font
+/Subtype /Type1
+/Name /F12
+/BaseFont /Times-Roman
+/Encoding 8 0 R
+>> endobj
+11 0 obj <<
+/Type /Font
+/Subtype /Type1
+/Name /F16
+/BaseFont /Symbol
+>> endobj
+xref
+0 12
+0000000000 65535 f 
+0000000021 00000 n 
+0000000164 00000 n 
+0000003373 00000 n 
+0000003456 00000 n 
+0000000213 00000 n 
+0000000293 00000 n 
+0000003353 00000 n 
+0000003561 00000 n 
+0000003818 00000 n 
+0000003912 00000 n 
+0000004012 00000 n 
+trailer
+<<
+/Size 12
+/Info 1 0 R
+/Root 2 0 R
+>>
+startxref
+4091
+%%EOF
