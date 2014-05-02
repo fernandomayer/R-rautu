@@ -23,18 +23,20 @@
 \title[Módulo II\\ Descritiva]{Introdução ao uso do software R}
 \author[]{Fernando de Pol Mayer\inst{1} \and %\url{fernandomayer@gmail.com} \and
 Rodrigo Sant'Ana\inst{2}} %\\ \url{oc.rodrigosantana@gmail.com}}
-\date{26 e 27 de Novembro, 2012}
+\date{}
 \institute{
   \inst{1}%
-  Universidade Federal de Santa Catarina (UFSC) \\
-  Departamento de Ecologia e Zoologia (ECZ/CCB) \\
-  \url{fernando.mayer@gmail.com}
+  Laboratório de Estatística Ambiental (LEA) \\
+  Instituto de Matemática, Estatística e Física (IMEF) \\
+  Universidade Federal do Rio Grande (FURG) \\
+  \url{fernando.mayer@furg.br}
   \and
   \inst{2}%
   Instituto Albatroz \\
   \url{oc.rodrigosantana@gmail.com}
 }
-\logo{\includegraphics[width=1cm]{../Rlogo-5}}
+\logo{\includegraphics[width=1cm]{../conf/Rlogo-5}}
+
 
 \AtBeginSection[]
 {
@@ -64,7 +66,7 @@ opts_chunk$set(size = "small",
                fig.align = "center",
                fig.width = 5,
                fig.height = 5)
-thm <- knit_theme$get("beamer2")
+thm <- knit_theme$get("beamer3")
 knit_theme$set(thm)
 options(width = 65, digits = 5, continue = "  ")
 @
@@ -118,8 +120,8 @@ O método mais comum de importação de dados para o R, é utilizando a
 função \texttt{read.table()}. Para importar um arquivo \texttt{.csv}
 faça:
 <<>>=
-dados <- read.table("crabs.csv", header = T, sep = ";",
-                    dec = ",")
+dados <- read.table("../dados/crabs.csv", header = T,
+                    sep = ";", dec = ",")
 @
 Argumentos:
 \begin{itemize}
@@ -320,14 +322,14 @@ e customizados.
 \begin{frame}[fragile=singleslide]{Gráficos}{Terminologia}
 \begin{figure}[htp]
 \centering
-\includegraphics[height=0.95\textheight]{fig8m}
+\includegraphics[height=0.95\textheight]{figure/fig8m}
 \end{figure}
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Gráficos}{Regiões do gráfico}
 \begin{figure}[htp]
 \centering
-\includegraphics[height=0.95\textheight]{fig1m}
+\includegraphics[height=0.95\textheight]{figure/fig1m}
 \end{figure}
 \end{frame}
 
@@ -335,14 +337,14 @@ e customizados.
     gráficos}
 \begin{figure}[htp]
 \centering
-\includegraphics[height=0.95\textheight]{fig2m}
+\includegraphics[height=0.95\textheight]{figure/fig2m}
 \end{figure}
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Gráficos}{Sistema de coordenadas}
 \begin{figure}[htp]
 \centering
-\includegraphics[height=0.95\textheight]{fig3m}
+\includegraphics[height=0.95\textheight]{figure/fig3m}
 \end{figure}
 \end{frame}
 
@@ -350,21 +352,21 @@ e customizados.
     (\texttt{lty})}
 \begin{figure}[htp]
 \centering
-\includegraphics[height=1\textheight]{fig4m}
+\includegraphics[height=1\textheight]{figure/fig4m}
 \end{figure}
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Gráficos}{Tipos de pontos (\texttt{pch})}
 \begin{figure}[htp]
 \centering
-\includegraphics[height=1\textheight]{fig5m}
+\includegraphics[height=1\textheight]{figure/fig5m}
 \end{figure}
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Gráficos}{Tipos de plot (\texttt{type})}
 \begin{figure}[htp]
 \centering
-\includegraphics[height=0.95\textheight]{fig6m}
+\includegraphics[height=0.95\textheight]{figure/fig6m}
 \end{figure}
 \end{frame}
 
@@ -372,7 +374,7 @@ e customizados.
     (\texttt{expression()})}
 \begin{figure}[htp]
 \centering
-\includegraphics[height=0.95\textheight]{fig7m}
+\includegraphics[height=0.95\textheight]{figure/fig7m}
 \end{figure}
 \end{frame}
 
