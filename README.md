@@ -5,11 +5,12 @@ Introdução ao uso do R
 
 Autores: Fernando Mayer, Rodrigo Sant'Ana
 
-Módulo I: fundamentos da linguagem
-Módulo II: Análise descritiva e gráficos
-Módulo III: Probabilidade, inferência e modelagem
+Módulo I: fundamentos da linguagem; Módulo II: Análise descritiva e
+gráficos; Módulo III: Probabilidade, inferência e modelagem
+
 
 > Material em desenvolvimento
+
 
 ## Licença
 
