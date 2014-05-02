@@ -1,0 +1,945 @@
+\documentclass[10pt]{beamer}
+
+\usetheme[compress]{PaloAlto}
+\usecolortheme{sidebartab}
+%\logo{\includegraphics[width=1cm]{../Rlogo-5.png}}
+
+\usepackage[brazilian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[scaled]{beramono} % truetype: Bistream Vera Sans Mono
+%\usepackage{inconsolata}
+
+\setbeamertemplate{footline}[frame number] % mostra o numero dos slides
+\setbeamertemplate{navigation symbols}{} % retira a barra de navegacao
+
+\usepackage{xspace}
+\providecommand{\eg}{\textit{e.g.}\xspace}
+\providecommand{\ie}{\textit{i.e.}\xspace}
+\providecommand{\R}{\textsf{R}\xspace}
+
+\title[Módulo III\\ Inferência e Modelagem]{Introdução ao uso do software R}
+\author[]{Fernando de Pol Mayer\inst{1} \and %\url{fernandomayer@gmail.com} \and
+Rodrigo Sant'Ana\inst{2}} %\\ \url{oc.rodrigosantana@gmail.com}}
+\date{26 e 27 de Novembro, 2012}
+\institute{
+  \inst{1}%
+  Universidade Federal de Santa Catarina (UFSC) \\
+  Departamento de Ecologia e Zoologia (ECZ/CCB) \\
+  \url{fernando.mayer@gmail.com}
+  \and
+  \inst{2}%
+  Instituto Albatroz \\
+  \url{oc.rodrigosantana@gmail.com}
+}
+\logo{\includegraphics[width=1cm]{../Rlogo-5}}
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Sumário}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\AtBeginSubsection[]
+{
+  \begin{frame}
+    \frametitle{Sumário}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+\begin{document}
+
+<<setup, include=FALSE, cache=FALSE>>=
+# smaller font size for chunks
+opts_chunk$set(size = "small",
+               prompt = TRUE,
+               comment = NA,
+               tidy = FALSE,
+               cache = TRUE,
+               fig.align = "center",
+               fig.width = 5,
+               fig.height = 5)
+thm <- knit_theme$get("beamer2")
+knit_theme$set(thm)
+options(width = 65, digits = 5, continue = "  ")
+@
+
+\begin{frame}
+\maketitle
+%\titlepage
+\end{frame}
+
+\begin{frame}{Sumário}
+\tableofcontents
+\end{frame}
+
+\section{Distribuições de probabilidade}
+
+\begin{frame}[fragile=singleslide]{Distribuições de probabilidade}
+A maioria das distribuições de probabilidade tradicionais estão
+implementadas no R, e podem ser utilizadas para substituir as tabelas
+estatísticas tradicionais. Existem 4 itens fundamentais que podem ser
+calculados para cada distribuição:
+\begin{itemize}
+\item[d*] Calcula a densidade de probabilidade ou probabilidade pontual
+\item[p*] Calcula a função de probabilidade acumulada
+\item[q*] Calcula o quantil correspondente a uma dada probabilidade
+\item[r*] Gera números aleatórios (ou ``pseudo-aleatórios'')
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Distribuições de probabilidade}
+As distribuições de probabilidade mais comuns são:
+\begin{center}
+% use packages: array
+\begin{tabular}{lll}
+\hline
+Distribuição & Nome no \R & Parâmetros \\
+\hline
+Binomial & \texttt{*binom} & \texttt{size, prob} \\
+$\chi^2$ & \texttt{*chisq} & \texttt{df} \\
+
+Normal & \texttt{*norm} & \texttt{mean, sd} \\
+Poisson & \texttt{*pois} & \texttt{lambda} \\
+t & \texttt{*t} & \texttt{df} \\
+Uniforme & \texttt{*unif} & \texttt{min, max}\\
+\hline
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Distribuições de probabilidade}
+Alguns exemplos:
+<<>>=
+# valores críticos de z com alfa = 0,05 (bilateral)
+qnorm(0.025)
+qnorm(0.975)
+# valores críticos de t com diferentes G.L.
+qt(0.025, df = 9)
+qt(0.025,df = 900)
+@
+\end{frame}
+
+% \begin{frame}[fragile=singleslide]{Distribuições de probabilidade}
+% Intervalos de confiança: suponha uma amostra de $n=5$, com $\bar{x}=83$
+% e $s=12$. Um intervalo de 95\% de confiança ($\alpha = 0.05$) para $\mu$
+% pode ser calculado como:
+% \begin{verbatim}
+% > xbarra <- 83
+% > desvio <- 12
+% > n <- 5
+% > erro <- desvio/sqrt(n)
+% > erro
+% [1] 5.366563
+% > xbarra + erro * qt(0.025, df=n)
+% [1] 69.20481
+% > xbarra + erro * qt(0.975, df=n)
+% [1] 96.79519
+% \end{verbatim}
+% \end{frame}
+
+\section{Inferência}
+
+\begin{frame}[fragile=singleslide]{Base de dados}
+<<>>=
+dados <- read.table("crabs.csv", header = T, sep = ";",
+                    dec = ",")
+str(dados)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t
+    para uma amostra}
+<<out.width=".6\\textwidth">>=
+hist(dados$CL, main = "", ylab = "Frequência absoluta",
+     xlab = "Comprimento da carapaça (mm)", col = "grey")
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t
+    para uma amostra}
+Procedimentos gerais para um teste de hipótese
+\begin{enumerate}
+\item Definir a hipótese nula ($H_0$) e a alternativa ($H_1$)
+\item Definir um nível de \textbf{significância} $\alpha$ (ex.: $\alpha
+  = 0,05$), que irá determinar o nível de \textbf{confiança}
+  $100(1-\alpha)\%$ do teste
+\item Determinar a \textbf{região de rejeição} com base no nível de
+  significância $\rightarrow$ $t_{crit}$
+\item Calcula a \textbf{estatística de teste}, sob a hipótese nula
+  \begin{equation*}
+    t_{calc} = \frac{\bar{y} - \mu_0}{s/\sqrt{n}}
+  \end{equation*}
+\item Rejeitar a hipótese nula se a estatística de teste calculada
+  estiver dentro da região de rejeição ($t_{calc} > t_{crit}$)
+  \begin{itemize}
+  \item Alternativamente, calcula-se o p-valor, que é a probabilidade de
+    se obter um valor de $t$ igual ou maior do que $t_{calc}$
+  \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para uma
+    amostra}
+  \begin{itemize}
+  \item Testar a hipótese de que a média ($\mu$) de CL é igual a 30 mm
+    (com 95\% de confiança)
+  \item As hipóteses são
+    \begin{align*}
+      H_0: \mu = 30 \\
+      H_1: \mu \neq 30
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para uma
+    amostra}
+<<>>=
+t.test(dados$CL, mu = 30, alternative = "two.sided",
+       conf.level = 0.95)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para uma
+    amostra}
+\textbf{Detalhe:} O teste pode ser armazenado em um objeto para futuras
+referências
+<<>>=
+teste <- t.test(dados$CL, mu = 30, alternative = "two.sided",
+                conf.level = 0.95)
+names(teste)
+teste$statistic
+teste$p.value
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para uma
+    amostra}
+  \begin{itemize}
+  \item Testar a hipótese de que a média ($\mu$) de CL é menor do que 30
+    mm (com 95\% de confiança)
+  \item As hipóteses são
+    \begin{align*}
+      H_0: \mu \leq 30 \\
+      H_1: \mu > 30
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para uma
+    amostra}
+<<>>=
+t.test(dados$CL, mu = 30, alternative = "greater",
+       conf.level = 0.95)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para uma
+    amostra}
+  \begin{itemize}
+  \item Testar a hipótese de que a média ($\mu$) de CL é maior do que 30
+    mm (com 95\% de confiança)
+  \item As hipóteses são
+    \begin{align*}
+      H_0: \mu \geq 30 \\
+      H_1: \mu < 30
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para uma
+    amostra}
+<<>>=
+t.test(dados$CL, mu = 30, alternative = "less",
+       conf.level = 0.95)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para duas amostras}
+<<out.width=".6\\textwidth">>=
+require(lattice) # pacote para gráficos avançados
+histogram(~CL | especie, data = dados)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para duas amostras}
+<<>>=
+with(dados, tapply(CL, especie, summary))
+@
+Existem evidências de que uma espécie é maior do que a outra?
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para duas amostras}
+  \begin{itemize}
+  \item Testar a hipótese de que a \textbf{diferença} entre a média de
+    CL da espécie azul ($\mu_A$) e a média de CL da espécie laranja
+    ($\mu_L$) é igual a 0 (zero) (com 95\% de confiança)
+  \item As hipóteses são
+    \begin{align*}
+      H_0: \mu_A - \mu_L = 0 \quad \Rightarrow \quad \mu_A = \mu_L \\
+      H_1: \mu_A - \mu_L \neq 0 \quad \Rightarrow \quad \mu_A \neq \mu_L
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para duas amostras}
+<<>>=
+t.test(CL ~ especie, data = dados, mu = 0,
+       alternative = "two.sided", conf.level = 0.95)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para duas amostras}
+  \begin{itemize}
+  \item Testar a hipótese de que a \textbf{diferença} entre a média de
+    CL da espécie azul ($\mu_A$) e a média de CL da espécie laranja
+    ($\mu_L$) é \textbf{menor} do que 0 (zero) (com 95\% de confiança)
+  \item Em outras palavras: ``O CL médio é menor para a espécie azul?''
+  \item As hipóteses são
+    \begin{align*}
+      H_0: \mu_A - \mu_L \leq 0 \quad \Rightarrow \quad \mu_A \leq \mu_L \\
+      H_1: \mu_A - \mu_L > 0 \quad \Rightarrow \quad \mu_A > \mu_L
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para duas amostras}
+<<>>=
+t.test(CL ~ especie, data = dados, mu = 0,
+       alternative = "greater", conf.level = 0.95)
+@
+Como você faria para calcular a diferença observada das médias de CL
+entre as duas espécies?
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Exercícios}
+Com base no objeto \texttt{dados}:
+  \begin{enumerate}
+  \item Faça um histograma de CW
+  \item Com base no histograma, construa uma hipótese para a média de CW
+    \begin{enumerate}
+    \item Teste a igualdade dessa hipótese
+    \item Teste uma desigualdade dessa hipótese
+    \end{enumerate}
+    Em ambos os casos use um nível de confiança de 90\%, e escreva uma
+    frase com a sua conclusão.
+  \item Faça um histograma de CW para cada sexo
+  \item Com base nesses histogramas, construa uma hipótese para a
+    diferença média de CW entre os sexos
+    \begin{enumerate}
+    \item Teste a igualdade dessa hipótese
+    \item Teste uma desigualdade dessa hipótese
+    \end{enumerate}
+    Em ambos os casos use um nível de confiança de 90\%, e escreva uma
+    frase com a sua conclusão.
+  \end{enumerate}
+\end{frame}
+
+\section{Correlação e regressão}
+
+\begin{frame}[fragile=singleslide]{Correlação e regressão}
+Vamos analisar a correlação que existe entre CL e CW
+<<out.width=".6\\textwidth">>=
+plot(CW ~ CL, data = dados)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Correlação}
+A correlação entre duas variáveis é simbolizada por $\rho$ (para a
+população) e $r$ (para a amostra), e varia no intervalo $[-1,1]$
+\begin{equation*}
+  r = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}
+  {\sqrt{\sum (x_i - \bar{x})^2 \sum (y_i - \bar{y})^2}}
+\end{equation*}
+<<out.width=".33\\textwidth", echo=FALSE, fig.show="hold">>=
+plot(1:10, 1:10, type = "l", xlab = "", ylab = "",  main = "r = 1")
+plot(1:10, rep(5,10), type = "l", xlab = "", ylab = "", main = "r = 0")
+plot(1:10, -1:-10, type = "l", xlab = "", ylab = "", main = "r = -1")
+@
+Portanto, um \textbf{teste de correlação} tem as seguintes hipóteses
+\begin{align*}
+  H_0: \rho = 0 \\
+  H_1: \rho \neq 0
+\end{align*}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Correlação}
+Teste de correlação entre CL e CW
+<<>>=
+cor(dados$CL, dados$CW)
+cor.test(dados$CL, dados$CW)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Regressão}
+O modelo linear é definido por:
+\begin{equation*}
+  y_i = \beta_0 + \beta_1 x_{i} + \epsilon_i
+\end{equation*}
+onde
+\begin{itemize}
+\item $y$ é a variável resposta
+\item $x$ é a variável explicativa
+\item $\beta_0$ é o intercepto da reta (valor de $y$ quando $x = 0$)
+\item $\beta_1$ é a inclinação da reta (\textbf{efeito} de $x$ sobre $y$)
+\item $i = 1, 2, \ldots, n$ observações
+\item $\epsilon \sim N(0, \sigma^2)$
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Regressão}
+Os parâmetros $\beta_0$ e $\beta_1$ são estimados pelo \textbf{método dos
+mínimos quadrados}. Os resíduos são
+\begin{equation*}
+  \epsilon_i = y_i - (\beta_0 - \beta_1 x_i)
+\end{equation*}
+Portanto, a \textbf{soma dos quadrados dos resíduos} (SQR) é
+\begin{equation*}
+  SQR = \sum_{i=1}^{n} (y_i - (\beta_0 - \beta_1 x_i))^2
+\end{equation*}
+Através das derivadas da SQR em relação à $\beta_0$ e $\beta_1$ chega-se
+aos resultados
+\begin{align*}
+  \hat{\beta_1} &= \frac{\sum (y_i - \bar{y}) (x_i - \bar{x})}
+  {\sum (x_i - \bar{x})^2} \\
+  \hat{\beta_0} &= \bar{y} - \hat{\beta_1} \bar{x}
+\end{align*}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Regressão}
+Ajustando um modelo linear no \R
+<<>>=
+mod <- lm(CW ~ CL, data = dados)
+mod
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Regressão}{Sumário}
+<<size="footnotesize">>=
+summary(mod)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Regressão}{Ajuste gráfico}
+<<out.width=".49\\textwidth", fig.show="hold">>=
+plot(CW ~ CL, data = dados)
+abline(mod)
+plot(CW ~ CL, data = dados, xlim = c(0,50), ylim = c(0,55))
+abline(mod)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Regressão}{Análise dos resíduos}
+<<out.width=".6\\textwidth", fig.show="hold", fig.width=7, fig.height=7>>=
+par(mfrow = c(2,2))
+plot(mod)
+par(mfrow = c(1,1))
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Regressão}
+Acessando os componentes do objeto \texttt{mod}:
+<<>>=
+names(mod)
+names(summary(mod))
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Exercícios}
+Com as colunas BD e CL do objeto \texttt{dados}
+\begin{enumerate}
+\item Faça um gráfico da relação entre estas variáveis
+\item Faça um teste de correlação
+\item Ajuste um modelo linear
+  \begin{enumerate}
+  \item Veja o sumário
+  \item Ajuste a linha do modelo no gráfico
+  \item Verifique os resíduos
+  \end{enumerate}
+\end{enumerate}
+Qual sua conclusão?
+\small
+\begin{itemize}
+\item Existe correlação significativa? De que tipo (positiva, negativa)?
+\item O modelo linear descreve bem a relação entre estas duas variáveis
+  (verifique com o valor de \verb+Pr(>|t|)+ e do $R^2$)
+\item O modelos foi bem ajustado aos dados (observe os resíduos)
+\end{itemize}
+\end{frame}
+
+
+\section[ANOVA]{Análise de Variância}
+
+%\begin{frame}[fragile=singleslide]{Análise de Variância}{Base de dados}
+%<<>>=
+%## dados <- read.table("crabs.csv", header = T, sep = ";",
+%##                     dec = ",")
+%## str(dados)
+%@
+%\end{frame}
+
+\begin{frame}[fragile=singleslide]{Análise de Variância}
+Definição: $y_{ij}$ representa a observação $j$ do grupo $i$;
+$\bar{y}_{i}$ é a média do grupo $i$; $\bar{y}$ é a média geral de todas
+as observações. As observações podem ser decompostas em
+\begin{equation*}
+  y_{ij} = \quad \bar{y} \quad + \quad (\bar{y}_{i} - \bar{y}) \quad + \quad
+  (y_{ij} - \bar{y}_{i})
+\end{equation*}
+que corresponde ao modelo
+\begin{equation*}
+  y_{ij} = \quad \theta \quad + \quad \mu_i \quad + \quad \epsilon_{ij},
+  \qquad \epsilon_{ij} \sim N(0, \sigma^2)
+\end{equation*}
+A hipótese a ser testada de que todos os grupos são iguais (\textit{i.e}
+médias iguais) implica que todos os $\mu_{i}$ são iguais:
+\begin{align*}
+  &H_0: \mu_1 = \mu_2 = \cdots = \mu_n \\
+  &H_1: \textsf{pelo menos um}\ \mu_i\ \textsf{é diferente dos demais}
+\end{align*}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Análise de Variância}
+Voltando ao exemplo da diferença de CL entre as duas espécies:\\
+$\bar{y}_A = \Sexpr{round(mean(dados$CL[dados$especie=="azul"]),1)}$ e
+$\bar{y}_L = \Sexpr{round(mean(dados$CL[dados$especie=="laranja"]),1)}$
+<<>>=
+with(dados, tapply(CL, especie, summary))
+@
+Média geral $\bar{y} = \Sexpr{round(mean(dados$CL),2)}$
+<<>>=
+mean(dados$CL)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Análise de Variância}
+<<out.width=".6\\textwidth">>=
+boxplot(CL ~ especie, data = dados)
+abline(h = mean(dados$CL), lty = 2, col = "red", lwd = 2)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Análise de Variância}
+Geometricamente
+<<out.width=".7\\textwidth", echo=FALSE>>=
+plot(CL ~ as.numeric(especie), data = dados, axes = FALSE,
+     xlim = c(0,3), xlab = "Espécie", ylab = "CL")
+axis(1, at = seq(0,3,1), labels = c("", "Azul", "Laranja", ""), tick = FALSE)
+axis(2); box()
+points(1, mean(dados$CL[dados$especie == "azul"]), pch = 15,
+       cex = 2, col = "blue")
+points(2, mean(dados$CL[dados$especie == "laranja"]), pch = 15,
+       cex = 2, col = "orange")
+abline(h = mean(dados$CL), lty = 2, col = "red", lwd = 2)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Análise de Variância}
+Podemos ajustar um modelo linear entre CL e espécie
+<<size="footnotesize">>=
+mod <- lm(CL ~ especie, data = dados)
+summary(mod)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Análise de Variância}
+Ajustando o modelo
+<<out.width=".7\\textwidth", echo=FALSE>>=
+plot(CL ~ as.numeric(especie), data = dados, axes = FALSE,
+     xlim = c(0,3), xlab = "Espécie", ylab = "CL")
+axis(1, at = seq(0,3,1), labels = c("", "Azul", "Laranja", ""), tick = FALSE)
+axis(2); box()
+points(1, mean(dados$CL[dados$especie == "azul"]), pch = 15,
+       cex = 2, col = "blue")
+points(2, mean(dados$CL[dados$especie == "laranja"]), pch = 15,
+       cex = 2, col = "orange")
+abline(h = mean(dados$CL), lty = 2, col = "red", lwd = 2)
+segments(1, mean(dados$CL[dados$especie=="azul"]),
+         2, mean(dados$CL[dados$especie=="laranja"]))
+# abline(mod)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Análise de Variância}
+Você lembra do teste-t feito anteriormente?
+<<size="footnotesize">>=
+teste <- t.test(CL ~ especie, data = dados, mu = 0,
+                alternative = "two.sided", conf.level = 0.95)
+teste
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Análise de Variância}
+Notou a relação?
+<<size="footnotesize", echo=-c(1,2,7)>>=
+sci <- getOption("scipen")
+options(scipen = -1)
+summary(mod)$coefficients
+teste$p.value
+teste$estimate
+diff(teste$estimate)
+options(scipen = sci)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Análise de Variância}
+A ANOVA vai testar apenas a hipótese inicial
+\begin{align*}
+  &H_0: \mu_A = \mu_L \\
+  &H_1: \mu_A \neq \mu_L
+\end{align*}
+<<>>=
+anova(mod)
+@
+Aqui a única conclusão é de que os $\mu_i$ não são iguais (mas você
+não sabe quanto e nem quais!)
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Análise de Variância}
+Se olharmos apenas o resultado da ANOVA, podemos prosseguir com a
+análise fazendo um teste \textit{a posteriori} para verificarmos quais
+são os grupos que diferem entre si. Um deles é o teste de Tukey
+<<>>=
+mod.anova <- aov(CL ~ especie, data = dados)
+TukeyHSD(mod.anova)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Análise de Variância}
+Porque então fazer uma ANOVA???
+\begin{itemize}
+\item Quando formos comparar a média de mais de 2 grupos
+\item Não é possível fazer um teste-t para mais de 2 grupos
+\item Por exemplo, com 3 grupos (A, B, C) teríamos que fazer 3
+  comparações (A:B, A:C, B:C)
+  \begin{itemize}
+  \item Com um nível de confiança de 95\% ($\alpha = 0.05$)
+    para cada teste, os 3 testes teriam um nível de confiança
+    $(1-\alpha)^3$
+  \item Portanto $(1-0.05)^3 = (0.95)^3 = 0.85$
+  \item Isso implica que quanto mais comparações forem feitas, menor
+    será seu nível de confiança no resultado dos testes.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\section[MLGs]{Modelos Lineares Generalizados}
+
+\begin{frame}[fragile=singleslide]{Modelos Lineares Generalizados}
+Nelder e Wedderburn (1972) mostraram que uma série de técnicas
+estatísticas podem ser formuladas de forma unificada, como uma classe de
+modelos de regressão. A essa teoria, uma extensão dos modelos clássicos
+de regressão, deram o nome de \textbf{Modelos Lineares
+  Generalizados}.
+\begin{center}
+  Teste-t $\subset$ ANOVA $\subset$ ANCOVA* $\subset$ ML $\subset$
+  ML-MULT* $\subset$ MLG
+\end{center}
+  \begin{itemize}
+  \item Teste-t: compara uma ou duas médias
+  \item ANOVA: compara 2 ou mais médias (fator)
+  \item ANCOVA: compara 2 ou mais médias (fator) + variáveis numéricas
+  \item ML: regressão de $y$ (numérico) em função de um único $x$
+    (numérico ou fator)
+  \item ML-MULT: regressão de $y$ (numérico) em função de mais de um $x$
+    (numéricos ou fatores)
+  \item MLG: Similar ao ML-MULT, mas extende o modelo para que $y$ possa
+    ser um fator ou ter uma distribuição diferente da normal.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Modelos Lineares Generalizados}
+Os MLGs são formados por três componentes:
+\begin{enumerate}
+\item \textbf{Componente aleatório}: a variável resposta do modelo, com
+  distribuição pertencente à família de distribuições exponencial.
+\item \textbf{Componente sistemático}: as variáveis explicativas, que
+  entram na forma de uma estrutura linear.
+\item \textbf{Função de ligação}: função que liga os componentes
+  aleatório e sistemático.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Modelos Lineares Generalizados}
+De maneira geral, os MLGs descrevem a relação entre a variável resposta
+$y_i$ ($i = 1, \ldots, n$) através de preditores $x_i$. A média de $y_i$
+condicionada aos preditores $x_i$ é
+\begin{equation*}
+  E(y_i|x_i) = \mu_i
+\end{equation*}
+e existe uma transformação de $\mu_i$ de forma que
+\begin{equation*}
+  g(\mu_i) = x_{i}^{T}\beta
+\end{equation*}
+onde $g(\cdot)$ é uma função de ligação conhecida, e $\beta$ é o vetor
+de parâmetros a ser estimado.
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Modelos Lineares Generalizados}
+Distribuições da família exponencial e funções de ligação (P = link
+padrão)
+\begin{center}
+\begin{table}[h!]
+\renewcommand{\baselinestretch}{1}
+\small\footnotesize\scriptsize
+\begin{tabular}{lcccccc}
+\hline
+Link & \texttt{binomial} & \texttt{poisson} & \texttt{negative} &
+\texttt{Gamma} & \texttt{gaussian} & \texttt{inverse}\\
+    &       &    & \texttt{binomial} &  &  & \texttt{gaussian} \\
+\hline
+\texttt{logit} & P & & & & & \\
+\texttt{probit} & $\bullet$ & & & & &  \\
+\texttt{cloglog} & $\bullet$ & & & & &  \\
+\texttt{identity} &  & $\bullet$ & $\bullet$ & $\bullet$ & P &  \\
+\texttt{inverse} &  & & & P & &  \\
+\texttt{log} &  & P & P & $\bullet$ & &  \\
+\verb|1/mu^2| & & & & & & P  \\
+\texttt{sqrt} & & $\bullet$ & $\bullet$ & & &  \\
+\hline
+\end{tabular}
+\end{table}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Modelos Lineares Generalizados}
+Para ajustar um MLG usamos a função \texttt{glm()}
+<<size="footnotesize">>=
+mod.glm <- glm(CL ~ especie, data = dados,
+               family = gaussian(link = "identity"))
+summary(mod.glm)
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Modelos Lineares Generalizados}
+Quando existe mais de uma variável resposta ($y$)? \textbf{Métodos
+  multivariados}!
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Exercícios}
+Com o objeto \texttt{dados}
+\begin{enumerate}
+\item Faça um boxplot de CW por sexo
+\item Faça um teste-t para testar se existe diferença entre as médias de
+  CW para machos e fêmeas
+\item Ajuste um modelo linear para testar essa mesma hipótese
+\item Faça uma ANOVA e o teste de Tukey
+\end{enumerate}
+Qual sua conclusão?
+\end{frame}
+
+
+
+% \section[ANOVA]{Análise de Variância}
+
+% \begin{frame}[fragile=singleslide]{Análise de Variância}
+% Definição: $y_{ij}$ representa a observação $j$ do grupo $i$;
+% $\bar{y}_{i}$ é a média do grupo $i$; $\bar{y}$ é a média geral de todas
+% as observações. As observações podem ser decompostas em
+% \begin{equation*}
+%   y_{ij} = \quad \bar{y} \quad + \quad (\bar{y}_{i} - \bar{y}) \quad + \quad
+%   (y_{ij} - \bar{y}_{i})
+% \end{equation*}
+% que corresponde ao modelo
+% \begin{equation*}
+%   y_{ij} = \quad \mu \quad + \quad \alpha_i \quad + \quad \epsilon_{ij},
+%   \qquad \epsilon_{ij} \sim N(0, \sigma^2)
+% \end{equation*}
+% A hipótese a ser testada de que todos os grupos são iguais (\textit{i.e}
+% médias iguais) implica que todos os $\alpha_{i}$ são zero:
+% \begin{align*}
+%   &H_0: \alpha_1 = \alpha_2 = \cdots = \alpha_n = 0 \\
+%   &H_1: \textsf{pelo menos um}\ \alpha_i\ \textsf{é diferente dos demais}
+% \end{align*}
+% \end{frame}
+
+% \begin{frame}[fragile=singleslide]{Análise de Variância}
+% Voltando ao exemplo da diferença de CL entre as duas espécies
+% <<>>=
+% with(dados, tapply(CL, especie, summary))
+% @
+% \end{frame}
+
+% \begin{frame}[fragile=singleslide]{Análise de Variância}
+% <<out.width=".6\\textwidth">>=
+% boxplot(CL ~ especie, data = dados)
+% @
+% \end{frame}
+
+% \begin{frame}[fragile=singleslide]{Análise de Variância}
+% Podemos ajustar um modelo linear entre CL e espécie
+% <<size="footnotesize">>=
+% mod <- lm(CL ~ especie, data = dados)
+% summary(mod)
+% @
+% \end{frame}
+
+% \begin{frame}[fragile=singleslide]{Análise de Variância}
+% Você lembra do teste-t feito anteriormente?
+% <<size="footnotesize">>=
+% teste <- t.test(CL ~ especie, data = dados, mu = 0,
+%                 alternative = "two.sided", conf.level = 0.95)
+% teste
+% @
+% \end{frame}
+
+% \begin{frame}[fragile=singleslide]{Análise de Variância}
+% Notou a relação?
+% <<size="footnotesize", echo=-c(1,2,7)>>=
+% sci <- getOption("scipen")
+% options(scipen = -1)
+% summary(mod)$coefficients
+% teste$p.value
+% teste$estimate
+% diff(teste$estimate)
+% options(scipen = sci)
+% @
+% \end{frame}
+
+% \begin{frame}[fragile=singleslide]{Análise de Variância}
+% A ANOVA vai testar apenas a hipótese inicial
+% \begin{align*}
+%   &H_0: \alpha_A = \alpha_L = 0 \\
+%   &H_1: \alpha_A \neq \alpha_L \neq 0
+% \end{align*}
+% <<>>=
+% anova(mod)
+% @
+% Aqui a única conclusão é de que os $\alpha_i$ não são iguais (mas você
+% não sabe quanto e nem quais!)
+% \end{frame}
+
+% \begin{frame}[fragile=singleslide]{Exercícios}
+% Com o objeto \texttt{dados}
+% \begin{enumerate}
+% \item Faça um boxplot de CW por sexo
+% \item Faça um teste-t para testar se existe diferença entre as médias de
+%   CW para machos e fêmeas
+% \item Ajuste um modelo linear para testar essa mesma hipótese
+% \item Faça uma ANOVA e tire suas conclusões
+% \end{enumerate}
+% \end{frame}
+
+
+
+% \begin{frame}[fragile=singleslide]{Análise de Variância}
+% Teste de Bartlett (homocedasticidade)
+% \begin{verbatim}
+% > bartlett.test(dados$comp, dados$area)
+
+%         Bartlett test of homogeneity of variances
+
+% data:  dados$comp and dados$area
+% Bartlett's K-squared = 1.5921, df = 2, p-value = 0.4511
+% \end{verbatim}
+% \end{frame}
+
+% \begin{frame}[fragile=singleslide]{Análise de Variância}
+% ANOVA para testar se as médias de comprimento entre as áreas são iguais:
+% \begin{verbatim}
+% > mod.comp <- lm(comp ~ area, data=dados)
+% > tab.anova <- anova(mod.comp)
+% > tab.anova
+% Analysis of Variance Table
+
+% Response: comp
+%            Df Sum Sq Mean Sq F value    Pr(>F)
+% area        2 413.50  206.75  37.647 5.432e-14 ***
+% Residuals 151 829.25    5.49
+% ---
+% Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+% \end{verbatim}
+% \end{frame}
+
+% \begin{frame}[fragile=singleslide]{Análise de Variância}
+% Para acessar os componentes da ANOVA:
+% \begin{verbatim}
+% > names(tab.anova)
+% [1] "Df"      "Sum Sq"  "Mean Sq" "F value" "Pr(>F)"
+% \end{verbatim}
+% Coeficiente de explicação:
+% \begin{verbatim}
+% > tab.anova$"Sum Sq"[1]/sum(tab.anova$"Sum Sq")
+% [1] 0.3327264
+% \end{verbatim}
+% \end{frame}
+
+% \begin{frame}[fragile=singleslide]{Análise de Variância}{ANOVA com dois fatores}
+% ANOVA com os fatores área e profundidade:
+% \begin{verbatim}
+% > mod.comp2 <- lm(comp ~ area + prof, data=dados)
+% > anova(mod.comp2)
+% Analysis of Variance Table
+
+% Response: comp
+%            Df Sum Sq Mean Sq F value    Pr(>F)
+% area        2 413.50  206.75 37.4324 6.497e-14 ***
+% prof        1   0.77    0.77  0.1394    0.7094
+% Residuals 150 828.48    5.52
+% ---
+% Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+% \end{verbatim}
+% \end{frame}
+
+% \begin{frame}[fragile=singleslide]{Análise de Variância}{ANOVA com dois
+%     fatores}
+% Incluindo interação de segunda ordem:
+% \begin{verbatim}
+% > mod.comp2.i <- lm(comp ~ (area + prof)^2, data=dados)
+% > anova(mod.comp2.i)
+% Analysis of Variance Table
+
+% Response: comp
+%            Df Sum Sq Mean Sq F value    Pr(>F)
+% area        2 413.50  206.75 37.8674 5.237e-14 ***
+% prof        1   0.77    0.77  0.1410    0.7078
+% area:prof   2  20.44   10.22  1.8714    0.1575
+% Residuals 148 808.05    5.46
+% ---
+% Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+% \end{verbatim}
+% \end{frame}
+
+% \begin{frame}[fragile=singleslide]{Análise de Variância}{Teste de Tukey}
+% Para realizar o teste \textit{a posteriori} de Tukey, é necessário usar
+% a função \texttt{aov()} para fazer a ANOVA:
+% \begin{verbatim}
+% > mod.comp2.aov <- aov(comp ~ (area + prof)^2, data=dados)
+% > summary(mod.comp2.aov)
+%              Df Sum Sq Mean Sq F value    Pr(>F)
+% area          2 413.50 206.748 37.8674 5.237e-14 ***
+% prof          1   0.77   0.770  0.1410    0.7078
+% area:prof     2  20.44  10.218  1.8714    0.1575
+% Residuals   148 808.05   5.460
+% ---
+% Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+% > TukeyHSD(mod.comp2.aov)
+
+% > par(mfrow = c(2,2))
+% > plot(TukeyHSD(mod.comp2.aov))
+% > par(mfrow = c(1,1))
+% \end{verbatim}
+% \end{frame}
+
+% \begin{frame}[fragile=singleslide,plain]{Análise de Variância}
+% \begin{verbatim}
+% par(mfrow = c(2,2))
+% plot(mod.comp2.aov)
+% par(mfrow = c(1,1))
+% \end{verbatim}
+% \begin{figure}[htp]
+% \centering
+% %\includegraphics[height=0.9\textheight]{res_aov}
+% \end{figure}
+% \end{frame}
+
+
+
+
+\end{document}
