@@ -24,8 +24,8 @@
 
 \title{Instalação do \textit{software} \R}
 \author{Fernando de Pol Mayer \\
-  UFSC \\
-  \texttt{fernando.mayer@gmail.com} \and Rodrigo Sant'Ana \\
+  LEA/IMEF/FURG \\
+  \texttt{fernando.mayer@furg.br} \and Rodrigo Sant'Ana \\
   Instituto Albatroz \\
   \texttt{oc.rodrigosantana@gmail.com}}
 \date{}
@@ -40,7 +40,7 @@ opts_chunk$set(size = "small",
                prompt = TRUE,
                comment = NA,
                tidy = FALSE)
-thm <- knit_theme$get("beamer2")
+thm <- knit_theme$get("beamer3")
 knit_theme$set(thm)
 options(width = 65, digits = 5, prompt = " ")
 @
@@ -152,9 +152,9 @@ pronto para ser utilizado.
   que já possuem pacotes pré-compilados para o \R estão listadas ali
   (Debian, RedHat [Fedora], Suse [OpenSuse], Ubuntu). Por exemplo, para
   instalar no Ubuntu, execute em um terminal
-  <<eval=FALSE>>=
+<<eval=FALSE, engine="bash">>=
   sudo apt-get install r-base r-base-core
-  @
+@
   Se a sua distribuição não está listada ali, provavelmente será
   necessário compilar o código-fonte (veja na
   \hyperref[sec:ill]{Instalação longa} abaixo).
@@ -164,9 +164,9 @@ pronto para ser utilizado.
   pacote, a instalação pode ser executada apenas abrindo o arquivo. Em
   todo caso, tomando o Ubuntu novamente como exemplo, a instalação pode
   ser feita também via terminal com
-  <<eval=FALSE>>=
+<<eval=FALSE, engine="bash">>=
   sudo dpkg -i rstudio-0.97.173-amd64.deb
-  @
+@
   Note que o arquivo \texttt{rstudio-0.97.173-amd64.deb} é uma versão
   específica para o Ubuntu 64 bits, e você deve estar no diretório onde
   o arquivo foi baixado (use o comando \texttt{cd} para mudar
@@ -207,40 +207,40 @@ de performance do programa quando comparado com versões pré-compiladas.
   terminal e acesse esse diretório (usando \texttt{cd}). Por exemplo, se
   o arquivo estiver dentro de um diretório chamado \texttt{Programas},
   no diretório padrão do usuário
-  <<eval=FALSE>>=
+<<eval=FALSE, engine="bash">>=
   cd Programas/
-  @
+@
 \item Descompacte o arquivo com o comando \texttt{tar}
-  <<eval=FALSE>>=
+<<eval=FALSE, engine="bash">>=
   tar -zxvf R-2.15.2.tar.gz
-  @
+@
   Isso irá criar um diretório chamado \texttt{R-2.15.2}. Entre nesse
   diretório
-  <<eval=FALSE>>=
+<<eval=FALSE, engine="bash">>=
   cd R-2.15.2
-  @
+@
 \item Agora você pode configurar (\texttt{configure}), compilar
   (\texttt{make}), verificar a compilação (\texttt{make check-all})
   (esse processo pode ser demorado), e finalmente instalar (\texttt{make
   install}). O processo todo fica assim
-  <<eval=FALSE>>=
+<<eval=FALSE, engine="bash">>=
   ./configure
   make
   make check-all
   sudo make install
-  @
+@
   Detalhe: se você for realmente utilizar o \RStudio como interface no
   Linux, é necessário compilar o \R como um \textit{shared
     library}. Para isso, substitua a primeira linha acima por
-  <<eval=FALSE>>=
+<<eval=FALSE, engine="bash">>=
   ./configure --enable-R-shlib
-  @
+@
   e continue com os demais comandos.
 \item No Linux, o \R não tem interface alguma, ele é um programa que
   roda no terminal. Por isso, você pode verificar a instalação apenas digitando
-  <<eval=FALSE>>=
+<<eval=FALSE, engine="bash">>=
   R
-  @
+@
   no terminal.
 \end{enumerate}
 
@@ -280,7 +280,7 @@ Após abrir o \RStudio você vai se deparar com uma interface como essa:
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{RStudio_002}
+  \includegraphics[width=\textwidth]{figure/RStudio_002}
 \end{figure}
 
 \clearpage
@@ -314,7 +314,7 @@ mensagem como essa deverá aparecer:
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=.7\textwidth]{Selection_011}
+  \includegraphics[width=.7\textwidth]{figure/Selection_011}
 \end{figure}
 
 Talvez o seu esteja em português, mas a mensagem é a mesma. Se apareceu
@@ -333,7 +333,7 @@ bases de dados) ficarão armazenados. Para fazer esse direcionamento no
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{RStudio_005}
+  \includegraphics[width=\textwidth]{figure/RStudio_005}
 \end{figure}
 Na janela que irá abrir, selecione um diretório (ou crie um), clique em
 \textsf{Abrir}, e automaticamente o \R vai executar no \textsf{Console}
@@ -345,7 +345,7 @@ exemplo abaixo, o diretório selecionado foi \texttt{/home/fernando/R}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{RStudio_006}
+  \includegraphics[width=\textwidth]{figure/RStudio_006}
 \end{figure}
 
 O próximo passo é utilizar o editor de scripts para entrar
@@ -357,7 +357,7 @@ isso clique no menu em \textsf{File $\rightarrow$ New $\rightarrow$ R
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{RStudio_010}
+  \includegraphics[width=\textwidth]{figure/RStudio_010}
 \end{figure}
 
 Esse processo irá abrir uma nova ``janela'' dentro do \RStudio, acima do
@@ -365,7 +365,7 @@ Esse processo irá abrir uma nova ``janela'' dentro do \RStudio, acima do
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{RStudio_008}
+  \includegraphics[width=\textwidth]{figure/RStudio_008}
 \end{figure}
 
 Essa parte superior é o editor de scripts, onde você pode digitar os
@@ -375,7 +375,7 @@ na figura abaixo:
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{RStudio_009}
+  \includegraphics[width=\textwidth]{figure/RStudio_009}
 \end{figure}
 
 Na janela que abrir, digite o nome que você quer dar para o arquivo e
@@ -408,7 +408,7 @@ Para ajuda com o \RStudio, você pode clicar na aba \texttt{Help} do
 programa. Se você quiser ir se familiarizando com a linguagem em si,
 digite
 <<eval=FALSE>>=
-> help.start()
+help.start()
 @
 \noindent para ter acesso aos manuais e outras referências. Para uma boa
 referência inicial em português recomendo seguir o material e os

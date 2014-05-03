@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt]{article}\usepackage{graphicx, color}
+\documentclass[a4paper,12pt]{article}\usepackage[]{graphicx}\usepackage[]{color}
 %% maxwidth is the original width if it is less than linewidth
 %% otherwise use linewidth (to make sure the graphics do not exceed the margin)
 \makeatletter
@@ -11,21 +11,16 @@
 }
 \makeatother
 
-\definecolor{fgcolor}{rgb}{0.2, 0.2, 0.2}
-\newcommand{\hlfunctioncall}[1]{\textcolor[rgb]{0,0,0.545098039215686}{\textbf{#1}}}%
-\newcommand{\hlstring}[1]{\textcolor[rgb]{0.282352941176471,0.23921568627451,0.545098039215686}{#1}}%
-\newcommand{\hlnumber}[1]{\textcolor[rgb]{0,0,0}{#1}}%
-\newcommand{\hlkeyword}[1]{\textcolor[rgb]{0,0,0}{\textbf{#1}}}%
-\newcommand{\hlargument}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
-\newcommand{\hlcomment}[1]{\textcolor[rgb]{0.2,0.2,0.2}{#1}}%
-\newcommand{\hlroxygencomment}[1]{\textcolor[rgb]{0.2,0.2,0.2}{#1}}%
-\newcommand{\hlformalargs}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
-\newcommand{\hleqformalargs}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
-\newcommand{\hlassignement}[1]{\textcolor[rgb]{0,0,0}{\textbf{#1}}}%
-\newcommand{\hlpackage}[1]{\textcolor[rgb]{0.588235294117647,0.709803921568627,0.145098039215686}{#1}}%
-\newcommand{\hlslot}[1]{\textit{#1}}%
-\newcommand{\hlsymbol}[1]{\textcolor[rgb]{0,0,0}{#1}}%
-\newcommand{\hlprompt}[1]{\textcolor[rgb]{0.2,0.2,0.2}{#1}}%
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.282,0.239,0.545}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.498,0.498,0.498}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.282,0.239,0.545}{\textbf{#1}}}%
 
 \usepackage{framed}
 \makeatletter
@@ -78,13 +73,14 @@
 
 \title{Instalação do \textit{software} \R}
 \author{Fernando de Pol Mayer \\
-  UFSC \\
-  \texttt{fernando.mayer@gmail.com} \and Rodrigo Sant'Ana \\
+  LEA/IMEF/FURG \\
+  \texttt{fernando.mayer@furg.br} \and Rodrigo Sant'Ana \\
   Instituto Albatroz \\
   \texttt{oc.rodrigosantana@gmail.com}}
 \date{}
 
 \hyphenation{e-la-bo-ra-das}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 
 \begin{document}
 
@@ -199,10 +195,13 @@ pronto para ser utilizado.
   (Debian, RedHat [Fedora], Suse [OpenSuse], Ubuntu). Por exemplo, para
   instalar no Ubuntu, execute em um terminal
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.933, 0.914, 0.914}\color{fgcolor}\begin{kframe}
-\begin{alltt}
- sudo apt-get install r-base r-base-core
-\end{alltt}
+\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\noindent
+\ttfamily
+\hlstd{}\hlstd{\ \ }\hlstd{sudo\ apt}\hlopt{{-}}\hlstd{get\ }\hlkwc{install\ }\hlstd{r}\hlopt{{-}}\hlstd{base\ r}\hlopt{{-}}\hlstd{base}\hlopt{{-}}\hlstd{core}\hspace*{\fill}
+\mbox{}
+\normalfont
+\normalsize
 \end{kframe}
 \end{knitrout}
 
@@ -216,10 +215,13 @@ pronto para ser utilizado.
   todo caso, tomando o Ubuntu novamente como exemplo, a instalação pode
   ser feita também via terminal com
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.933, 0.914, 0.914}\color{fgcolor}\begin{kframe}
-\begin{alltt}
- sudo dpkg -i rstudio-0.97.173-amd64.deb
-\end{alltt}
+\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\noindent
+\ttfamily
+\hlstd{}\hlstd{\ \ }\hlstd{sudo\ dpkg\ }\hlopt{{-}}\hlstd{i\ rstudio}\hlopt{{-}}\hlstd{}\hlnum{0.97.173}\hlstd{}\hlopt{{-}}\hlstd{amd64.deb}\hspace*{\fill}
+\mbox{}
+\normalfont
+\normalsize
 \end{kframe}
 \end{knitrout}
 
@@ -264,29 +266,38 @@ de performance do programa quando comparado com versões pré-compiladas.
   o arquivo estiver dentro de um diretório chamado \texttt{Programas},
   no diretório padrão do usuário
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.933, 0.914, 0.914}\color{fgcolor}\begin{kframe}
-\begin{alltt}
- cd Programas/
-\end{alltt}
+\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\noindent
+\ttfamily
+\hlstd{}\hlstd{\ \ }\hlstd{}\hlkwb{cd\ }\hlstd{Programas}\hlopt{/}\hlstd{}\hspace*{\fill}
+\mbox{}
+\normalfont
+\normalsize
 \end{kframe}
 \end{knitrout}
 
 \item Descompacte o arquivo com o comando \texttt{tar}
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.933, 0.914, 0.914}\color{fgcolor}\begin{kframe}
-\begin{alltt}
- tar -zxvf R-2.15.2.tar.gz
-\end{alltt}
+\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\noindent
+\ttfamily
+\hlstd{}\hlstd{\ \ }\hlstd{}\hlkwc{tar\ }\hlstd{}\hlopt{{-}}\hlstd{zxvf\ R}\hlopt{{-}}\hlstd{}\hlnum{2.15.2}\hlstd{.}\hlkwc{tar}\hlstd{.gz}\hspace*{\fill}
+\mbox{}
+\normalfont
+\normalsize
 \end{kframe}
 \end{knitrout}
 
   Isso irá criar um diretório chamado \texttt{R-2.15.2}. Entre nesse
   diretório
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.933, 0.914, 0.914}\color{fgcolor}\begin{kframe}
-\begin{alltt}
- cd R-2.15.2
-\end{alltt}
+\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\noindent
+\ttfamily
+\hlstd{}\hlstd{\ \ }\hlstd{}\hlkwb{cd\ }\hlstd{R}\hlopt{{-}}\hlstd{}\hlnum{2.15.2}\hlstd{}\hspace*{\fill}
+\mbox{}
+\normalfont
+\normalsize
 \end{kframe}
 \end{knitrout}
 
@@ -295,13 +306,16 @@ de performance do programa quando comparado com versões pré-compiladas.
   (esse processo pode ser demorado), e finalmente instalar (\texttt{make
   install}). O processo todo fica assim
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.933, 0.914, 0.914}\color{fgcolor}\begin{kframe}
-\begin{alltt}
- ./configure
- make
- make check-all
- sudo make install
-\end{alltt}
+\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\noindent
+\ttfamily
+\hlstd{}\hlstd{\ \ }\hlstd{.}\hlopt{/}\hlstd{configure\hspace*{\fill}\\
+}\hlstd{\ \ }\hlstd{}\hlkwc{make}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ }\hlstd{}\hlkwc{make\ }\hlstd{check}\hlopt{{-}}\hlstd{all\hspace*{\fill}\\
+}\hlstd{\ \ }\hlstd{sudo\ }\hlkwc{make\ install}\hlstd{}\hspace*{\fill}
+\mbox{}
+\normalfont
+\normalsize
 \end{kframe}
 \end{knitrout}
 
@@ -309,10 +323,13 @@ de performance do programa quando comparado com versões pré-compiladas.
   Linux, é necessário compilar o \R como um \textit{shared
     library}. Para isso, substitua a primeira linha acima por
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.933, 0.914, 0.914}\color{fgcolor}\begin{kframe}
-\begin{alltt}
- ./configure --enable-R-shlib
-\end{alltt}
+\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\noindent
+\ttfamily
+\hlstd{}\hlstd{\ \ }\hlstd{.}\hlopt{/}\hlstd{configure\ }\hlopt{{-}{-}}\hlstd{}\hlkwb{enable}\hlstd{}\hlopt{{-}}\hlstd{R}\hlopt{{-}}\hlstd{shlib}\hspace*{\fill}
+\mbox{}
+\normalfont
+\normalsize
 \end{kframe}
 \end{knitrout}
 
@@ -320,10 +337,13 @@ de performance do programa quando comparado com versões pré-compiladas.
 \item No Linux, o \R não tem interface alguma, ele é um programa que
   roda no terminal. Por isso, você pode verificar a instalação apenas digitando
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.933, 0.914, 0.914}\color{fgcolor}\begin{kframe}
-\begin{alltt}
- R
-\end{alltt}
+\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\noindent
+\ttfamily
+\hlstd{}\hlstd{\ \ }\hlstd{R}\hspace*{\fill}
+\mbox{}
+\normalfont
+\normalsize
 \end{kframe}
 \end{knitrout}
 
@@ -366,7 +386,7 @@ Após abrir o \RStudio você vai se deparar com uma interface como essa:
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{RStudio_002}
+  \includegraphics[width=\textwidth]{figure/RStudio_002}
 \end{figure}
 
 \clearpage
@@ -400,7 +420,7 @@ mensagem como essa deverá aparecer:
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=.7\textwidth]{Selection_011}
+  \includegraphics[width=.7\textwidth]{figure/Selection_011}
 \end{figure}
 
 Talvez o seu esteja em português, mas a mensagem é a mesma. Se apareceu
@@ -419,7 +439,7 @@ bases de dados) ficarão armazenados. Para fazer esse direcionamento no
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{RStudio_005}
+  \includegraphics[width=\textwidth]{figure/RStudio_005}
 \end{figure}
 Na janela que irá abrir, selecione um diretório (ou crie um), clique em
 \textsf{Abrir}, e automaticamente o \R vai executar no \textsf{Console}
@@ -431,7 +451,7 @@ exemplo abaixo, o diretório selecionado foi \texttt{/home/fernando/R}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{RStudio_006}
+  \includegraphics[width=\textwidth]{figure/RStudio_006}
 \end{figure}
 
 O próximo passo é utilizar o editor de scripts para entrar
@@ -443,7 +463,7 @@ isso clique no menu em \textsf{File $\rightarrow$ New $\rightarrow$ R
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{RStudio_010}
+  \includegraphics[width=\textwidth]{figure/RStudio_010}
 \end{figure}
 
 Esse processo irá abrir uma nova ``janela'' dentro do \RStudio, acima do
@@ -451,7 +471,7 @@ Esse processo irá abrir uma nova ``janela'' dentro do \RStudio, acima do
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{RStudio_008}
+  \includegraphics[width=\textwidth]{figure/RStudio_008}
 \end{figure}
 
 Essa parte superior é o editor de scripts, onde você pode digitar os
@@ -461,7 +481,7 @@ na figura abaixo:
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{RStudio_009}
+  \includegraphics[width=\textwidth]{figure/RStudio_009}
 \end{figure}
 
 Na janela que abrir, digite o nome que você quer dar para o arquivo e
@@ -481,14 +501,14 @@ comentários usando o símbolo \texttt{\#} na frente de qualquer frase que
 não seja um comando. Por exemplo:
 
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.933, 0.914, 0.914}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
- \hlcomment{# isso é um comentário e não será executado pelo R}
- x <- 2 + 2
- y <- 4 * 4 \hlcomment{# comentários também podem ser colocados ao lado de comandos}
- \hlcomment{# use esse recurso para descrever o que está sendo feito}
- \hlcomment{# o comando abaixo serve para listar os objetos criados}
- \hlfunctioncall{ls}()
+\hlstd{ }\hlcom{# isso é um comentário e não será executado pelo R}
+\hlstd{ }\hlstd{x} \hlkwb{<-} \hlnum{2} \hlopt{+} \hlnum{2}
+\hlstd{ }\hlstd{y} \hlkwb{<-} \hlnum{4} \hlopt{*} \hlnum{4} \hlcom{# comentários também podem ser colocados ao lado de comandos}
+\hlstd{ }\hlcom{# use esse recurso para descrever o que está sendo feito}
+\hlstd{ }\hlcom{# o comando abaixo serve para listar os objetos criados}
+\hlstd{ }\hlkwd{ls}\hlstd{()}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -499,9 +519,9 @@ Para ajuda com o \RStudio, você pode clicar na aba \texttt{Help} do
 programa. Se você quiser ir se familiarizando com a linguagem em si,
 digite
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.933, 0.914, 0.914}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
- > \hlfunctioncall{help.start}()
+\hlstd{ }\hlkwd{help.start}\hlstd{()}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
