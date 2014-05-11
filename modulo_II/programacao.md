@@ -29,7 +29,7 @@
 -   Exemplo: cálculo de notas de uma disciplina.
 
 
-```python
+```r
 
 ## Importa os dados
 notas <- read.table("../dados/notas.csv", header = TRUE, sep = ";", dec = ",")
@@ -45,7 +45,7 @@ str(notas)
 ##  $ prova3: int  1 6 4 9 8 3 0 7 1 3 ...
 ```
 
-```python
+```r
 head(notas)
 ```
 
@@ -59,7 +59,7 @@ head(notas)
 ## 6 Aluno_6     10      0      3
 ```
 
-```python
+```r
 summary(notas)
 ```
 
@@ -74,79 +74,18 @@ summary(notas)
 ##  (Other) :24
 ```
 
-```python
 
-## Antes de seguir adiante, veja o resultado de
+Antes de seguir adiante, veja o resultado de
+
+```r
 for (i in 1:30) {
     print(notas[i, c("prova1", "prova2", "prova3")])
 }
 ```
 
-```
-##   prova1 prova2 prova3
-## 1      8      4      1
-##   prova1 prova2 prova3
-## 2      2      7      6
-##   prova1 prova2 prova3
-## 3      9      2      4
-##   prova1 prova2 prova3
-## 4      1     10      9
-##   prova1 prova2 prova3
-## 5      7      6      8
-##   prova1 prova2 prova3
-## 6     10      0      3
-##   prova1 prova2 prova3
-## 7      1      8      0
-##   prova1 prova2 prova3
-## 8      5      9      7
-##   prova1 prova2 prova3
-## 9      5      6      1
-##    prova1 prova2 prova3
-## 10     10      2      3
-##    prova1 prova2 prova3
-## 11      1      0      7
-##    prova1 prova2 prova3
-## 12      5      0      7
-##    prova1 prova2 prova3
-## 13      8      8      2
-##    prova1 prova2 prova3
-## 14      7      1      9
-##    prova1 prova2 prova3
-## 15      5      7      6
-##    prova1 prova2 prova3
-## 16      5      3      5
-##    prova1 prova2 prova3
-## 17      1      6      7
-##    prova1 prova2 prova3
-## 18      2     10      7
-##    prova1 prova2 prova3
-## 19     10      3      2
-##    prova1 prova2 prova3
-## 20      0      5      8
-##    prova1 prova2 prova3
-## 21      4      8      7
-##    prova1 prova2 prova3
-## 22      3      8      3
-##    prova1 prova2 prova3
-## 23      2      5      4
-##    prova1 prova2 prova3
-## 24      3      5      2
-##    prova1 prova2 prova3
-## 25      3      3      2
-##    prova1 prova2 prova3
-## 26      3      9      9
-##    prova1 prova2 prova3
-## 27      1      8      8
-##    prova1 prova2 prova3
-## 28      6     10      8
-##    prova1 prova2 prova3
-## 29      2      1      8
-##    prova1 prova2 prova3
-## 30      4      9      9
-```
 
-```python
 
+```r
 ## Para calcular as médias das 3 provas, precisamos inicialmente de um vetor
 ## para armazenar os resultados. Esse vetor pode ser um novo objeto ou uma
 ## nova coluna no dataframe
@@ -181,7 +120,7 @@ forma fica mais fácil fazer alterações e procurar erros. Uma forma de
 melhorar o código acima é generalizando alguns passos.
 
 
-```python
+```r
 ## Armazenamos o número de linhas no dataframe
 nlinhas <- nrow(notas)
 ## Identificamos as colunas de interesse no cálculo da média, e armazenamos
@@ -218,7 +157,7 @@ funções prontas do R. No caso da média isso é possível pois a função
 estamos utilizando não está implementado em nenhuma função pronta do R.
 
 
-```python
+```r
 ## Cria uma nova coluna apenas para comparação
 notas$media3 <- 0
 ## A estrutura de repetição fica
@@ -240,7 +179,7 @@ head(notas)
 ## 6 Aluno_6     10      0      3 4.333  4.333  4.333
 ```
 
-```python
+```r
 
 ## A única diferença é que aqui precisamos transformar cada linha em um vetor
 ## de números com as.numeric(), pois
@@ -252,7 +191,7 @@ notas[1, provas]
 ## 1      8      4      1
 ```
 
-```python
+```r
 ## é um data.frame:
 class(notas[1, provas])
 ```
@@ -266,7 +205,7 @@ Podemos agora inserir pesos para as provas: prova 1 = 4, prova 2 = 3,
 prova 3 = 3.
 
 
-```python
+```r
 ## Cria uma nova coluna para armazenar os resultados das médias ponderadas
 notas$mediap <- 0
 ## Estrutura de repetição
@@ -294,7 +233,7 @@ head(notas)
 -   Adicionando a condição do aluno de acordo com a nota.
 
 
-```python
+```r
 ## Nova coluna para armazenar os resultados
 notas$situacao <- NA
 ## Estrutura de repetição
@@ -317,7 +256,7 @@ Através do processo de vetorização do R, o mesmo algoritmo pode ser
 simplificado em duas etapas.
 
 
-```python
+```r
 ## Criando uma funcao para calcular a media ponderada
 mediap <- function(notas, pesos) {
     saida <- numeric(nrow(notas))
@@ -337,7 +276,7 @@ mediap(notas[, c("prova1", "prova2", "prova3")], c(4, 3, 3))
 ## [18] 5.9 5.5 3.9 6.1 4.5 3.5 3.3 2.7 6.6 5.2 7.8 3.5 7.0
 ```
 
-```python
+```r
 
 ## Podemos conferir o nosso cálculo através da função mean() do R
 apply(notas[, c("prova1", "prova2", "prova3")], 1, mean)

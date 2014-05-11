@@ -37,12 +37,16 @@ notas <- read.table("../dados/notas.csv", header = TRUE,
 str(notas)
 head(notas)
 summary(notas)
+```
 
-## Antes de seguir adiante, veja o resultado de
+Antes de seguir adiante, veja o resultado de
+```{r eval=FALSE}
 for(i in 1:30){
     print(notas[i, c("prova1", "prova2", "prova3")])
 }
+```
 
+```{r }
 ## Para calcular as médias das 3 provas, precisamos inicialmente de um
 ## vetor para armazenar os resultados. Esse vetor pode ser um novo
 ## objeto ou uma nova coluna no dataframe
