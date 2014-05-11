@@ -1,0 +1,108 @@
+# Programação com R
+
+## Programação
+
+- Por quê programar?
+
+	-   Evitar repetições desnecessárias de análises ou cálculos que são
+        repetidos com frequência.
+
+    -   Fica documentado as etapas que você realizou para chegar a um
+        resultado.
+
+    -   Fácil recuperação e modificação de programas.
+
+-   Como programar?
+
+    -   Criando programas! (Scripts, rotinas, **algoritmos**).
+
+    -   Crie uma sequência lógica de comandos que devem ser executados
+        em ordem.
+
+    -   Utilize as ferramentas básicas da programação: **estruturas de
+        repetição** (`for()`) e **estruturas de seleção** (`if()`).
+
+## Estrutura de repetição `for()`
+
+-   Serve para repetir um ou mais comandos diversas vezes.
+
+-   Exemplo: cálculo de notas de uma disciplina.
+
+```{r }
+
+## Importa os dados
+notas <- read.table("../dados/notas.csv", header = TRUE,
+                    sep=";", dec=",")
+## Analisa a estrutura
+str(notas)
+head(notas)
+summary(notas)
+
+## Cria uma nova coluna para armazenar os resultados das médias
+notas$media <- 0
+## Estrutura de repetição
+for(i in 1:30){
+    notas$media[i] <- sum(notas[i, c("prova1",
+                                     "prova2",
+                                     "prova3")])/3
+}
+## Confere os resultados
+head(notas)
+```
+
+Podemos agora inserir pesos para as provas: prova 1 = 4, prova 2 = 3,
+prova 3 = 3.
+
+```{r }
+## Cria uma nova coluna para armazenar os resultados das médias
+## ponderadas
+notas$mediap <- 0
+## Estrutura de repetição
+for(i in 1:30){
+    pesos <- notas[i, c("prova1", "prova2", "prova3")] * c(4,3,3)
+    notas$mediap[i] <- sum(pesos)/10
+}
+## Confere os resultados
+head(notas)
+```
+
+## Estrutura de seleção `if()`
+
+-   Adicionando a condição do aluno de acordo com a nota.
+
+```{r }
+## Nova coluna para armazenar os resultados
+notas$situacao <- NA
+## Estrutura de repetição
+for(i in 1:30){
+    pesos <- notas[i, c("prova1", "prova2", "prova3")] *
+        c(4,3,3)
+    notas$mediap[i] <- sum(pesos)/10
+    ## Estrutura de seleção
+    if(notas$media[i] >= 7){
+        notas$situacao[i] <- "aprovado"
+    } else{
+        notas$situacao[i] <- "reprovado"
+    }
+}
+```
+
+## O modo do R: vetorização
+
+Através do processo de vetorização do R, o mesmo algoritmo pode ser
+simplificado em duas etapas.
+
+```{r }
+## Criando uma funcao para calcular a media ponderada
+mediap <- function(notas, pesos){
+    saida <- numeric(nrow(notas))
+    for(i in 1:nrow(notas)){
+        aux <- notas[i,] * pesos
+        saida[i] <- sum(aux)/10
+    }
+    return(saida)
+}
+
+## Confere o resultado
+mediap(notas[,c("prova1", "prova2", "prova3")], c(4,3,3))
+```
