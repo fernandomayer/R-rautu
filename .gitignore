@@ -35,5 +35,6 @@
 ## R
 *.Rhistory
 *.RData
+.#*
 cache/
 Rplots.pdf
