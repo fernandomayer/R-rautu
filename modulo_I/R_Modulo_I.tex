@@ -73,20 +73,20 @@
 \title{Introdução ao uso do R}
 
 \title[Módulo I\\ Básico]{Introdução ao uso do software R}
-\author[]{Fernando de Pol Mayer\inst{1} \and %\url{fernandomayer@gmail.com} \and
-Rodrigo Sant'Ana\inst{2}} %\\ \url{oc.rodrigosantana@gmail.com}}
-\date{}
-\institute{
-  \inst{1}%
-  Laboratório de Estatística Ambiental (LEA) \\
-  Instituto de Matemática, Estatística e Física (IMEF) \\
-  Universidade Federal do Rio Grande (FURG) \\
-  \url{fernando.mayer@furg.br}
-  \and
-  \inst{2}%
-  Instituto Albatroz \\
-  \url{oc.rodrigosantana@gmail.com}
-}
+%% \author[]{Fernando de Pol Mayer\inst{1} \and %\url{fernandomayer@gmail.com} \and
+%% Rodrigo Sant'Ana\inst{2}} %\\ \url{oc.rodrigosantana@gmail.com}}
+%% \date{}
+%% \institute{
+%%   \inst{1}%
+%%   Laboratório de Estatística Ambiental (LEA) \\
+%%   Instituto de Matemática, Estatística e Física (IMEF) \\
+%%   Universidade Federal do Rio Grande (FURG) \\
+%%   \url{fernando.mayer@furg.br}
+%%   \and
+%%   \inst{2}%
+%%   Instituto Albatroz \\
+%%   \url{oc.rodrigosantana@gmail.com}
+%% }
 \logo{\includegraphics[width=1cm]{../conf/Rlogo-5}}
 
 \AtBeginSection[]
@@ -156,7 +156,7 @@ Rodrigo Sant'Ana\inst{2}} %\\ \url{oc.rodrigosantana@gmail.com}}
 \item Livre distribuição (código-aberto)\pause
 \item Mais de 2000 pacotes adicionais\pause
 \item Disponível em \url{http://www.R-project.org} \pause
-\item Versão atual: 2.15.2 (26/10/2012). Ciclo de lançamentos: 6 meses
+\item Versão atual: 3.1.0 (10/04/2014). Ciclo de lançamentos: 6 meses
   (versões menores), 1 ano (versões maiores).
 \end{itemize}
 \end{frame}
@@ -187,7 +187,7 @@ Rodrigo Sant'Ana\inst{2}} %\\ \url{oc.rodrigosantana@gmail.com}}
 
 \section{Configuração inicial}
 
-\begin{frame}[fragile=singleslide]{Configurando o diretório de trabalho}
+\begin{frame}[fragile]{Configurando o diretório de trabalho}
 \begin{itemize}
 \item O diretório de trabalho é uma pasta onde o R será
   direcionado. Todos os arquivos que serão importados (base de dados,
@@ -199,7 +199,7 @@ Rodrigo Sant'Ana\inst{2}} %\\ \url{oc.rodrigosantana@gmail.com}}
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Configurando o diretório de trabalho}
+\begin{frame}[fragile]{Configurando o diretório de trabalho}
 \begin{enumerate}
 \item Utilizando a função \texttt{setwd()} dentro do R:
 \begin{verbatim}
@@ -213,7 +213,7 @@ Confira o diretório que está trabalhando com a função
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{getwd}\hlstd{()}
+\hlkwd{getwd}\hlstd{()}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -229,7 +229,7 @@ Confira o diretório que está trabalhando com a função
 % \end{figure}
 % \end{frame}
 
-\begin{frame}[fragile=singleslide]{O R como uma calculadora}
+\begin{frame}[fragile]{O R como uma calculadora}
 O símbolo \verb|>| indica que o R está pronto para receber um comando:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
@@ -247,7 +247,7 @@ O símbolo \verb|>| muda para \verb|+| se o comando estiver incompleto:
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{> }\hlnum{2} \hlopt{*}
-\hlstd{  }\hlnum{2}
+\hlstd{+ }\hlnum{2}
 \end{alltt}
 \begin{verbatim}
 [1] 4
@@ -269,14 +269,14 @@ Espaços entre os números não fazem diferença:
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{O editor de scripts}
+\begin{frame}[fragile]{O editor de scripts}
   \begin{itemize}
   \item Para criar rotinas computacionais é necessário utilizar um editor
     de scripts.
-  \item Clique em \texttt{Arquivo > Novo script}. Salve com a extensão
+  \item Clique em \texttt{File > New file> R script}. Salve com a extensão
     \texttt{.R}.
   \item Para enviar comandos diretamente para o console, selecione-os e
-    aperte \texttt{Ctrl + R}.
+    aperte \texttt{Ctrl + <Enter>}.
   \item Para adicionar comentários ao script, utiliza-se o símbolo
     \texttt{\#} antes do texto e/ou comandos. O que estiver depois do
     símbolo não será interpretado pelo R. Portanto:
@@ -293,7 +293,7 @@ Espaços entre os números não fazem diferença:
 \end{frame}
 
 
-\begin{frame}[fragile=singleslide]{Operadores aritméticos}
+\begin{frame}[fragile]{Operadores aritméticos}
 \begin{table}[!ht]
     \centering
     %\caption
@@ -316,7 +316,7 @@ Espaços entre os números não fazem diferença:
 \end{table}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Ordems de execução}
+\begin{frame}[fragile]{Ordems de execução}
 As operações são realizadas sempre seguindo as prioridades:
 \begin{enumerate}
 \item De dentro para fora de parênteses \verb|()|
@@ -326,25 +326,25 @@ As operações são realizadas sempre seguindo as prioridades:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlnum{5} \hlopt{*} \hlnum{2} \hlopt{-} \hlnum{10} \hlopt{+} \hlnum{7}
+\hlnum{5} \hlopt{*} \hlnum{2} \hlopt{-} \hlnum{10} \hlopt{+} \hlnum{7}
 \end{alltt}
 \begin{verbatim}
 [1] 7
 \end{verbatim}
 \begin{alltt}
-\hlstd{> }\hlnum{5} \hlopt{*} \hlnum{2} \hlopt{-} \hlstd{(}\hlnum{10} \hlopt{+} \hlnum{7}\hlstd{)}
+\hlnum{5} \hlopt{*} \hlnum{2} \hlopt{-} \hlstd{(}\hlnum{10} \hlopt{+} \hlnum{7}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
 [1] -7
 \end{verbatim}
 \begin{alltt}
-\hlstd{> }\hlnum{5} \hlopt{*} \hlstd{(}\hlnum{2} \hlopt{-} \hlnum{10} \hlopt{+} \hlnum{7}\hlstd{)}
+\hlnum{5} \hlopt{*} \hlstd{(}\hlnum{2} \hlopt{-} \hlnum{10} \hlopt{+} \hlnum{7}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
 [1] -5
 \end{verbatim}
 \begin{alltt}
-\hlstd{> }\hlnum{5} \hlopt{*} \hlstd{(}\hlnum{2} \hlopt{-} \hlstd{(}\hlnum{10} \hlopt{+} \hlnum{7}\hlstd{))}
+\hlnum{5} \hlopt{*} \hlstd{(}\hlnum{2} \hlopt{-} \hlstd{(}\hlnum{10} \hlopt{+} \hlnum{7}\hlstd{))}
 \end{alltt}
 \begin{verbatim}
 [1] -75
@@ -354,14 +354,29 @@ As operações são realizadas sempre seguindo as prioridades:
 
 \end{frame}
 
+\begin{frame}[fragile]{Exercícios}
+  \begin{enumerate}
+  \item Calcule a seguinte equação: $32 + 16^2 - 25^3$
+  \item Divida o resultado por $345$
+  \item Qual o resultado da expressão $\frac{e^{-2}  2^{4} - 1}{4!}$?
+  \item E do logaritmo desta expressão?
+  %% \item Usando a função \verb|runif()| gere $30$ números aleatórios entre:
+  %%   \begin{itemize}
+  %%   \item 0 e 1
+  %%   \item -5 e 5
+  %%   \item 10 e 500
+  %%   \end{itemize}
+  \end{enumerate}
+\end{frame}
+
 \section{Funções e argumentos}
 
-\begin{frame}[fragile=singleslide]{Funções e argumentos}
+\begin{frame}[fragile]{Funções e argumentos}
 As funções no R são definidas como:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{nome}\hlstd{(argumento1, argumento2, ...)}
+\hlkwd{nome}\hlstd{(argumento1, argumento2, ...)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -371,7 +386,7 @@ distribuição uniforme):
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{runif}\hlstd{(n,} \hlkwc{min} \hlstd{=} \hlnum{0}\hlstd{,} \hlkwc{max} \hlstd{=} \hlnum{1}\hlstd{)}
+\hlkwd{runif}\hlstd{(n,} \hlkwc{min} \hlstd{=} \hlnum{0}\hlstd{,} \hlkwc{max} \hlstd{=} \hlnum{1}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -379,24 +394,24 @@ distribuição uniforme):
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{runif}\hlstd{(}\hlnum{10}\hlstd{,} \hlnum{1}\hlstd{,} \hlnum{100}\hlstd{)}
+\hlkwd{runif}\hlstd{(}\hlnum{10}\hlstd{,} \hlnum{1}\hlstd{,} \hlnum{100}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
- [1] 64.531 70.844 76.653 17.082 13.192 60.164 14.895 97.979
- [9] 91.078 84.326
+ [1] 60.987 18.436 73.635 79.109 36.117 11.424 14.115 75.931
+ [9] 59.455 14.065
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Funções e argumentos}
+\begin{frame}[fragile]{Funções e argumentos}
 Argumentos que já possuem um valor especificado (como \texttt{max} e
 \texttt{min}) podem ser omitidos:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{runif}\hlstd{(}\hlnum{10}\hlstd{)}
+\hlkwd{runif}\hlstd{(}\hlnum{10}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -406,7 +421,7 @@ mais importância:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{runif}\hlstd{(}\hlkwc{min} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{max} \hlstd{=} \hlnum{100}\hlstd{,} \hlkwc{n} \hlstd{=} \hlnum{10}\hlstd{)}
+\hlkwd{runif}\hlstd{(}\hlkwc{min} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{max} \hlstd{=} \hlnum{100}\hlstd{,} \hlkwc{n} \hlstd{=} \hlnum{10}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -416,19 +431,19 @@ não nomeados estejam na posição correta:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{runif}\hlstd{(}\hlnum{10}\hlstd{,} \hlkwc{max} \hlstd{=} \hlnum{100}\hlstd{,} \hlkwc{min} \hlstd{=} \hlnum{1}\hlstd{)}
+\hlkwd{runif}\hlstd{(}\hlnum{10}\hlstd{,} \hlkwc{max} \hlstd{=} \hlnum{100}\hlstd{,} \hlkwc{min} \hlstd{=} \hlnum{1}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Outros tipos de argumentos}
+\begin{frame}[fragile]{Outros tipos de argumentos}
 Exemplo: função \verb|sample()|:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{sample}\hlstd{(x, size,} \hlkwc{replace} \hlstd{=} \hlnum{FALSE}\hlstd{,} \hlkwc{prob} \hlstd{=} \hlkwa{NULL}\hlstd{)}
+\hlkwd{sample}\hlstd{(x, size,} \hlkwc{replace} \hlstd{=} \hlnum{FALSE}\hlstd{,} \hlkwc{prob} \hlstd{=} \hlkwa{NULL}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -443,7 +458,7 @@ Exemplo: função \verb|plot()|:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{plot}\hlstd{(x, y, ...)}
+\hlkwd{plot}\hlstd{(x, y, ...)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -454,27 +469,12 @@ Exemplo: função \verb|plot()|:
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Exercícios}
-  \begin{enumerate}
-  \item Calcule a seguinte equação: $32 + 16^2 - 25^3$
-  \item Divida o resultado por $345$
-  \item Qual o resultado da expressão $\frac{e^{-2}  2^{4} - 1}{4!}$?
-  \item E do logaritmo desta expressão?
-  \item Usando a função \verb|runif()| gere $30$ números aleatórios entre:
-    \begin{itemize}
-    \item 0 e 1
-    \item -5 e 5
-    \item 10 e 500
-    \end{itemize}
-  \end{enumerate}
-\end{frame}
-
-\begin{frame}[fragile=singleslide]{Mecanismos de ajuda}
+\begin{frame}[fragile]{Mecanismos de ajuda}
 Argumentos e detalhes do funcionamento das funções:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlopt{?}\hlstd{runif}
+\hlopt{?}\hlstd{runif}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -483,7 +483,7 @@ ou
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{help}\hlstd{(runif)}
+\hlkwd{help}\hlstd{(runif)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -501,12 +501,12 @@ A documentação contém os campos:
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Mecanismos de ajuda}
+\begin{frame}[fragile]{Mecanismos de ajuda}
 Procura por funções que contenham \texttt{"palavra"}:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{help.search}\hlstd{(}\hlstr{"palavra"}\hlstd{)}
+\hlkwd{help.search}\hlstd{(}\hlstr{"palavra"}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -515,7 +515,7 @@ Ajuda através do navegador (também contém manuais, \ldots):
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{help.start}\hlstd{()}
+\hlkwd{help.start}\hlstd{()}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -524,16 +524,91 @@ Busca por \texttt{"palavra"} nos arquivos da lista de discussão do R:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{RSiteSearch}\hlstd{(}\hlstr{"palavra"}\hlstd{)}
+\hlkwd{RSiteSearch}\hlstd{(}\hlstr{"palavra"}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
 
 \end{frame}
 
+\begin{frame}[fragile]{Criando uma função}
+  A ideia original do R é transformar usuários em programadores \\~\\
+  Criar funções para realizar trabalhos específicos é um dos grandes
+  poderes do R \\~\\
+  Por exemplo, podemos criar a famosa função
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{ola.mundo} \hlkwb{<-} \hlkwa{function}\hlstd{()\{}
+    \hlkwd{writeLines}\hlstd{(}\hlstr{"Olá mundo"}\hlstd{)}
+\hlstd{\}}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+E chama-la através de
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{ola.mundo}\hlstd{()}
+\end{alltt}
+\begin{verbatim}
+Olá mundo
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]{Criando uma função}
+A função acima não permite alterar o resultado de saída. Podemos fazer
+isso incluindo um \textbf{argumento}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{ola.mundo} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{texto}\hlstd{)\{}
+    \hlkwd{writeLines}\hlstd{(texto)}
+\hlstd{\}}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+E fazer por exemplo
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{ola.mundo}\hlstd{(}\hlstr{"Funções são legais"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+Funções são legais
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+(Veremos detalhes de funções mais adiante)
+\end{frame}
+
+\begin{frame}[fragile]{Exercícios}
+  \begin{itemize}
+  \item Usando a função \verb|runif()| gere $30$ números
+    aleatórios entre:
+    \begin{itemize}
+    \item 0 e 1
+    \item -5 e 5
+    \item 10 e 500
+    \end{itemize}
+    alternando a posição dos argumentos da função.
+  \item Veja o help da função (?) \verb|"+"|
+  \item Crie uma função para fazer a soma de dois números: \texttt{x} e
+    \texttt{y}
+  \end{itemize}
+
+
+\end{frame}
+
 \section{Objetos}
 
-\begin{frame}[fragile=singleslide]{Programação orientada a objetos}
+\begin{frame}[fragile]{Programação orientada a objetos}
 O que é um objeto?
 \begin{itemize}
 \item Um \textbf{símbolo} ou uma \textbf{variável} capaz de armazenar
@@ -550,7 +625,7 @@ Programação:
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Objetos}
+\begin{frame}[fragile]{Objetos}
 \begin{quote}
     ``Tudo no R é um objeto.''\\
     ``Todo objeto no R tem uma classe''
@@ -566,14 +641,24 @@ Programação:
   \item \verb|plot()|
   \end{itemize}
 \end{itemize}
+Veja o resultado de
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{methods}\hlstd{(summary)}
+\hlkwd{methods}\hlstd{(plot)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Objetos}
+\begin{frame}[fragile]{Objetos}
 A variável \texttt{x} recebe o valor $2$ (tornando-se um objeto dentro do R):
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{x} \hlkwb{<-} \hlnum{2}
+\hlstd{x} \hlkwb{<-} \hlnum{2}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -588,7 +673,7 @@ Para ver o conteúdo do objeto:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{x}
+\hlstd{x}
 \end{alltt}
 \begin{verbatim}
 [1] 2
@@ -600,12 +685,12 @@ Obs.: O símbolo \verb|=| pode ser usado no lugar de \verb|<-| mas não é
 recomendado.
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Objetos}
+\begin{frame}[fragile]{Objetos}
 Quando você faz
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{x} \hlkwb{<-} \hlnum{2}
+\hlstd{x} \hlkwb{<-} \hlnum{2}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -616,8 +701,8 @@ está fazendo uma \textbf{declaração}, ou seja, declarando que a variável
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{x} \hlkwb{<-} \hlnum{2}
-\hlstd{> }\hlstd{y} \hlkwb{<-} \hlnum{4}
+\hlstd{x} \hlkwb{<-} \hlnum{2}
+\hlstd{y} \hlkwb{<-} \hlnum{4}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -626,19 +711,19 @@ ou separadas por \verb|;|
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{x} \hlkwb{<-} \hlnum{2}\hlstd{; y} \hlkwb{<-} \hlnum{4}
+\hlstd{x} \hlkwb{<-} \hlnum{2}\hlstd{; y} \hlkwb{<-} \hlnum{4}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Objetos}
+\begin{frame}[fragile]{Objetos}
 Operações matemáticas em objetos:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{x} \hlopt{+} \hlstd{x}
+\hlstd{x} \hlopt{+} \hlstd{x}
 \end{alltt}
 \begin{verbatim}
 [1] 4
@@ -650,12 +735,12 @@ Objetos podem armazenar diferentes estruturas de dados:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{y} \hlkwb{<-} \hlkwd{runif}\hlstd{(}\hlnum{10}\hlstd{)}
-\hlstd{> }\hlstd{y}
+\hlstd{y} \hlkwb{<-} \hlkwd{runif}\hlstd{(}\hlnum{10}\hlstd{)}
+\hlstd{y}
 \end{alltt}
 \begin{verbatim}
- [1] 0.086905 0.045019 0.374282 0.412360 0.091728 0.106902
- [7] 0.398697 0.639019 0.177635 0.163587
+ [1] 0.55842 0.44183 0.97171 0.58974 0.42993 0.34257 0.79874
+ [8] 0.21318 0.44120 0.22809
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -665,9 +750,10 @@ sequência de valores) de cada vez! (Aqui, o valor $4$ que estava
 armazenado em \verb|y| foi sobrescrito pelos valores acima.)
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Nomes de objetos}
+\begin{frame}[fragile]{Nomes de objetos}
 \begin{itemize}
-\item Podem ser formados por letras, números e ``\texttt{.}'' (ponto)
+\item Podem ser formados por letras, números, ``\verb|_|'', e
+  ``\texttt{.}''
 \item Não podem começar com número e/ou ponto
 \item Não podem conter espaços
 \item Evite usar acentos
@@ -690,12 +776,12 @@ c q t C D F I T diff df data var pt
 \end{quote}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Gerenciando a área de trabalho (\textit{workspace})}
+\begin{frame}[fragile]{Gerenciando a área de trabalho (\textit{workspace})}
 Liste os objetos criados com a função \texttt{ls()}:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{ls}\hlstd{()}
+\hlkwd{ls}\hlstd{()}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -704,7 +790,7 @@ Para remover apenas um objeto:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{rm}\hlstd{(x)}
+\hlkwd{rm}\hlstd{(x)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -713,7 +799,7 @@ Para remover outros objetos:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{rm}\hlstd{(x, y)}
+\hlkwd{rm}\hlstd{(x, y)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -722,14 +808,14 @@ Para remover todos os objetos:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{rm}\hlstd{(}\hlkwc{list} \hlstd{=} \hlkwd{ls}\hlstd{())}
+\hlkwd{rm}\hlstd{(}\hlkwc{list} \hlstd{=} \hlkwd{ls}\hlstd{())}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Exercícios}
+\begin{frame}[fragile]{Exercícios}
   \begin{enumerate}
   \item Armazene o resultado da equação $32 + 16^2 - 25^3$ no objeto
     \verb|x|
@@ -743,7 +829,7 @@ Para remover todos os objetos:
 
 \subsection[Classes]{Classes de objetos}
 
-\begin{frame}[fragile=singleslide]{Vetor}
+\begin{frame}[fragile]{Vetor}
 Características:
 \begin{itemize}
 \item Coleção ordenada de valores
@@ -753,8 +839,8 @@ Usando a função \texttt{c()} para criar vetores:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{numerico} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{10}\hlstd{,} \hlnum{5}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{8}\hlstd{,} \hlnum{9}\hlstd{)}
-\hlstd{> }\hlstd{numerico}
+\hlstd{num} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{10}\hlstd{,} \hlnum{5}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{8}\hlstd{,} \hlnum{9}\hlstd{)}
+\hlstd{num}
 \end{alltt}
 \begin{verbatim}
 [1] 10  5  2  4  8  9
@@ -764,12 +850,12 @@ Usando a função \texttt{c()} para criar vetores:
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Vetor}{Sequências de números}
+\begin{frame}[fragile]{Vetor}{Sequências de números}
   Usando a função \verb|seq()|
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{seq}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{10}\hlstd{)}
+\hlkwd{seq}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{10}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
  [1]  1  2  3  4  5  6  7  8  9 10
@@ -781,7 +867,7 @@ Ou \verb|1:10| gera o mesmo resultado. Para a sequência variar em $2$
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{seq}\hlstd{(}\hlkwc{from} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{to} \hlstd{=} \hlnum{10}\hlstd{,} \hlkwc{by} \hlstd{=} \hlnum{2}\hlstd{)}
+\hlkwd{seq}\hlstd{(}\hlkwc{from} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{to} \hlstd{=} \hlnum{10}\hlstd{,} \hlkwc{by} \hlstd{=} \hlnum{2}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
 [1] 1 3 5 7 9
@@ -793,7 +879,7 @@ Para obter $15$ valores entre $1$ e $10$
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{seq}\hlstd{(}\hlkwc{from} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{to} \hlstd{=} \hlnum{10}\hlstd{,} \hlkwc{length.out} \hlstd{=} \hlnum{15}\hlstd{)}
+\hlkwd{seq}\hlstd{(}\hlkwc{from} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{to} \hlstd{=} \hlnum{10}\hlstd{,} \hlkwc{length.out} \hlstd{=} \hlnum{15}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
  [1]  1.0000  1.6429  2.2857  2.9286  3.5714  4.2143  4.8571
@@ -805,12 +891,12 @@ Para obter $15$ valores entre $1$ e $10$
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Vetor}{Sequências de números}
+\begin{frame}[fragile]{Vetor}{Sequências de números}
   Usando a função \verb|rep()|
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{rep}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{10}\hlstd{)}
+\hlkwd{rep}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{10}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
  [1] 1 1 1 1 1 1 1 1 1 1
@@ -822,7 +908,7 @@ Para gerar um sequência várias vezes
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{rep}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{3}\hlstd{),} \hlnum{5}\hlstd{)}
+\hlkwd{rep}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{3}\hlstd{),} \hlnum{5}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
  [1] 1 2 3 1 2 3 1 2 3 1 2 3 1 2 3
@@ -834,7 +920,7 @@ Para repetir um número da sequência várias vezes
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{rep}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{3}\hlstd{),} \hlkwc{each} \hlstd{=} \hlnum{5}\hlstd{)}
+\hlkwd{rep}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{3}\hlstd{),} \hlkwc{each} \hlstd{=} \hlnum{5}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
  [1] 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3
@@ -844,12 +930,12 @@ Para repetir um número da sequência várias vezes
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Vetor}{Operações matemáticas em vetores}
+\begin{frame}[fragile]{Vetor}{Operações matemáticas em vetores}
 Operações podem ser feitas entre um vetor e um número:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{numerico} \hlopt{*} \hlnum{2}
+\hlstd{num} \hlopt{*} \hlnum{2}
 \end{alltt}
 \begin{verbatim}
 [1] 20 10  4  8 16 18
@@ -862,13 +948,13 @@ múltiplos:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{numerico} \hlopt{*} \hlstd{numerico}
+\hlstd{num} \hlopt{*} \hlstd{num}
 \end{alltt}
 \begin{verbatim}
 [1] 100  25   4  16  64  81
 \end{verbatim}
 \begin{alltt}
-\hlstd{> }\hlstd{numerico} \hlopt{+} \hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{1}\hlstd{)}
+\hlstd{num} \hlopt{+} \hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{1}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
 [1] 12  9  3  6 12 10
@@ -878,7 +964,7 @@ múltiplos:
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Vetor}
+\begin{frame}[fragile]{Vetor}
 A Regra da Reciclagem
 \begin{table}[htbp]
 %\caption{}
@@ -886,7 +972,7 @@ A Regra da Reciclagem
 \begin{tabular}{|c|c|c|c|c|c|}
 \hline
 \multicolumn{ 2}{|c|}{Original} & \multicolumn{ 2}{c|}{Expandido} & \multicolumn{ 2}{c|}{Resposta} \\ \hline
-numerico & c(2,4,1) & numerico & c(2,4,1) & \multicolumn{ 2}{c|}{numerico + c(2,4,1)} \\ \hline
+num & c(2,4,1) & num & c(2,4,1) & \multicolumn{ 2}{c|}{num + c(2,4,1)} \\ \hline
 10 & 2 & 10 & 2 & \multicolumn{ 2}{c|}{12} \\ \hline
 5 & 4 & 5 & 4 & \multicolumn{ 2}{c|}{9} \\ \hline
 2 & 1 & 2 & 1 & \multicolumn{ 2}{c|}{3} \\ \hline
@@ -901,7 +987,7 @@ Agora tente:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{numerico} \hlopt{+} \hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{1}\hlstd{,} \hlnum{3}\hlstd{)}
+\hlstd{num} \hlopt{+} \hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{1}\hlstd{,} \hlnum{3}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -909,12 +995,12 @@ Agora tente:
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Vetor}{Atributos de objetos}
+\begin{frame}[fragile]{Vetor}{Atributos de objetos}
 Classe:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{class}\hlstd{(numerico)}
+\hlkwd{class}\hlstd{(num)}
 \end{alltt}
 \begin{verbatim}
 [1] "numeric"
@@ -926,7 +1012,7 @@ Comprimento:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{length}\hlstd{(numerico)}
+\hlkwd{length}\hlstd{(num)}
 \end{alltt}
 \begin{verbatim}
 [1] 6
@@ -936,15 +1022,15 @@ Comprimento:
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Vetor}
+\begin{frame}[fragile]{Vetor}
 Vetores também podem ter outras classes:
 \begin{itemize}
 \item Vetor de caracteres:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{caracter} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"brava"}\hlstd{,} \hlstr{"joaquina"}\hlstd{,} \hlstr{"armação"}\hlstd{)}
-\hlstd{> }\hlstd{caracter}
+\hlstd{caracter} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"brava"}\hlstd{,} \hlstr{"joaquina"}\hlstd{,} \hlstr{"armação"}\hlstd{)}
+\hlstd{caracter}
 \end{alltt}
 \begin{verbatim}
 [1] "brava"    "joaquina" "armação" 
@@ -956,8 +1042,8 @@ Vetores também podem ter outras classes:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{logico} \hlkwb{<-} \hlstd{caracter} \hlopt{==} \hlstr{"armação"}
-\hlstd{> }\hlstd{logico}
+\hlstd{logico} \hlkwb{<-} \hlstd{caracter} \hlopt{==} \hlstr{"armação"}
+\hlstd{logico}
 \end{alltt}
 \begin{verbatim}
 [1] FALSE FALSE  TRUE
@@ -969,8 +1055,8 @@ ou
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{logico} \hlkwb{<-} \hlstd{numerico} \hlopt{>} \hlnum{4}
-\hlstd{> }\hlstd{logico}
+\hlstd{logico} \hlkwb{<-} \hlstd{num} \hlopt{>} \hlnum{4}
+\hlstd{logico}
 \end{alltt}
 \begin{verbatim}
 [1]  TRUE  TRUE FALSE FALSE  TRUE  TRUE
@@ -981,8 +1067,8 @@ ou
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Vetor}
-No exemplo anterior, a condição \texttt{numerico > 4} é uma
+\begin{frame}[fragile]{Vetor}
+No exemplo anterior, a condição \texttt{num > 4} é uma
 \textbf{expressão condicional}, e o símbolo \texttt{>} um
 \textbf{operador lógico}. Os operadores lógicos utilizados no R são:
 
@@ -1007,7 +1093,7 @@ No exemplo anterior, a condição \texttt{numerico > 4} é uma
 \end{table}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Fator}
+\begin{frame}[fragile]{Fator}
 Características:
 \begin{itemize}
 \item Coleção de categorias ou \textbf{níveis} (\emph{levels})
@@ -1017,16 +1103,16 @@ Utilizando as funções \texttt{factor()} e \texttt{c()}:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{fator} \hlkwb{<-} \hlkwd{factor}\hlstd{(}\hlkwd{c}\hlstd{(}\hlstr{"alta"}\hlstd{,}\hlstr{"baixa"}\hlstd{,}\hlstr{"baixa"}\hlstd{,}\hlstr{"media"}\hlstd{,}
-\hlstd{  }                  \hlstr{"alta"}\hlstd{,}\hlstr{"media"}\hlstd{,}\hlstr{"baixa"}\hlstd{,}\hlstr{"media"}\hlstd{,}\hlstr{"media"}\hlstd{))}
-\hlstd{> }\hlstd{fator}
+\hlstd{fator} \hlkwb{<-} \hlkwd{factor}\hlstd{(}\hlkwd{c}\hlstd{(}\hlstr{"alta"}\hlstd{,}\hlstr{"baixa"}\hlstd{,}\hlstr{"baixa"}\hlstd{,}\hlstr{"media"}\hlstd{,}
+                  \hlstr{"alta"}\hlstd{,}\hlstr{"media"}\hlstd{,}\hlstr{"baixa"}\hlstd{,}\hlstr{"media"}\hlstd{,}\hlstr{"media"}\hlstd{))}
+\hlstd{fator}
 \end{alltt}
 \begin{verbatim}
 [1] alta  baixa baixa media alta  media baixa media media
 Levels: alta baixa media
 \end{verbatim}
 \begin{alltt}
-\hlstd{> }\hlkwd{class}\hlstd{(fator)}
+\hlkwd{class}\hlstd{(fator)}
 \end{alltt}
 \begin{verbatim}
 [1] "factor"
@@ -1036,15 +1122,15 @@ Levels: alta baixa media
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Fator}
+\begin{frame}[fragile]{Fator}
 Caso haja uma hierarquia, os níveis dos fatores podem ser ordenados:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{fator} \hlkwb{<-} \hlkwd{factor}\hlstd{(}\hlkwd{c}\hlstd{(}\hlstr{"alta"}\hlstd{,}\hlstr{"baixa"}\hlstd{,}\hlstr{"baixa"}\hlstd{,}\hlstr{"media"}\hlstd{,}
-\hlstd{  }                  \hlstr{"alta"}\hlstd{,}\hlstr{"media"}\hlstd{,}\hlstr{"baixa"}\hlstd{,}\hlstr{"media"}\hlstd{,}\hlstr{"media"}\hlstd{),}
-\hlstd{  }                \hlkwc{levels}\hlstd{=}\hlkwd{c}\hlstd{(}\hlstr{"alta"}\hlstd{,}\hlstr{"media"}\hlstd{,}\hlstr{"baixa"}\hlstd{))}
-\hlstd{> }\hlstd{fator}
+\hlstd{fator} \hlkwb{<-} \hlkwd{factor}\hlstd{(}\hlkwd{c}\hlstd{(}\hlstr{"alta"}\hlstd{,}\hlstr{"baixa"}\hlstd{,}\hlstr{"baixa"}\hlstd{,}\hlstr{"media"}\hlstd{,}
+                  \hlstr{"alta"}\hlstd{,}\hlstr{"media"}\hlstd{,}\hlstr{"baixa"}\hlstd{,}\hlstr{"media"}\hlstd{,}\hlstr{"media"}\hlstd{),}
+                \hlkwc{levels} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"alta"}\hlstd{,}\hlstr{"media"}\hlstd{,}\hlstr{"baixa"}\hlstd{))}
+\hlstd{fator}
 \end{alltt}
 \begin{verbatim}
 [1] alta  baixa baixa media alta  media baixa media media
@@ -1055,52 +1141,26 @@ Levels: alta media baixa
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Fator}{Transformando outras classes
-    em fator e \textit{vice-versa}}
-Numérico para fator:
-\begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlstd{> }\hlstd{num.fac} \hlkwb{<-} \hlkwd{as.factor}\hlstd{(numerico)}
-\hlstd{> }\hlstd{num.fac}
-\end{alltt}
-\begin{verbatim}
-[1] 10 5  2  4  8  9 
-Levels: 2 4 5 8 9 10
-\end{verbatim}
-\end{kframe}
-\end{knitrout}
+%% \begin{frame}[fragile]{Fator}{Transformando outras classes
+%%     em fator e \textit{vice-versa}}
+%% Numérico para fator:
+%% <<>>=
+%% num.fac <- as.factor(num)
+%% num.fac
+%% @
+%% Fator para numérico:
+%% <<>>=
+%% num.num <- as.numeric(as.character(num.fac))
+%% num.num
+%% @
+%% Caracter para fator:
+%% <<>>=
+%% carac.fac <- as.factor(caracter)
+%% carac.fac
+%% @
+%% \end{frame}
 
-Fator para numérico:
-\begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlstd{> }\hlstd{num.num} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(}\hlkwd{as.character}\hlstd{(num.fac))}
-\hlstd{> }\hlstd{num.num}
-\end{alltt}
-\begin{verbatim}
-[1] 10  5  2  4  8  9
-\end{verbatim}
-\end{kframe}
-\end{knitrout}
-
-Caracter para fator:
-\begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlstd{> }\hlstd{carac.fac} \hlkwb{<-} \hlkwd{as.factor}\hlstd{(caracter)}
-\hlstd{> }\hlstd{carac.fac}
-\end{alltt}
-\begin{verbatim}
-[1] brava    joaquina armação 
-Levels: armação brava joaquina
-\end{verbatim}
-\end{kframe}
-\end{knitrout}
-
-\end{frame}
-
-\begin{frame}[fragile=singleslide]{Matriz}
+\begin{frame}[fragile]{Matriz}
 Características:
 \begin{itemize}
 \item Podem conter apenas um tipo de informação (números, caracteres)
@@ -1110,8 +1170,8 @@ Utilizando a função \texttt{matrix()}:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{matriz} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlnum{1}\hlopt{:}\hlnum{12}\hlstd{,} \hlkwc{nrow}\hlstd{=}\hlnum{3}\hlstd{,} \hlkwc{ncol}\hlstd{=}\hlnum{4}\hlstd{)}
-\hlstd{> }\hlstd{matriz}
+\hlstd{matriz} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlnum{1}\hlopt{:}\hlnum{12}\hlstd{,} \hlkwc{nrow} \hlstd{=} \hlnum{3}\hlstd{,} \hlkwc{ncol} \hlstd{=} \hlnum{4}\hlstd{)}
+\hlstd{matriz}
 \end{alltt}
 \begin{verbatim}
      [,1] [,2] [,3] [,4]
@@ -1120,7 +1180,7 @@ Utilizando a função \texttt{matrix()}:
 [3,]    3    6    9   12
 \end{verbatim}
 \begin{alltt}
-\hlstd{> }\hlkwd{class}\hlstd{(matriz)}
+\hlkwd{class}\hlstd{(matriz)}
 \end{alltt}
 \begin{verbatim}
 [1] "matrix"
@@ -1130,13 +1190,13 @@ Utilizando a função \texttt{matrix()}:
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Matriz}
+\begin{frame}[fragile]{Matriz}
 Alterando a ordem de preenchimento da matriz (por linhas):
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{matriz} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlnum{1}\hlopt{:}\hlnum{12}\hlstd{,} \hlkwc{nrow}\hlstd{=}\hlnum{3}\hlstd{,} \hlkwc{ncol}\hlstd{=}\hlnum{4}\hlstd{,} \hlkwc{byrow}\hlstd{=T)}
-\hlstd{> }\hlstd{matriz}
+\hlstd{matriz} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlnum{1}\hlopt{:}\hlnum{12}\hlstd{,} \hlkwc{nrow} \hlstd{=} \hlnum{3}\hlstd{,} \hlkwc{ncol} \hlstd{=} \hlnum{4}\hlstd{,} \hlkwc{byrow} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\hlstd{matriz}
 \end{alltt}
 \begin{verbatim}
      [,1] [,2] [,3] [,4]
@@ -1151,7 +1211,7 @@ Para verificar a dimensão da matriz:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{dim}\hlstd{(matriz)}
+\hlkwd{dim}\hlstd{(matriz)}
 \end{alltt}
 \begin{verbatim}
 [1] 3 4
@@ -1161,12 +1221,12 @@ Para verificar a dimensão da matriz:
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Matriz}
+\begin{frame}[fragile]{Matriz}
 Adicionando colunas com \verb|cbind()|
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{cbind}\hlstd{(matriz,} \hlkwd{rep}\hlstd{(}\hlnum{99}\hlstd{,} \hlnum{3}\hlstd{))}
+\hlkwd{cbind}\hlstd{(matriz,} \hlkwd{rep}\hlstd{(}\hlnum{99}\hlstd{,} \hlnum{3}\hlstd{))}
 \end{alltt}
 \begin{verbatim}
      [,1] [,2] [,3] [,4] [,5]
@@ -1181,7 +1241,7 @@ Adicionando linhas com \verb|rbind()|
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{rbind}\hlstd{(matriz,} \hlkwd{rep}\hlstd{(}\hlnum{99}\hlstd{,} \hlnum{4}\hlstd{))}
+\hlkwd{rbind}\hlstd{(matriz,} \hlkwd{rep}\hlstd{(}\hlnum{99}\hlstd{,} \hlnum{4}\hlstd{))}
 \end{alltt}
 \begin{verbatim}
      [,1] [,2] [,3] [,4]
@@ -1195,13 +1255,13 @@ Adicionando linhas com \verb|rbind()|
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Matriz}{Operações matemáticas em
+\begin{frame}[fragile]{Matriz}{Operações matemáticas em
     matrizes}
 Matriz multiplicada por um escalar
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{matriz} \hlopt{*} \hlnum{2}
+\hlstd{matriz} \hlopt{*} \hlnum{2}
 \end{alltt}
 \begin{verbatim}
      [,1] [,2] [,3] [,4]
@@ -1216,8 +1276,8 @@ Multiplicação de matrizes (observe as dimensões!)
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{matriz2} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlnum{1}\hlstd{,} \hlkwc{nrow}\hlstd{=}\hlnum{4}\hlstd{,} \hlkwc{ncol}\hlstd{=}\hlnum{3}\hlstd{)}
-\hlstd{> }\hlstd{matriz} \hlopt{%*%} \hlstd{matriz2}
+\hlstd{matriz2} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlnum{1}\hlstd{,} \hlkwc{nrow} \hlstd{=} \hlnum{4}\hlstd{,} \hlkwc{ncol} \hlstd{=} \hlnum{3}\hlstd{)}
+\hlstd{matriz} \hlopt{%*%} \hlstd{matriz2}
 \end{alltt}
 \begin{verbatim}
      [,1] [,2] [,3]
@@ -1230,14 +1290,14 @@ Multiplicação de matrizes (observe as dimensões!)
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Matriz}
+\begin{frame}[fragile]{Matriz}
 Associando nomes às linhas e colunas:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{rownames}\hlstd{(matriz)} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"A"}\hlstd{,}\hlstr{"B"}\hlstd{,}\hlstr{"C"}\hlstd{)}
-\hlstd{> }\hlkwd{colnames}\hlstd{(matriz)} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"T1"}\hlstd{,}\hlstr{"T2"}\hlstd{,}\hlstr{"T3"}\hlstd{,}\hlstr{"T4"}\hlstd{)}
-\hlstd{> }\hlstd{matriz}
+\hlkwd{rownames}\hlstd{(matriz)} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"A"}\hlstd{,}\hlstr{"B"}\hlstd{,}\hlstr{"C"}\hlstd{)}
+\hlkwd{colnames}\hlstd{(matriz)} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"T1"}\hlstd{,}\hlstr{"T2"}\hlstd{,}\hlstr{"T3"}\hlstd{,}\hlstr{"T4"}\hlstd{)}
+\hlstd{matriz}
 \end{alltt}
 \begin{verbatim}
   T1 T2 T3 T4
@@ -1250,7 +1310,7 @@ C  9 10 11 12
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Lista}
+\begin{frame}[fragile]{Lista}
 Características:
 \begin{itemize}
 \item Pode combinar uma coleção de objetos
@@ -1261,8 +1321,8 @@ Utilizando a função \texttt{list()}:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{lista} \hlkwb{<-} \hlkwd{list}\hlstd{(}\hlkwc{a} \hlstd{=} \hlnum{1}\hlopt{:}\hlnum{10}\hlstd{,} \hlkwc{b} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"T1"}\hlstd{,}\hlstr{"T2"}\hlstd{,}\hlstr{"T3"}\hlstd{,}\hlstr{"T4"}\hlstd{))}
-\hlstd{> }\hlstd{lista}
+\hlstd{lista} \hlkwb{<-} \hlkwd{list}\hlstd{(}\hlkwc{a} \hlstd{=} \hlnum{1}\hlopt{:}\hlnum{10}\hlstd{,} \hlkwc{b} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"T1"}\hlstd{,}\hlstr{"T2"}\hlstd{,}\hlstr{"T3"}\hlstd{,}\hlstr{"T4"}\hlstd{))}
+\hlstd{lista}
 \end{alltt}
 \begin{verbatim}
 $a
@@ -1272,7 +1332,7 @@ $b
 [1] "T1" "T2" "T3" "T4"
 \end{verbatim}
 \begin{alltt}
-\hlstd{> }\hlkwd{class}\hlstd{(lista)}
+\hlkwd{class}\hlstd{(lista)}
 \end{alltt}
 \begin{verbatim}
 [1] "list"
@@ -1282,13 +1342,13 @@ $b
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Lista}
+\begin{frame}[fragile]{Lista}
 Formando uma lista com objetos criados anteriormente:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{lista} \hlkwb{<-} \hlkwd{list}\hlstd{(}\hlkwc{fator} \hlstd{= fator,} \hlkwc{matriz} \hlstd{= matriz)}
-\hlstd{> }\hlstd{lista}
+\hlstd{lista} \hlkwb{<-} \hlkwd{list}\hlstd{(}\hlkwc{fator} \hlstd{= fator,} \hlkwc{matriz} \hlstd{= matriz)}
+\hlstd{lista}
 \end{alltt}
 \begin{verbatim}
 $fator
@@ -1302,7 +1362,7 @@ B  5  6  7  8
 C  9 10 11 12
 \end{verbatim}
 \begin{alltt}
-\hlstd{> }\hlkwd{length}\hlstd{(lista)}
+\hlkwd{length}\hlstd{(lista)}
 \end{alltt}
 \begin{verbatim}
 [1] 2
@@ -1312,7 +1372,7 @@ C  9 10 11 12
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Data frame}
+\begin{frame}[fragile]{Data frame}
 Características:
 \begin{itemize}
 \item Uma lista de vetores e/ou fatores, de mesmo comprimento
@@ -1323,9 +1383,9 @@ Utilizando a função \texttt{data.frame()}:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{dataFrame} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{ano} \hlstd{=} \hlnum{2000}\hlopt{:}\hlnum{2004}\hlstd{,}
-\hlstd{  }                        \hlkwc{captura} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{32}\hlstd{,} \hlnum{54}\hlstd{,} \hlnum{25}\hlstd{,} \hlnum{48}\hlstd{,} \hlnum{29}\hlstd{))}
-\hlstd{> }\hlstd{dataFrame}
+\hlstd{dataFrame} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{ano} \hlstd{=} \hlnum{2000}\hlopt{:}\hlnum{2004}\hlstd{,}
+                        \hlkwc{captura} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{32}\hlstd{,} \hlnum{54}\hlstd{,} \hlnum{25}\hlstd{,} \hlnum{48}\hlstd{,} \hlnum{29}\hlstd{))}
+\hlstd{dataFrame}
 \end{alltt}
 \begin{verbatim}
    ano captura
@@ -1336,7 +1396,7 @@ Utilizando a função \texttt{data.frame()}:
 5 2004      29
 \end{verbatim}
 \begin{alltt}
-\hlstd{> }\hlkwd{class}\hlstd{(dataFrame)}
+\hlkwd{class}\hlstd{(dataFrame)}
 \end{alltt}
 \begin{verbatim}
 [1] "data.frame"
@@ -1346,15 +1406,15 @@ Utilizando a função \texttt{data.frame()}:
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Data frame}
+\begin{frame}[fragile]{Data frame}
 Data frames podem ser formados com objetos criados anteriormente, desde
 que tenham o mesmo comprimento!
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{dataFrame} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{numerico} \hlstd{=} \hlkwd{c}\hlstd{(numerico,} \hlnum{NA}\hlstd{,} \hlnum{NA}\hlstd{,} \hlnum{NA}\hlstd{),}
-\hlstd{  }                        \hlkwc{fator} \hlstd{= fator)}
-\hlstd{> }\hlstd{dataFrame}
+\hlstd{dataFrame} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{numerico} \hlstd{=} \hlkwd{c}\hlstd{(num,} \hlnum{NA}\hlstd{,} \hlnum{NA}\hlstd{,} \hlnum{NA}\hlstd{),}
+                        \hlkwc{fator} \hlstd{= fator)}
+\hlstd{dataFrame}
 \end{alltt}
 \begin{verbatim}
   numerico fator
@@ -1375,19 +1435,19 @@ que tenham o mesmo comprimento!
 
 \section[Valores perdidos]{Valores perdidos e especiais}
 
-\begin{frame}[fragile=singleslide]{Valores perdidos e especiais}
+\begin{frame}[fragile]{Valores perdidos e especiais}
 Valores perdidos devem ser definidos como \texttt{NA} (\textit{not available}):
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{perd} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{3}\hlstd{,} \hlnum{5}\hlstd{,} \hlnum{NA}\hlstd{,} \hlnum{2}\hlstd{)}
-\hlstd{> }\hlstd{perd}
+\hlstd{perd} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{3}\hlstd{,} \hlnum{5}\hlstd{,} \hlnum{NA}\hlstd{,} \hlnum{2}\hlstd{)}
+\hlstd{perd}
 \end{alltt}
 \begin{verbatim}
 [1]  3  5 NA  2
 \end{verbatim}
 \begin{alltt}
-\hlstd{> }\hlkwd{class}\hlstd{(perd)}
+\hlkwd{class}\hlstd{(perd)}
 \end{alltt}
 \begin{verbatim}
 [1] "numeric"
@@ -1399,7 +1459,7 @@ Podemos testar a presença de \texttt{NA}s com a função \texttt{is.na()}:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{is.na}\hlstd{(perd)}
+\hlkwd{is.na}\hlstd{(perd)}
 \end{alltt}
 \begin{verbatim}
 [1] FALSE FALSE  TRUE FALSE
@@ -1411,7 +1471,7 @@ Ou:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{any}\hlstd{(}\hlkwd{is.na}\hlstd{(perd))}
+\hlkwd{any}\hlstd{(}\hlkwd{is.na}\hlstd{(perd))}
 \end{alltt}
 \begin{verbatim}
 [1] TRUE
@@ -1421,7 +1481,7 @@ Ou:
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Valores perdidos e especiais}
+\begin{frame}[fragile]{Valores perdidos e especiais}
 Outros valores especiais são:
 \begin{itemize}
 \item \texttt{NaN} (\textit{not a number}) - exemplo: \texttt{0/0}
@@ -1431,14 +1491,14 @@ A função \texttt{is.na()} também testa a presença de \texttt{NaN}s:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{perd} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlopt{-}\hlnum{1}\hlstd{,}\hlnum{0}\hlstd{,}\hlnum{1}\hlstd{)}\hlopt{/}\hlnum{0}
-\hlstd{> }\hlstd{perd}
+\hlstd{perd} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlopt{-}\hlnum{1}\hlstd{,}\hlnum{0}\hlstd{,}\hlnum{1}\hlstd{)}\hlopt{/}\hlnum{0}
+\hlstd{perd}
 \end{alltt}
 \begin{verbatim}
 [1] -Inf  NaN  Inf
 \end{verbatim}
 \begin{alltt}
-\hlstd{> }\hlkwd{is.na}\hlstd{(perd)}
+\hlkwd{is.na}\hlstd{(perd)}
 \end{alltt}
 \begin{verbatim}
 [1] FALSE  TRUE FALSE
@@ -1450,7 +1510,7 @@ A função \verb|is.infinite()| testa se há valores infinitos
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{is.infinite}\hlstd{(perd)}
+\hlkwd{is.infinite}\hlstd{(perd)}
 \end{alltt}
 \begin{verbatim}
 [1]  TRUE FALSE  TRUE
@@ -1460,7 +1520,7 @@ A função \verb|is.infinite()| testa se há valores infinitos
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Exercícios}
+\begin{frame}[fragile]{Exercícios}
   \begin{enumerate}
   \item Crie um objeto com os valores 54, 0, 17, 94, 12.5, 2, 0.9, 15.
   \item Some o objeto acima com os valores 5, 6.
@@ -1485,13 +1545,13 @@ A função \verb|is.infinite()| testa se há valores infinitos
 
 \subsection{Indexação}
 
-\begin{frame}[fragile=singleslide]{Indexação de vetores}
+\begin{frame}[fragile]{Indexação de vetores}
 Crie um vetor para exemplo:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{cont} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{8}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{NA}\hlstd{,} \hlnum{9}\hlstd{,} \hlnum{6}\hlstd{,} \hlnum{1}\hlstd{,} \hlnum{7}\hlstd{,} \hlnum{9}\hlstd{)}
-\hlstd{> }\hlstd{cont}
+\hlstd{cont} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{8}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{NA}\hlstd{,} \hlnum{9}\hlstd{,} \hlnum{6}\hlstd{,} \hlnum{1}\hlstd{,} \hlnum{7}\hlstd{,} \hlnum{9}\hlstd{)}
+\hlstd{cont}
 \end{alltt}
 \begin{verbatim}
 [1]  8  4 NA  9  6  1  7  9
@@ -1503,7 +1563,7 @@ Para acessar o valor que está na posição 4, faça:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{cont[}\hlnum{4}\hlstd{]}
+\hlstd{cont[}\hlnum{4}\hlstd{]}
 \end{alltt}
 \begin{verbatim}
 [1] 9
@@ -1519,13 +1579,13 @@ Para acessar o valor que está na posição 4, faça:
 \end{center}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Indexação de vetores}
+\begin{frame}[fragile]{Indexação de vetores}
 Para acessar os valores nas posições 1, 4 e 8 é necessário o uso da
 função \texttt{c()}:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{cont[}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{8}\hlstd{)]}
+\hlstd{cont[}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{8}\hlstd{)]}
 \end{alltt}
 \begin{verbatim}
 [1] 8 9 9
@@ -1537,8 +1597,8 @@ Ou:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{ind} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{8}\hlstd{)}
-\hlstd{> }\hlstd{cont[ind]}
+\hlstd{ind} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{8}\hlstd{)}
+\hlstd{cont[ind]}
 \end{alltt}
 \begin{verbatim}
 [1] 8 9 9
@@ -1551,7 +1611,7 @@ Para selecionar todos os valores, \emph{excluindo} aqueles das posições
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{cont[}\hlopt{-}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{8}\hlstd{)]}
+\hlstd{cont[}\hlopt{-}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{8}\hlstd{)]}
 \end{alltt}
 \begin{verbatim}
 [1]  4 NA  6  1  7
@@ -1561,12 +1621,12 @@ Para selecionar todos os valores, \emph{excluindo} aqueles das posições
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Indexação de vetores}
+\begin{frame}[fragile]{Indexação de vetores}
 Também é possível selecionar uma sequência de elementos:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{cont[}\hlnum{1}\hlopt{:}\hlnum{5}\hlstd{]}
+\hlstd{cont[}\hlnum{1}\hlopt{:}\hlnum{5}\hlstd{]}
 \end{alltt}
 \begin{verbatim}
 [1]  8  4 NA  9  6
@@ -1578,7 +1638,7 @@ Para selecionar todos os elementos, menos os \texttt{NA}s:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{cont[}\hlopt{!}\hlkwd{is.na}\hlstd{(cont)]}
+\hlstd{cont[}\hlopt{!}\hlkwd{is.na}\hlstd{(cont)]}
 \end{alltt}
 \begin{verbatim}
 [1] 8 4 9 6 1 7 9
@@ -1590,8 +1650,8 @@ Para substituir os \texttt{NA}s por algum valor (\textit{e.g.} 0):
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{cont[}\hlkwd{is.na}\hlstd{(cont)]} \hlkwb{<-} \hlnum{0}
-\hlstd{> }\hlstd{cont}
+\hlstd{cont[}\hlkwd{is.na}\hlstd{(cont)]} \hlkwb{<-} \hlnum{0}
+\hlstd{cont}
 \end{alltt}
 \begin{verbatim}
 [1] 8 4 0 9 6 1 7 9
@@ -1601,13 +1661,13 @@ Para substituir os \texttt{NA}s por algum valor (\textit{e.g.} 0):
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Indexação de matrizes}
+\begin{frame}[fragile]{Indexação de matrizes}
 Crie uma matriz para exemplo:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{mat} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlnum{1}\hlopt{:}\hlnum{9}\hlstd{,} \hlkwc{nrow}\hlstd{=}\hlnum{3}\hlstd{)}
-\hlstd{> }\hlstd{mat}
+\hlstd{mat} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlnum{1}\hlopt{:}\hlnum{9}\hlstd{,} \hlkwc{nrow}\hlstd{=}\hlnum{3}\hlstd{)}
+\hlstd{mat}
 \end{alltt}
 \begin{verbatim}
      [,1] [,2] [,3]
@@ -1622,7 +1682,7 @@ Acesse o valor que está na linha 2 da coluna 3:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{mat[}\hlnum{2}\hlstd{,}\hlnum{3}\hlstd{]}
+\hlstd{mat[}\hlnum{2}\hlstd{,}\hlnum{3}\hlstd{]}
 \end{alltt}
 \begin{verbatim}
 [1] 8
@@ -1632,12 +1692,12 @@ Acesse o valor que está na linha 2 da coluna 3:
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Indexação de matrizes}
+\begin{frame}[fragile]{Indexação de matrizes}
 Para acessar todas as linhas da coluna 1:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{mat[,}\hlnum{1}\hlstd{]}
+\hlstd{mat[,}\hlnum{1}\hlstd{]}
 \end{alltt}
 \begin{verbatim}
 [1] 1 2 3
@@ -1649,7 +1709,7 @@ Para acessar todas as colunas da linha 1:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{mat[}\hlnum{1}\hlstd{,]}
+\hlstd{mat[}\hlnum{1}\hlstd{,]}
 \end{alltt}
 \begin{verbatim}
 [1] 1 4 7
@@ -1661,7 +1721,7 @@ Para acessar as linhas 1 e 3 das colunas 2 e 3:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{mat[}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{3}\hlstd{),} \hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,}\hlnum{3}\hlstd{)]}
+\hlstd{mat[}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{3}\hlstd{),} \hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,}\hlnum{3}\hlstd{)]}
 \end{alltt}
 \begin{verbatim}
      [,1] [,2]
@@ -1673,13 +1733,13 @@ Para acessar as linhas 1 e 3 das colunas 2 e 3:
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Indexação de listas}
+\begin{frame}[fragile]{Indexação de listas}
 Crie uma lista para exemplo:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{lis} \hlkwb{<-} \hlkwd{list}\hlstd{(}\hlkwc{vetor1} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{3}\hlstd{,} \hlnum{8}\hlstd{,} \hlnum{7}\hlstd{,} \hlnum{4}\hlstd{),} \hlkwc{vetor2} \hlstd{=} \hlnum{5}\hlopt{:}\hlnum{0}\hlstd{)}
-\hlstd{> }\hlstd{lis}
+\hlstd{lis} \hlkwb{<-} \hlkwd{list}\hlstd{(}\hlkwc{vetor1} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{3}\hlstd{,} \hlnum{8}\hlstd{,} \hlnum{7}\hlstd{,} \hlnum{4}\hlstd{),} \hlkwc{vetor2} \hlstd{=} \hlnum{5}\hlopt{:}\hlnum{0}\hlstd{)}
+\hlstd{lis}
 \end{alltt}
 \begin{verbatim}
 $vetor1
@@ -1695,7 +1755,7 @@ Para acessar o segundo componente da lista:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{lis[[}\hlnum{2}\hlstd{]]}
+\hlstd{lis[[}\hlnum{2}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
 [1] 5 4 3 2 1 0
@@ -1705,12 +1765,12 @@ Para acessar o segundo componente da lista:
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Indexação de listas}
+\begin{frame}[fragile]{Indexação de listas}
 Para acessar o terceiro valor do primeiro componente:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{lis[[}\hlnum{1}\hlstd{]][}\hlnum{3}\hlstd{]}
+\hlstd{lis[[}\hlnum{1}\hlstd{]][}\hlnum{3}\hlstd{]}
 \end{alltt}
 \begin{verbatim}
 [1] 7
@@ -1722,7 +1782,7 @@ Os componentes das listas também podem ser acessados com \verb|$|:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{lis}\hlopt{$}\hlstd{vetor2}
+\hlstd{lis}\hlopt{$}\hlstd{vetor2}
 \end{alltt}
 \begin{verbatim}
 [1] 5 4 3 2 1 0
@@ -1736,13 +1796,13 @@ Os componentes das listas também podem ser acessados com \verb|$|:
 \end{center}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Indexação de data frames}
+\begin{frame}[fragile]{Indexação de data frames}
 Crie um data frame para exemplo:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{dframe} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{col1} \hlstd{=} \hlnum{4}\hlopt{:}\hlnum{1}\hlstd{,} \hlkwc{col2} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,}\hlnum{NA}\hlstd{,}\hlnum{5}\hlstd{,}\hlnum{8}\hlstd{))}
-\hlstd{> }\hlstd{dframe}
+\hlstd{dframe} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{col1} \hlstd{=} \hlnum{4}\hlopt{:}\hlnum{1}\hlstd{,} \hlkwc{col2} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,}\hlnum{NA}\hlstd{,}\hlnum{5}\hlstd{,}\hlnum{8}\hlstd{))}
+\hlstd{dframe}
 \end{alltt}
 \begin{verbatim}
   col1 col2
@@ -1758,7 +1818,7 @@ Para acessar o segundo elemento da primeira coluna:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{dframe[}\hlnum{2}\hlstd{,}\hlnum{1}\hlstd{]}
+\hlstd{dframe[}\hlnum{2}\hlstd{,}\hlnum{1}\hlstd{]}
 \end{alltt}
 \begin{verbatim}
 [1] 3
@@ -1768,12 +1828,12 @@ Para acessar o segundo elemento da primeira coluna:
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Indexação de data frames}
+\begin{frame}[fragile]{Indexação de data frames}
 Acesse todas as linhas da coluna 2:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{dframe[,}\hlnum{2}\hlstd{]}
+\hlstd{dframe[,}\hlnum{2}\hlstd{]}
 \end{alltt}
 \begin{verbatim}
 [1]  2 NA  5  8
@@ -1785,7 +1845,7 @@ Ou:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{dframe[,}\hlstr{"col2"}\hlstd{]}
+\hlstd{dframe[,}\hlstr{"col2"}\hlstd{]}
 \end{alltt}
 \begin{verbatim}
 [1]  2 NA  5  8
@@ -1797,7 +1857,7 @@ Todas as colunas da linha 1:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{dframe[}\hlnum{1}\hlstd{,]}
+\hlstd{dframe[}\hlnum{1}\hlstd{,]}
 \end{alltt}
 \begin{verbatim}
   col1 col2
@@ -1810,7 +1870,7 @@ Ou:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{dframe[}\hlstr{"1"}\hlstd{,]}
+\hlstd{dframe[}\hlstr{"1"}\hlstd{,]}
 \end{alltt}
 \begin{verbatim}
   col1 col2
@@ -1821,12 +1881,12 @@ Ou:
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Indexação de data frames}
+\begin{frame}[fragile]{Indexação de data frames}
 As colunas de um data frame podem ser acessadas com \texttt{\$}:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{dframe}\hlopt{$}\hlstd{col1}
+\hlstd{dframe}\hlopt{$}\hlstd{col1}
 \end{alltt}
 \begin{verbatim}
 [1] 4 3 2 1
@@ -1838,7 +1898,7 @@ Para acessar o terceiro elemento da coluna 2:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{dframe}\hlopt{$}\hlstd{col2[}\hlnum{3}\hlstd{]}
+\hlstd{dframe}\hlopt{$}\hlstd{col2[}\hlnum{3}\hlstd{]}
 \end{alltt}
 \begin{verbatim}
 [1] 5
@@ -1850,7 +1910,7 @@ Para acessar os elementos nas posições 2 e 4 da coluna 2:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{dframe}\hlopt{$}\hlstd{col2[}\hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,}\hlnum{4}\hlstd{)]}
+\hlstd{dframe}\hlopt{$}\hlstd{col2[}\hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,}\hlnum{4}\hlstd{)]}
 \end{alltt}
 \begin{verbatim}
 [1] NA  8
@@ -1860,13 +1920,13 @@ Para acessar os elementos nas posições 2 e 4 da coluna 2:
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{A função \texttt{with()}}
+\begin{frame}[fragile]{A função \texttt{with()}}
 Para evitar fazer muitas indexações de um mesmo data frame, por exemplo,
 podemos utilizar a função \verb|with()|
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{with}\hlstd{(dframe, col1)}
+\hlkwd{with}\hlstd{(dframe, col1)}
 \end{alltt}
 \begin{verbatim}
 [1] 4 3 2 1
@@ -1878,7 +1938,7 @@ podemos utilizar a função \verb|with()|
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{dframe}\hlopt{$}\hlstd{col1}
+\hlstd{dframe}\hlopt{$}\hlstd{col1}
 \end{alltt}
 \begin{verbatim}
 [1] 4 3 2 1
@@ -1890,7 +1950,7 @@ podemos utilizar a função \verb|with()|
 
 \subsection{Seleção condicional}
 
-\begin{frame}[fragile=singleslide]{Seleção condicional em vetores}
+\begin{frame}[fragile]{Seleção condicional em vetores}
 \begin{center}
 \fbox{\parbox{0.9\textwidth}{A \textbf{seleção condicional} serve para
     extrair dados que satisfaçam algum critério, usando
@@ -1900,7 +1960,7 @@ Crie o seguinte vetor:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{dados} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{5}\hlstd{,} \hlnum{15}\hlstd{,} \hlnum{42}\hlstd{,} \hlnum{28}\hlstd{,} \hlnum{79}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{7}\hlstd{,} \hlnum{14}\hlstd{)}
+\hlstd{dados} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{5}\hlstd{,} \hlnum{15}\hlstd{,} \hlnum{42}\hlstd{,} \hlnum{28}\hlstd{,} \hlnum{79}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{7}\hlstd{,} \hlnum{14}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -1909,7 +1969,7 @@ Selecione apenas os valores maiores do que 15:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{dados[dados} \hlopt{>} \hlnum{15}\hlstd{]}
+\hlstd{dados[dados} \hlopt{>} \hlnum{15}\hlstd{]}
 \end{alltt}
 \begin{verbatim}
 [1] 42 28 79
@@ -1921,7 +1981,7 @@ Selecione os valores maiores que 15 \textbf{E} menores ou iguais a 35:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{dados[dados} \hlopt{>} \hlnum{15} \hlopt{&} \hlstd{dados} \hlopt{<=} \hlnum{35}\hlstd{]}
+\hlstd{dados[dados} \hlopt{>} \hlnum{15} \hlopt{&} \hlstd{dados} \hlopt{<=} \hlnum{35}\hlstd{]}
 \end{alltt}
 \begin{verbatim}
 [1] 28
@@ -1931,13 +1991,13 @@ Selecione os valores maiores que 15 \textbf{E} menores ou iguais a 35:
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Seleção condicional em vetores}
+\begin{frame}[fragile]{Seleção condicional em vetores}
 Para entender como funciona a seleção condicional, observe apenas o
 resultado da condição dentro do colchetes:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{dados} \hlopt{>} \hlnum{15} \hlopt{&} \hlstd{dados} \hlopt{<=} \hlnum{35}
+\hlstd{dados} \hlopt{>} \hlnum{15} \hlopt{&} \hlstd{dados} \hlopt{<=} \hlnum{35}
 \end{alltt}
 \begin{verbatim}
 [1] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
@@ -1950,14 +2010,14 @@ Os valores selecionados serão aqueles em que a condição for
 \texttt{dados}.
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Seleção condicional em data frames}
+\begin{frame}[fragile]{Seleção condicional em data frames}
 Crie um data frame:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{dados} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{ano}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{2001}\hlstd{,}\hlnum{2002}\hlstd{,}\hlnum{2003}\hlstd{,}\hlnum{2004}\hlstd{,}\hlnum{2005}\hlstd{),}
-\hlstd{  }                    \hlkwc{captura}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{26}\hlstd{,}\hlnum{18}\hlstd{,}\hlnum{28}\hlstd{,}\hlnum{26}\hlstd{,}\hlnum{NA}\hlstd{),}
-\hlstd{  }                    \hlkwc{porto}\hlstd{=}\hlkwd{c}\hlstd{(}\hlstr{"SP"}\hlstd{,}\hlstr{"RS"}\hlstd{,}\hlstr{"SC"}\hlstd{,}\hlstr{"SC"}\hlstd{,}\hlstr{"RN"}\hlstd{))}
+\hlstd{dados} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{ano}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{2001}\hlstd{,}\hlnum{2002}\hlstd{,}\hlnum{2003}\hlstd{,}\hlnum{2004}\hlstd{,}\hlnum{2005}\hlstd{),}
+                    \hlkwc{captura}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{26}\hlstd{,}\hlnum{18}\hlstd{,}\hlnum{28}\hlstd{,}\hlnum{26}\hlstd{,}\hlnum{NA}\hlstd{),}
+                    \hlkwc{porto}\hlstd{=}\hlkwd{c}\hlstd{(}\hlstr{"SP"}\hlstd{,}\hlstr{"RS"}\hlstd{,}\hlstr{"SC"}\hlstd{,}\hlstr{"SC"}\hlstd{,}\hlstr{"RN"}\hlstd{))}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -1966,7 +2026,7 @@ Extraia deste objeto apenas a linha correspondente ao ano 2004:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{dados[dados}\hlopt{$}\hlstd{ano} \hlopt{==} \hlnum{2004}\hlstd{,]}
+\hlstd{dados[dados}\hlopt{$}\hlstd{ano} \hlopt{==} \hlnum{2004}\hlstd{,]}
 \end{alltt}
 \begin{verbatim}
    ano captura porto
@@ -1979,7 +2039,7 @@ Mostre as linhas apenas do porto "SC":
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{dados[dados}\hlopt{$}\hlstd{porto} \hlopt{==} \hlstr{"SC"}\hlstd{,]}
+\hlstd{dados[dados}\hlopt{$}\hlstd{porto} \hlopt{==} \hlstr{"SC"}\hlstd{,]}
 \end{alltt}
 \begin{verbatim}
    ano captura porto
@@ -1991,13 +2051,13 @@ Mostre as linhas apenas do porto "SC":
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Seleção condicional em data frames}
+\begin{frame}[fragile]{Seleção condicional em data frames}
 Observe as linhas onde a captura seja maior que 20, selecionando apenas
 a coluna \texttt{captura}:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{dados[dados}\hlopt{$}\hlstd{captura} \hlopt{>} \hlnum{20}\hlstd{,} \hlstr{"captura"}\hlstd{]}
+\hlstd{dados[dados}\hlopt{$}\hlstd{captura} \hlopt{>} \hlnum{20}\hlstd{,} \hlstr{"captura"}\hlstd{]}
 \end{alltt}
 \begin{verbatim}
 [1] 26 28 26 NA
@@ -2009,7 +2069,7 @@ Também exclua as linhas com \texttt{NA}s (agora com todas as colunas):
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{dados[dados}\hlopt{$}\hlstd{captura} \hlopt{>} \hlnum{20} \hlopt{& !}\hlkwd{is.na}\hlstd{(dados}\hlopt{$}\hlstd{captura),]}
+\hlstd{dados[dados}\hlopt{$}\hlstd{captura} \hlopt{>} \hlnum{20} \hlopt{& !}\hlkwd{is.na}\hlstd{(dados}\hlopt{$}\hlstd{captura),]}
 \end{alltt}
 \begin{verbatim}
    ano captura porto
@@ -2022,12 +2082,12 @@ Também exclua as linhas com \texttt{NA}s (agora com todas as colunas):
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Seleção condicional em data frames}
+\begin{frame}[fragile]{Seleção condicional em data frames}
 A condição pode ser feita com diferentes colunas:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{dados[dados}\hlopt{$}\hlstd{captura} \hlopt{>} \hlnum{25} \hlopt{&} \hlstd{dados}\hlopt{$}\hlstd{porto} \hlopt{==} \hlstr{"SP"}\hlstd{,]}
+\hlstd{dados[dados}\hlopt{$}\hlstd{captura} \hlopt{>} \hlnum{25} \hlopt{&} \hlstd{dados}\hlopt{$}\hlstd{porto} \hlopt{==} \hlstr{"SP"}\hlstd{,]}
 \end{alltt}
 \begin{verbatim}
    ano captura porto
@@ -2040,7 +2100,7 @@ A função \texttt{subset()} serve para os mesmos propósitos:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{subset}\hlstd{(dados, captura} \hlopt{>} \hlnum{25} \hlopt{&} \hlstd{porto} \hlopt{==} \hlstr{"SP"}\hlstd{)}
+\hlkwd{subset}\hlstd{(dados, captura} \hlopt{>} \hlnum{25} \hlopt{&} \hlstd{porto} \hlopt{==} \hlstr{"SP"}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
    ano captura porto
@@ -2051,7 +2111,7 @@ A função \texttt{subset()} serve para os mesmos propósitos:
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Exercícios}
+\begin{frame}[fragile]{Exercícios}
   \begin{enumerate}
   \item Com o vetor criado no exercício (1) da sessão anterior, mostre
     quais são os valores nas posições 2, 5, e 7.
@@ -2070,7 +2130,7 @@ A função \texttt{subset()} serve para os mesmos propósitos:
 
 \section{Finalizando o programa}
 
-\begin{frame}[fragile=singleslide]{Finalizando o programa}
+\begin{frame}[fragile]{Finalizando o programa}
 O passo mais importante é salvar seu \textbf{script}! No RStudio:
 \begin{itemize}
 \item \texttt{File > Save As\ldots}
@@ -2082,7 +2142,7 @@ O passo mais importante é salvar seu \textbf{script}! No RStudio:
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Finalizando o programa}
+\begin{frame}[fragile]{Finalizando o programa}
 Alternativamente, você pode também salvar toda sua área de trabalho,
 clicando em \texttt{Workspace > Save As Default Workspace}. Este
 processo irá gerar dois arquivos:
@@ -2100,7 +2160,7 @@ A qualquer momento durante uma sessão você pode usar o comando
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{save.image}\hlstd{()}
+\hlkwd{save.image}\hlstd{()}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
