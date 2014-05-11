@@ -70,20 +70,22 @@
 %\providecommand{\R}{\texttt{R}\xspace}
 
 \title[Módulo II\\ Descritiva]{Introdução ao uso do software R}
-\author[]{Fernando de Pol Mayer\inst{1} \and %\url{fernandomayer@gmail.com} \and
-Rodrigo Sant'Ana\inst{2}} %\\ \url{oc.rodrigosantana@gmail.com}}
-\date{}
-\institute{
-  \inst{1}%
-  Laboratório de Estatística Ambiental (LEA) \\
-  Instituto de Matemática, Estatística e Física (IMEF) \\
-  Universidade Federal do Rio Grande (FURG) \\
-  \url{fernando.mayer@furg.br}
-  \and
-  \inst{2}%
-  Instituto Albatroz \\
-  \url{oc.rodrigosantana@gmail.com}
-}
+\author{Software Carpentry\\ FURG}
+\date{12 e 13 de maio, 2014}
+%% \author[]{Fernando de Pol Mayer\inst{1} \and %\url{fernandomayer@gmail.com} \and
+%% Rodrigo Sant'Ana\inst{2}} %\\ \url{oc.rodrigosantana@gmail.com}}
+%% \date{}
+%% \institute{
+%%   \inst{1}%
+%%   Laboratório de Estatística Ambiental (LEA) \\
+%%   Instituto de Matemática, Estatística e Física (IMEF) \\
+%%   Universidade Federal do Rio Grande (FURG) \\
+%%   \url{fernando.mayer@furg.br}
+%%   \and
+%%   \inst{2}%
+%%   Instituto Albatroz \\
+%%   \url{oc.rodrigosantana@gmail.com}
+%% }
 \logo{\includegraphics[width=1cm]{../conf/Rlogo-5}}
 
 
@@ -153,15 +155,15 @@ Rodrigo Sant'Ana\inst{2}} %\\ \url{oc.rodrigosantana@gmail.com}}
 %% \end{itemize}
 %% \end{frame}
 
-\begin{frame}[fragile=singleslide]{A função \texttt{read.table()}}
+\begin{frame}[fragile]{A função \texttt{read.table()}}
 O método mais comum de importação de dados para o R, é utilizando a
 função \texttt{read.table()}. Para importar um arquivo \texttt{.csv}
 faça:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{dados} \hlkwb{<-} \hlkwd{read.table}\hlstd{(}\hlstr{"../dados/crabs.csv"}\hlstd{,} \hlkwc{header} \hlstd{= T,}
-\hlstd{  }                    \hlkwc{sep} \hlstd{=} \hlstr{";"}\hlstd{,} \hlkwc{dec} \hlstd{=} \hlstr{","}\hlstd{)}
+\hlstd{dados} \hlkwb{<-} \hlkwd{read.table}\hlstd{(}\hlstr{"../dados/crabs.csv"}\hlstd{,} \hlkwc{header} \hlstd{= T,}
+                    \hlkwc{sep} \hlstd{=} \hlstr{";"}\hlstd{,} \hlkwc{dec} \hlstd{=} \hlstr{","}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -177,13 +179,13 @@ Argumentos:
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Estrutura dos dados importados}
+\begin{frame}[fragile]{Estrutura dos dados importados}
 A função \texttt{str()} serve para demonstrar a estrutura de um objeto,
 como o nome das colunas e suas classes:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{str}\hlstd{(dados)}
+\hlkwd{str}\hlstd{(dados)}
 \end{alltt}
 \begin{verbatim}
 'data.frame':	156 obs. of  7 variables:
@@ -200,12 +202,12 @@ como o nome das colunas e suas classes:
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Estrutura dos dados importados}
+\begin{frame}[fragile]{Estrutura dos dados importados}
 Para visualizar as 10 primeiras linhas do data frame:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{head}\hlstd{(dados,} \hlnum{10}\hlstd{)} \hlcom{# ou: dados[1:10,]}
+\hlkwd{head}\hlstd{(dados,} \hlnum{10}\hlstd{)} \hlcom{# ou: dados[1:10,]}
 \end{alltt}
 \begin{verbatim}
    especie sexo   FL   RW   CL   CW   BD
@@ -225,7 +227,7 @@ Para visualizar as 10 primeiras linhas do data frame:
 
 \end{frame}
 
-% \begin{frame}[fragile=singleslide]{Estrutura dos dados importados}
+% \begin{frame}[fragile]{Estrutura dos dados importados}
 % Alternativamente, o editor de dados pode ser utilizado para
 % visualização:
 % \begin{verbatim}
@@ -243,14 +245,14 @@ Para visualizar as 10 primeiras linhas do data frame:
 % \end{verbatim}
 % \end{frame}
 
-\section{Estatística descrtiva}
+\section{Estatística descritiva}
 
-\begin{frame}[fragile=singleslide]{Medidas de centro}
+\begin{frame}[fragile]{Medidas de centro}
 Média (utilizando a coluna \texttt{CL}):
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{mean}\hlstd{(dados}\hlopt{$}\hlstd{CL)} \hlcom{# ou sum(dados$CL)/length(dados$CL)}
+\hlkwd{mean}\hlstd{(dados}\hlopt{$}\hlstd{CL)} \hlcom{# ou sum(dados$CL)/length(dados$CL)}
 \end{alltt}
 \begin{verbatim}
 [1] 32.004
@@ -262,7 +264,7 @@ Média (utilizando a coluna \texttt{BD}):
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{mean}\hlstd{(dados}\hlopt{$}\hlstd{BD)}
+\hlkwd{mean}\hlstd{(dados}\hlopt{$}\hlstd{BD)}
 \end{alltt}
 \begin{verbatim}
 [1] NA
@@ -276,7 +278,7 @@ feito sem os \texttt{NA}s:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{mean}\hlstd{(dados}\hlopt{$}\hlstd{BD,} \hlkwc{na.rm}\hlstd{=T)}
+\hlkwd{mean}\hlstd{(dados}\hlopt{$}\hlstd{BD,} \hlkwc{na.rm}\hlstd{=T)}
 \end{alltt}
 \begin{verbatim}
 [1] 14.019
@@ -288,7 +290,7 @@ O argumento \texttt{na.rm} é utilizado também em outras funções como
 \texttt{median()}, \texttt{sum()} e \texttt{var()}
 \end{frame}
 
-% \begin{frame}[fragile=singleslide]{Medidas de centro}
+% \begin{frame}[fragile]{Medidas de centro}
 % Mediana (coluna \texttt{CL}):
 % \begin{verbatim}
 % > median(dados$lage, na.rm=T)
@@ -302,12 +304,12 @@ O argumento \texttt{na.rm} é utilizado também em outras funções como
 % \end{verbatim}
 % \end{frame}
 
-\begin{frame}[fragile=singleslide]{Medidas de variação}
+\begin{frame}[fragile]{Medidas de variação}
 Desvio padrão (coluna \texttt{CL}):
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{sd}\hlstd{(dados}\hlopt{$}\hlstd{CL)}
+\hlkwd{sd}\hlstd{(dados}\hlopt{$}\hlstd{CL)}
 \end{alltt}
 \begin{verbatim}
 [1] 7.2278
@@ -319,7 +321,7 @@ Variância:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{var}\hlstd{(dados}\hlopt{$}\hlstd{CL)} \hlcom{# sd(dados$CL)^2}
+\hlkwd{var}\hlstd{(dados}\hlopt{$}\hlstd{CL)} \hlcom{# sd(dados$CL)^2}
 \end{alltt}
 \begin{verbatim}
 [1] 52.242
@@ -331,7 +333,7 @@ Coeficiente de variação:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{sd}\hlstd{(dados}\hlopt{$}\hlstd{CL)}\hlopt{/}\hlkwd{mean}\hlstd{(dados}\hlopt{$}\hlstd{CL)}
+\hlkwd{sd}\hlstd{(dados}\hlopt{$}\hlstd{CL)}\hlopt{/}\hlkwd{mean}\hlstd{(dados}\hlopt{$}\hlstd{CL)}
 \end{alltt}
 \begin{verbatim}
 [1] 0.22584
@@ -341,12 +343,12 @@ Coeficiente de variação:
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Medidas de posição relativa}
+\begin{frame}[fragile]{Medidas de posição relativa}
 Quartis:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{quantile}\hlstd{(dados}\hlopt{$}\hlstd{CL)}
+\hlkwd{quantile}\hlstd{(dados}\hlopt{$}\hlstd{CL)}
 \end{alltt}
 \begin{verbatim}
     0%    25%    50%    75%   100% 
@@ -359,7 +361,7 @@ Decis:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{quantile}\hlstd{(dados}\hlopt{$}\hlstd{CL,} \hlkwc{probs} \hlstd{=} \hlkwd{seq}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{1}\hlstd{,} \hlnum{0.1}\hlstd{))}
+\hlkwd{quantile}\hlstd{(dados}\hlopt{$}\hlstd{CL,} \hlkwc{probs} \hlstd{=} \hlkwd{seq}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{1}\hlstd{,} \hlnum{0.1}\hlstd{))}
 \end{alltt}
 \begin{verbatim}
    0%   10%   20%   30%   40%   50%   60%   70%   80%   90% 
@@ -372,12 +374,12 @@ Decis:
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Sumários}
+\begin{frame}[fragile]{Sumários}
 A função \texttt{summary()} resume os dados de forma lógica:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{summary}\hlstd{(dados}\hlopt{$}\hlstd{CL)}
+\hlkwd{summary}\hlstd{(dados}\hlopt{$}\hlstd{CL)}
 \end{alltt}
 \begin{verbatim}
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
@@ -391,7 +393,7 @@ quartis. Se houverem \texttt{NA}s, eles também serão contados:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{summary}\hlstd{(dados}\hlopt{$}\hlstd{BD)}
+\hlkwd{summary}\hlstd{(dados}\hlopt{$}\hlstd{BD)}
 \end{alltt}
 \begin{verbatim}
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
@@ -402,12 +404,12 @@ quartis. Se houverem \texttt{NA}s, eles também serão contados:
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Sumários}
+\begin{frame}[fragile]{Sumários}
 A função \texttt{summary()} pode ser utilizada para resumir todo o data frame:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{summary}\hlstd{(dados)}
+\hlkwd{summary}\hlstd{(dados)}
 \end{alltt}
 \begin{verbatim}
     especie   sexo         FL             RW      
@@ -432,12 +434,12 @@ A função \texttt{summary()} pode ser utilizada para resumir todo o data frame:
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Tabelas de contingência}
+\begin{frame}[fragile]{Tabelas de contingência}
 A função \texttt{table()} é usada para formar tabelas de contingência:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{table}\hlstd{(dados}\hlopt{$}\hlstd{especie)}
+\hlkwd{table}\hlstd{(dados}\hlopt{$}\hlstd{especie)}
 \end{alltt}
 \begin{verbatim}
 
@@ -451,7 +453,7 @@ Pode também ser utilizada para a contagem de combinações de fatores:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{table}\hlstd{(dados}\hlopt{$}\hlstd{especie, dados}\hlopt{$}\hlstd{sexo)}
+\hlkwd{table}\hlstd{(dados}\hlopt{$}\hlstd{especie, dados}\hlopt{$}\hlstd{sexo)}
 \end{alltt}
 \begin{verbatim}
          
@@ -464,13 +466,13 @@ Pode também ser utilizada para a contagem de combinações de fatores:
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{As funções \texttt{*apply()}}
+\begin{frame}[fragile]{As funções \texttt{*apply()}}
 A função \texttt{lapply()} retorna uma lista com os resultados de uma
 função aplicada a elemento(s) de um data frame:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{lapply}\hlstd{(dados[,} \hlnum{3}\hlopt{:}\hlnum{7}\hlstd{], mean)} \hlcom{# na.rm = T para lidar com NAs}
+\hlkwd{lapply}\hlstd{(dados[,} \hlnum{3}\hlopt{:}\hlnum{7}\hlstd{], mean)} \hlcom{# na.rm = T para lidar com NAs}
 \end{alltt}
 \begin{verbatim}
 $FL
@@ -491,27 +493,18 @@ $BD
 \end{kframe}
 \end{knitrout}
 
-\texttt{sapply()} simplifica os resultados em um vetor:
-\begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlstd{> }\hlkwd{sapply}\hlstd{(dados[,} \hlnum{3}\hlopt{:}\hlnum{7}\hlstd{], mean,} \hlkwc{na.rm} \hlstd{= T)}
-\end{alltt}
-\begin{verbatim}
-    FL     RW     CL     CW     BD 
-15.577 12.815 32.004 36.310 14.019 
-\end{verbatim}
-\end{kframe}
-\end{knitrout}
-
+%% \texttt{sapply()} simplifica os resultados em um vetor:
+%% <<>>=
+%% sapply(dados[, 3:7], mean, na.rm = T)
+%% @
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{As funções \texttt{*apply()}}
+\begin{frame}[fragile]{As funções \texttt{*apply()}}
 \texttt{sapply()} simplifica os resultados em um vetor:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{sapply}\hlstd{(dados[,} \hlnum{3}\hlopt{:}\hlnum{7}\hlstd{], mean,} \hlkwc{na.rm} \hlstd{= T)}
+\hlkwd{sapply}\hlstd{(dados[,} \hlnum{3}\hlopt{:}\hlnum{7}\hlstd{], mean,} \hlkwc{na.rm} \hlstd{= T)}
 \end{alltt}
 \begin{verbatim}
     FL     RW     CL     CW     BD 
@@ -525,7 +518,7 @@ coluna (\texttt{2}):
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{apply}\hlstd{(dados[,} \hlnum{3}\hlopt{:}\hlnum{7}\hlstd{],} \hlnum{2}\hlstd{, mean,} \hlkwc{na.rm}\hlstd{=T)}
+\hlkwd{apply}\hlstd{(dados[,} \hlnum{3}\hlopt{:}\hlnum{7}\hlstd{],} \hlnum{2}\hlstd{, mean,} \hlkwc{na.rm}\hlstd{=T)}
 \end{alltt}
 \begin{verbatim}
     FL     RW     CL     CW     BD 
@@ -536,14 +529,14 @@ coluna (\texttt{2}):
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{As funções \texttt{*apply()}}
+\begin{frame}[fragile]{As funções \texttt{*apply()}}
 A função \texttt{tapply()} aplica a função (\texttt{mean}) a um vetor
 (\texttt{dados\$CL}) para cada combinação dos níveis dos fatores
 (\texttt{list()}):
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{tapply}\hlstd{(dados}\hlopt{$}\hlstd{CL,} \hlkwd{list}\hlstd{(dados}\hlopt{$}\hlstd{especie, dados}\hlopt{$}\hlstd{sexo), mean)}
+\hlkwd{tapply}\hlstd{(dados}\hlopt{$}\hlstd{CL,} \hlkwd{list}\hlstd{(dados}\hlopt{$}\hlstd{especie, dados}\hlopt{$}\hlstd{sexo), mean)}
 \end{alltt}
 \begin{verbatim}
              F      M
@@ -555,14 +548,14 @@ laranja 34.570 33.474
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{A função \texttt{aggregate()} (``tabela dinâmica'')}
+\begin{frame}[fragile]{A função \texttt{aggregate()} (``tabela dinâmica'')}
 A função \texttt{aggregate()} agrega valores utilizando uma função, de
 acordo com uma lista de fatores especificados:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{aggregate}\hlstd{(}\hlkwd{cbind}\hlstd{(FL, RW, CL, CW, BD)} \hlopt{~} \hlstd{especie} \hlopt{+} \hlstd{sexo,}
-\hlstd{  }          \hlkwc{data} \hlstd{= dados, median,} \hlkwc{na.rm}\hlstd{=T)}
+\hlkwd{aggregate}\hlstd{(}\hlkwd{cbind}\hlstd{(FL, RW, CL, CW, BD)} \hlopt{~} \hlstd{especie} \hlopt{+} \hlstd{sexo,}
+          \hlkwc{data} \hlstd{= dados, median,} \hlkwc{na.rm}\hlstd{=T)}
 \end{alltt}
 \begin{verbatim}
   especie sexo   FL   RW    CL    CW   BD
@@ -578,7 +571,7 @@ acordo com uma lista de fatores especificados:
 
 \section{Análise gráfica}
 
-\begin{frame}[fragile=singleslide]{Gráficos}
+\begin{frame}[fragile]{Gráficos}
 Os comandos para gráficos se dividem em três grupos:
 \begin{itemize}
 \item \textbf{Alto-nível}: são as funções que criam novos gráficos, com
@@ -595,21 +588,21 @@ Ainda existem uma série de parâmetros gráficos que podem ser manipulados
 e customizados.
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Gráficos}{Terminologia}
+\begin{frame}[fragile]{Gráficos}{Terminologia}
 \begin{figure}[htp]
 \centering
 \includegraphics[height=0.95\textheight]{figure/fig8m}
 \end{figure}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Gráficos}{Regiões do gráfico}
+\begin{frame}[fragile]{Gráficos}{Regiões do gráfico}
 \begin{figure}[htp]
 \centering
 \includegraphics[height=0.95\textheight]{figure/fig1m}
 \end{figure}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Gráficos}{Regiões de múltiplos
+\begin{frame}[fragile]{Gráficos}{Regiões de múltiplos
     gráficos}
 \begin{figure}[htp]
 \centering
@@ -617,36 +610,36 @@ e customizados.
 \end{figure}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Gráficos}{Sistema de coordenadas}
+\begin{frame}[fragile]{Gráficos}{Sistema de coordenadas}
 \begin{figure}[htp]
 \centering
 \includegraphics[height=0.95\textheight]{figure/fig3m}
 \end{figure}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Gráficos}{Tipos de linhas
+\begin{frame}[fragile]{Gráficos}{Tipos de linhas
     (\texttt{lty})}
 \begin{figure}[htp]
 \centering
-\includegraphics[height=1\textheight]{figure/fig4m}
+\includegraphics[height=1.1\textheight]{figure/fig4m}
 \end{figure}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Gráficos}{Tipos de pontos (\texttt{pch})}
+\begin{frame}[fragile]{Gráficos}{Tipos de pontos (\texttt{pch})}
 \begin{figure}[htp]
 \centering
 \includegraphics[height=1\textheight]{figure/fig5m}
 \end{figure}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Gráficos}{Tipos de plot (\texttt{type})}
+\begin{frame}[fragile]{Gráficos}{Tipos de plot (\texttt{type})}
 \begin{figure}[htp]
 \centering
 \includegraphics[height=0.95\textheight]{figure/fig6m}
 \end{figure}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Gráficos}{Expressões matemáticas
+\begin{frame}[fragile]{Gráficos}{Expressões matemáticas
     (\texttt{expression()})}
 \begin{figure}[htp]
 \centering
@@ -654,14 +647,14 @@ e customizados.
 \end{figure}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{A função \texttt{plot()}}
+\begin{frame}[fragile]{A função \texttt{plot()}}
 A função \texttt{plot()} é uma \textbf{função genérica}. Os gráficos serão
 representados de forma diferente dependendo da \textbf{classe} dos
 objetos. A forma geral desta função é:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{plot}\hlstd{(x, y, ...)}
+\hlkwd{plot}\hlstd{(x, y, ...)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -671,7 +664,7 @@ mesmo resultado pode ser obtido em formato de \textbf{fórmula}:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{plot}\hlstd{(y} \hlopt{~} \hlstd{x, data, ...)}
+\hlkwd{plot}\hlstd{(y} \hlopt{~} \hlstd{x, data, ...)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -680,11 +673,29 @@ Onde lê-se ``\texttt{y} descrito utilizando-se \texttt{x}'', ou
 ``\texttt{y} em função de \texttt{x}''
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{A função \texttt{plot()}}
+\begin{frame}[fragile]{A função \texttt{plot()}}
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{plot}\hlstd{(dados)}
+\hlkwd{plot}\hlstd{(dados)}
+\end{alltt}
+\end{kframe}
+
+{\centering \includegraphics[width=.7\textwidth]{figure/unnamed-chunk-24} 
+
+}
+
+
+
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]{A função \texttt{plot()}}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{plot}\hlstd{(dados}\hlopt{$}\hlstd{CL)}     \hlcom{# uma variável}
 \end{alltt}
 \end{kframe}
 
@@ -698,15 +709,17 @@ Onde lê-se ``\texttt{y} descrito utilizando-se \texttt{x}'', ou
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{A função \texttt{plot()}}
+\begin{frame}[fragile]{A função \texttt{plot()}}
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{plot}\hlstd{(dados}\hlopt{$}\hlstd{CL)}     \hlcom{# uma variável}
+\hlkwd{plot}\hlstd{(dados}\hlopt{$}\hlstd{CL, dados}\hlopt{$}\hlstd{CW)}    \hlcom{# duas variáveis, ou:}
+\hlkwd{plot}\hlstd{(CW} \hlopt{~} \hlstd{CL,} \hlkwc{data} \hlstd{= dados)} \hlcom{# mesmo resultado}
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=.7\textwidth]{figure/unnamed-chunk-26} 
+{\centering \includegraphics[width=.49\textwidth]{figure/unnamed-chunk-261} 
+\includegraphics[width=.49\textwidth]{figure/unnamed-chunk-262} 
 
 }
 
@@ -716,17 +729,15 @@ Onde lê-se ``\texttt{y} descrito utilizando-se \texttt{x}'', ou
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{A função \texttt{plot()}}
+\begin{frame}[fragile]{A função \texttt{plot()}}
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{plot}\hlstd{(dados}\hlopt{$}\hlstd{CL, dados}\hlopt{$}\hlstd{CW)}    \hlcom{# duas variáveis, ou:}
-\hlstd{> }\hlkwd{plot}\hlstd{(CW} \hlopt{~} \hlstd{CL,} \hlkwc{data} \hlstd{= dados)} \hlcom{# mesmo resultado}
+\hlkwd{plot}\hlstd{(dados}\hlopt{$}\hlstd{especie, dados}\hlopt{$}\hlstd{CL)}  \hlcom{# fator, numérico}
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=.49\textwidth]{figure/unnamed-chunk-271} 
-\includegraphics[width=.49\textwidth]{figure/unnamed-chunk-272} 
+{\centering \includegraphics[width=.7\textwidth]{figure/unnamed-chunk-27} 
 
 }
 
@@ -736,25 +747,7 @@ Onde lê-se ``\texttt{y} descrito utilizando-se \texttt{x}'', ou
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{A função \texttt{plot()}}
-\begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlstd{> }\hlkwd{plot}\hlstd{(dados}\hlopt{$}\hlstd{especie, dados}\hlopt{$}\hlstd{CL)}  \hlcom{# fator, numérico}
-\end{alltt}
-\end{kframe}
-
-{\centering \includegraphics[width=.7\textwidth]{figure/unnamed-chunk-28} 
-
-}
-
-
-
-\end{knitrout}
-
-\end{frame}
-
-\begin{frame}[fragile=singleslide]{A função \texttt{boxplot()}}
+\begin{frame}[fragile]{A função \texttt{boxplot()}}
 Os \textbf{boxplots} são úteis para revelar o centro, a dispersão e a
 distribuição dos dados, além de \textbf{outliers}. São construídos da
 seguinte forma:
@@ -770,7 +763,7 @@ máximo e mínimo que ainda se encontram dentro deste intervalo.
 \end{itemize}
 \end{frame}
 
-% \begin{frame}[fragile=singleslide]{(Adicionando novas colunas)}
+% \begin{frame}[fragile]{(Adicionando novas colunas)}
 % Calcule a CPUE das três espécies:
 % \begin{verbatim}
 % dados$u.lage <- (dados$lage*1000)/dados$eff
@@ -779,15 +772,15 @@ máximo e mínimo que ainda se encontram dentro deste intervalo.
 % \end{verbatim}
 % \end{frame}
 
-\begin{frame}[fragile=singleslide]{A função \texttt{boxplot()}}
+\begin{frame}[fragile]{A função \texttt{boxplot()}}
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{boxplot}\hlstd{(dados[,} \hlnum{3}\hlopt{:}\hlnum{7}\hlstd{])}
+\hlkwd{boxplot}\hlstd{(dados[,} \hlnum{3}\hlopt{:}\hlnum{7}\hlstd{])}
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=.7\textwidth]{figure/unnamed-chunk-29} 
+{\centering \includegraphics[width=.7\textwidth]{figure/unnamed-chunk-28} 
 
 }
 
@@ -797,17 +790,17 @@ máximo e mínimo que ainda se encontram dentro deste intervalo.
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{A função \texttt{boxplot()}}
+\begin{frame}[fragile]{A função \texttt{boxplot()}}
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{boxplot}\hlstd{(CL} \hlopt{~} \hlstd{especie,} \hlkwc{data} \hlstd{= dados)}        \hlcom{# um fator}
-\hlstd{> }\hlkwd{boxplot}\hlstd{(CL} \hlopt{~} \hlstd{especie} \hlopt{+} \hlstd{sexo,} \hlkwc{data} \hlstd{= dados)} \hlcom{# dois fatores}
+\hlkwd{boxplot}\hlstd{(CL} \hlopt{~} \hlstd{especie,} \hlkwc{data} \hlstd{= dados)}        \hlcom{# um fator}
+\hlkwd{boxplot}\hlstd{(CL} \hlopt{~} \hlstd{especie} \hlopt{+} \hlstd{sexo,} \hlkwc{data} \hlstd{= dados)} \hlcom{# dois fatores}
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=.49\textwidth]{figure/unnamed-chunk-301} 
-\includegraphics[width=.49\textwidth]{figure/unnamed-chunk-302} 
+{\centering \includegraphics[width=.49\textwidth]{figure/unnamed-chunk-291} 
+\includegraphics[width=.49\textwidth]{figure/unnamed-chunk-292} 
 
 }
 
@@ -817,7 +810,7 @@ máximo e mínimo que ainda se encontram dentro deste intervalo.
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{A função \texttt{hist()}}
+\begin{frame}[fragile]{A função \texttt{hist()}}
 Na função \texttt{hist()}, dois argumentos controlam a configuração das
 classes:
 \begin{center}
@@ -838,15 +831,15 @@ O argumento \texttt{breaks} também pode ser utilizado para especificar
 as ``quebras'' das classes.
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{A função \texttt{hist()}}
+\begin{frame}[fragile]{A função \texttt{hist()}}
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{hist}\hlstd{(dados}\hlopt{$}\hlstd{CL)}
+\hlkwd{hist}\hlstd{(dados}\hlopt{$}\hlstd{CL)}
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=.7\textwidth]{figure/unnamed-chunk-31} 
+{\centering \includegraphics[width=.7\textwidth]{figure/unnamed-chunk-30} 
 
 }
 
@@ -856,17 +849,17 @@ as ``quebras'' das classes.
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{A função \texttt{hist()}}
+\begin{frame}[fragile]{A função \texttt{hist()}}
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{hist}\hlstd{(dados}\hlopt{$}\hlstd{CL,} \hlkwc{breaks} \hlstd{=} \hlkwd{seq}\hlstd{(}\hlnum{10}\hlstd{,} \hlnum{50}\hlstd{,} \hlnum{1}\hlstd{))} \hlcom{# ou}
-\hlstd{> }\hlkwd{hist}\hlstd{(dados}\hlopt{$}\hlstd{CL,} \hlkwc{nclass} \hlstd{=} \hlnum{40}\hlstd{)}             \hlcom{# aproximado}
+\hlkwd{hist}\hlstd{(dados}\hlopt{$}\hlstd{CL,} \hlkwc{breaks} \hlstd{=} \hlkwd{seq}\hlstd{(}\hlnum{10}\hlstd{,} \hlnum{50}\hlstd{,} \hlnum{1}\hlstd{))} \hlcom{# ou}
+\hlkwd{hist}\hlstd{(dados}\hlopt{$}\hlstd{CL,} \hlkwc{nclass} \hlstd{=} \hlnum{40}\hlstd{)}             \hlcom{# aproximado}
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=.49\textwidth]{figure/unnamed-chunk-321} 
-\includegraphics[width=.49\textwidth]{figure/unnamed-chunk-322} 
+{\centering \includegraphics[width=.49\textwidth]{figure/unnamed-chunk-311} 
+\includegraphics[width=.49\textwidth]{figure/unnamed-chunk-312} 
 
 }
 
@@ -876,14 +869,14 @@ as ``quebras'' das classes.
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{A função \texttt{hist()}}
+\begin{frame}[fragile]{A função \texttt{hist()}}
 A função \texttt{hist()}, além de produzir histogramas também retorna
 uma lista com as uma série de informações:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{h} \hlkwb{<-} \hlkwd{hist}\hlstd{(dados}\hlopt{$}\hlstd{CL)}
-\hlstd{> }\hlstd{h}
+\hlstd{h} \hlkwb{<-} \hlkwd{hist}\hlstd{(dados}\hlopt{$}\hlstd{CL)}
+\hlstd{h}
 \end{alltt}
 \begin{verbatim}
 $breaks
@@ -913,17 +906,17 @@ attr(,"class")
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{A função \texttt{hist()}}
+\begin{frame}[fragile]{A função \texttt{hist()}}
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{hist}\hlstd{(dados}\hlopt{$}\hlstd{CL)}           \hlcom{# contagem}
-\hlstd{> }\hlkwd{hist}\hlstd{(dados}\hlopt{$}\hlstd{CL,} \hlkwc{freq} \hlstd{= F)} \hlcom{# densidade}
+\hlkwd{hist}\hlstd{(dados}\hlopt{$}\hlstd{CL)}           \hlcom{# contagem}
+\hlkwd{hist}\hlstd{(dados}\hlopt{$}\hlstd{CL,} \hlkwc{freq} \hlstd{= F)} \hlcom{# densidade}
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=.49\textwidth]{figure/unnamed-chunk-341} 
-\includegraphics[width=.49\textwidth]{figure/unnamed-chunk-342} 
+{\centering \includegraphics[width=.49\textwidth]{figure/unnamed-chunk-331} 
+\includegraphics[width=.49\textwidth]{figure/unnamed-chunk-332} 
 
 }
 
@@ -933,13 +926,13 @@ attr(,"class")
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{A função \texttt{barplot()}}
+\begin{frame}[fragile]{A função \texttt{barplot()}}
 A função \texttt{barplot()} gera gráficos de barra a partir de uma
 tabela
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{table}\hlstd{(dados}\hlopt{$}\hlstd{especie)}
+\hlkwd{table}\hlstd{(dados}\hlopt{$}\hlstd{especie)}
 \end{alltt}
 \begin{verbatim}
 
@@ -947,11 +940,11 @@ tabela
      77      79 
 \end{verbatim}
 \begin{alltt}
-\hlstd{> }\hlkwd{barplot}\hlstd{(}\hlkwd{table}\hlstd{(dados}\hlopt{$}\hlstd{especie))}
+\hlkwd{barplot}\hlstd{(}\hlkwd{table}\hlstd{(dados}\hlopt{$}\hlstd{especie))}
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=.45\textwidth]{figure/unnamed-chunk-35} 
+{\centering \includegraphics[width=.45\textwidth]{figure/unnamed-chunk-34} 
 
 }
 
@@ -961,11 +954,11 @@ tabela
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{A função \texttt{barplot()}}
+\begin{frame}[fragile]{A função \texttt{barplot()}}
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{table}\hlstd{(dados}\hlopt{$}\hlstd{especie, dados}\hlopt{$}\hlstd{sexo)}
+\hlkwd{table}\hlstd{(dados}\hlopt{$}\hlstd{especie, dados}\hlopt{$}\hlstd{sexo)}
 \end{alltt}
 \begin{verbatim}
          
@@ -974,13 +967,13 @@ tabela
   laranja 44 35
 \end{verbatim}
 \begin{alltt}
-\hlstd{> }\hlkwd{barplot}\hlstd{(}\hlkwd{table}\hlstd{(dados}\hlopt{$}\hlstd{especie, dados}\hlopt{$}\hlstd{sexo))}
-\hlstd{> }\hlkwd{barplot}\hlstd{(}\hlkwd{table}\hlstd{(dados}\hlopt{$}\hlstd{especie, dados}\hlopt{$}\hlstd{sexo),} \hlkwc{beside} \hlstd{= T)}
+\hlkwd{barplot}\hlstd{(}\hlkwd{table}\hlstd{(dados}\hlopt{$}\hlstd{especie, dados}\hlopt{$}\hlstd{sexo))}
+\hlkwd{barplot}\hlstd{(}\hlkwd{table}\hlstd{(dados}\hlopt{$}\hlstd{especie, dados}\hlopt{$}\hlstd{sexo),} \hlkwc{beside} \hlstd{= T)}
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=.4\textwidth]{figure/unnamed-chunk-361} 
-\includegraphics[width=.4\textwidth]{figure/unnamed-chunk-362} 
+{\centering \includegraphics[width=.4\textwidth]{figure/unnamed-chunk-351} 
+\includegraphics[width=.4\textwidth]{figure/unnamed-chunk-352} 
 
 }
 
@@ -994,7 +987,7 @@ tabela
 
 \subsection{Argumentos gráficos}
 
-\begin{frame}[fragile=singleslide]{Argumentos gráficos}
+\begin{frame}[fragile]{Argumentos gráficos}
   Os principais argumentos que servem uma grande quantidade de funções
   gráficas são
   \begin{itemize}
@@ -1006,14 +999,34 @@ tabela
   \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Argumentos gráficos}
+\begin{frame}[fragile]{Argumentos gráficos}
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{plot}\hlstd{(dados}\hlopt{$}\hlstd{CL, dados}\hlopt{$}\hlstd{CW,}
-\hlstd{  }     \hlkwc{xlab} \hlstd{=} \hlstr{"Comprimento da carapaça (cm)"}\hlstd{,}
-\hlstd{  }     \hlkwc{ylab} \hlstd{=} \hlstr{"Largura da carapaça (cm)"}\hlstd{,}
-\hlstd{  }     \hlkwc{main} \hlstd{=} \hlstr{"Relação entre CL e CW"}\hlstd{)}
+\hlkwd{plot}\hlstd{(dados}\hlopt{$}\hlstd{CL, dados}\hlopt{$}\hlstd{CW,}
+     \hlkwc{xlab} \hlstd{=} \hlstr{"Comprimento da carapaça (cm)"}\hlstd{,}
+     \hlkwc{ylab} \hlstd{=} \hlstr{"Largura da carapaça (cm)"}\hlstd{,}
+     \hlkwc{main} \hlstd{=} \hlstr{"Relação entre CL e CW"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+
+{\centering \includegraphics[width=.55\textwidth]{figure/unnamed-chunk-36} 
+
+}
+
+
+
+\end{knitrout}
+
+\end{frame}
+
+\begin{frame}[fragile]{Argumentos gráficos}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{hist}\hlstd{(dados}\hlopt{$}\hlstd{CL,} \hlkwc{main} \hlstd{=} \hlstr{""}\hlstd{,} \hlkwc{xlim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{60}\hlstd{),}
+     \hlkwc{xlab} \hlstd{=} \hlstr{"Comprimento da carapaça (cm)"}\hlstd{,}
+     \hlkwc{ylab} \hlstd{=} \hlstr{"Frequência"}\hlstd{)}
 \end{alltt}
 \end{kframe}
 
@@ -1027,29 +1040,9 @@ tabela
 
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Argumentos gráficos}
-\begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlstd{> }\hlkwd{hist}\hlstd{(dados}\hlopt{$}\hlstd{CL,} \hlkwc{main} \hlstd{=} \hlstr{""}\hlstd{,} \hlkwc{xlim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{60}\hlstd{),}
-\hlstd{  }     \hlkwc{xlab} \hlstd{=} \hlstr{"Comprimento da carapaça (cm)"}\hlstd{,}
-\hlstd{  }     \hlkwc{ylab} \hlstd{=} \hlstr{"Frequência"}\hlstd{)}
-\end{alltt}
-\end{kframe}
-
-{\centering \includegraphics[width=.55\textwidth]{figure/unnamed-chunk-38} 
-
-}
-
-
-
-\end{knitrout}
-
-\end{frame}
-
 \subsection{Outros pacotes gráficos}
 
-\begin{frame}[fragile=singleslide]{Ouros pacotes gráficos}
+\begin{frame}[fragile]{Ouros pacotes gráficos}
 Além do pacote de gráficos padrão do R, \textbf{graphics}, existem
 outros que incorporam opções mais avançadas
 \begin{itemize}
@@ -1083,7 +1076,7 @@ outros que incorporam opções mais avançadas
 %   \end{itemize}
 % \end{frame}
 
-% \begin{frame}[fragile=singleslide]{Estrutura de repetição
+% \begin{frame}[fragile]{Estrutura de repetição
 %     \texttt{for()}}
 %   \begin{itemize}
 %   \item Serve para repetir um ou mais comandos diversas vezes.
@@ -1104,7 +1097,7 @@ outros que incorporam opções mais avançadas
 % \end{verbatim}
 % \end{frame}
 
-% \begin{frame}[fragile=singleslide]{Estrutura de repetição
+% \begin{frame}[fragile]{Estrutura de repetição
 %     \texttt{for()}}
 %   \begin{itemize}
 %   \item Inserindo pesos para as provas: prova 1 = 4, prova 2 = 3, prova
@@ -1120,7 +1113,7 @@ outros que incorporam opções mais avançadas
 % \end{verbatim}
 % \end{frame}
 
-% \begin{frame}[fragile=singleslide]{Estrutura de seleção \texttt{if()}}
+% \begin{frame}[fragile]{Estrutura de seleção \texttt{if()}}
 %   \begin{itemize}
 %   \item Adicionando a condição do aluno de acordo com a nota.
 %   \end{itemize}
@@ -1142,7 +1135,7 @@ outros que incorporam opções mais avançadas
 % \end{verbatim}
 % \end{frame}
 
-%% \begin{frame}[fragile=singleslide]{O modo de R --- Vetorização}
+%% \begin{frame}[fragile]{O modo de R --- Vetorização}
 %%   \begin{itemize}
 %%   \item Através do processo de vetorização do R, o mesmo algoritmo pode
 %%     ser simplificado em duas etapas.
