@@ -33,7 +33,7 @@
 
 ## Importa os dados
 notas <- read.table("../dados/notas.csv", header = TRUE, sep = ";", dec = ",")
-## Analisa a estrutura
+## Analisa a estrutura dos dados
 str(notas)
 ```
 
@@ -76,12 +76,91 @@ summary(notas)
 
 ```r
 
-## Cria uma nova coluna para armazenar os resultados das médias
-notas$media <- 0
-## Estrutura de repetição
+## Antes de seguir adiante, veja o resultado de
 for (i in 1:30) {
+    print(notas[i, c("prova1", "prova2", "prova3")])
+}
+```
+
+```
+##   prova1 prova2 prova3
+## 1      8      4      1
+##   prova1 prova2 prova3
+## 2      2      7      6
+##   prova1 prova2 prova3
+## 3      9      2      4
+##   prova1 prova2 prova3
+## 4      1     10      9
+##   prova1 prova2 prova3
+## 5      7      6      8
+##   prova1 prova2 prova3
+## 6     10      0      3
+##   prova1 prova2 prova3
+## 7      1      8      0
+##   prova1 prova2 prova3
+## 8      5      9      7
+##   prova1 prova2 prova3
+## 9      5      6      1
+##    prova1 prova2 prova3
+## 10     10      2      3
+##    prova1 prova2 prova3
+## 11      1      0      7
+##    prova1 prova2 prova3
+## 12      5      0      7
+##    prova1 prova2 prova3
+## 13      8      8      2
+##    prova1 prova2 prova3
+## 14      7      1      9
+##    prova1 prova2 prova3
+## 15      5      7      6
+##    prova1 prova2 prova3
+## 16      5      3      5
+##    prova1 prova2 prova3
+## 17      1      6      7
+##    prova1 prova2 prova3
+## 18      2     10      7
+##    prova1 prova2 prova3
+## 19     10      3      2
+##    prova1 prova2 prova3
+## 20      0      5      8
+##    prova1 prova2 prova3
+## 21      4      8      7
+##    prova1 prova2 prova3
+## 22      3      8      3
+##    prova1 prova2 prova3
+## 23      2      5      4
+##    prova1 prova2 prova3
+## 24      3      5      2
+##    prova1 prova2 prova3
+## 25      3      3      2
+##    prova1 prova2 prova3
+## 26      3      9      9
+##    prova1 prova2 prova3
+## 27      1      8      8
+##    prova1 prova2 prova3
+## 28      6     10      8
+##    prova1 prova2 prova3
+## 29      2      1      8
+##    prova1 prova2 prova3
+## 30      4      9      9
+```
+
+```r
+
+## Para calcular as médias das 3 provas, precisamos inicialmente de um vetor
+## para armazenar os resultados. Esse vetor pode ser um novo objeto ou uma
+## nova coluna no dataframe
+
+## Aqui vamos criar uma nova coluna no dataframe, contendo apenas o valor 0
+notas$media <- 0  # note que aqui será usada a regra da reciclagem, ou
+# seja, o valor zero será repetido até completar todas as linhas do
+# dataframe Estrutura de repetição para calcular a média
+for (i in 1:30) {
+    ## Aqui, cada linha i da coluna media sera substituida pelo respectivo valor
+    ## da media caculada
     notas$media[i] <- sum(notas[i, c("prova1", "prova2", "prova3")])/3
 }
+
 ## Confere os resultados
 head(notas)
 ```
@@ -94,6 +173,92 @@ head(notas)
 ## 4 Aluno_4      1     10      9 6.667
 ## 5 Aluno_5      7      6      8 7.000
 ## 6 Aluno_6     10      0      3 4.333
+```
+
+
+Agora podemos melhorar o código, tornando-o mais **genérico**. Dessa
+forma fica mais fácil fazer alterações e procurar erros. Uma forma de
+melhorar o código acima é generalizando alguns passos.
+
+
+```r
+## Armazenamos o número de linhas no dataframe
+nlinhas <- nrow(notas)
+## Identificamos as colunas de interesse no cálculo da média, e armazenamos
+## em um objeto separado
+provas <- c("prova1", "prova2", "prova3")
+## Sabendo o número de provas, fica mais fácil dividir pelo total no cálculo
+## da média
+nprovas <- length(provas)
+## Cria uma nova coluna apenas para comparar o cálculo com o anterior
+notas$media2 <- 0
+## A estrutura de repetição fica
+for (i in 1:nlinhas) {
+    notas$media2[i] <- sum(notas[i, provas])/nprovas
+}
+
+## Confere
+head(notas)
+```
+
+```
+##      nome prova1 prova2 prova3 media media2
+## 1 Aluno_1      8      4      1 4.333  4.333
+## 2 Aluno_2      2      7      6 5.000  5.000
+## 3 Aluno_3      9      2      4 5.000  5.000
+## 4 Aluno_4      1     10      9 6.667  6.667
+## 5 Aluno_5      7      6      8 7.000  7.000
+## 6 Aluno_6     10      0      3 4.333  4.333
+```
+
+
+Ainda podemos melhorar (leia-se: **otimizar**) o código, se utilizarmos
+funções prontas do R. No caso da média isso é possível pois a função
+`mean()` já existe. Em seguida veremos como fazer quando o cálculo que
+estamos utilizando não está implementado em nenhuma função pronta do R.
+
+
+```r
+## Cria uma nova coluna apenas para comparação
+notas$media3 <- 0
+## A estrutura de repetição fica
+for (i in 1:nlinhas) {
+    notas$media3[i] <- mean(as.numeric(notas[i, provas]))
+}
+
+## Confere
+head(notas)
+```
+
+```
+##      nome prova1 prova2 prova3 media media2 media3
+## 1 Aluno_1      8      4      1 4.333  4.333  4.333
+## 2 Aluno_2      2      7      6 5.000  5.000  5.000
+## 3 Aluno_3      9      2      4 5.000  5.000  5.000
+## 4 Aluno_4      1     10      9 6.667  6.667  6.667
+## 5 Aluno_5      7      6      8 7.000  7.000  7.000
+## 6 Aluno_6     10      0      3 4.333  4.333  4.333
+```
+
+```r
+
+## A única diferença é que aqui precisamos transformar cada linha em um vetor
+## de números com as.numeric(), pois
+notas[1, provas]
+```
+
+```
+##   prova1 prova2 prova3
+## 1      8      4      1
+```
+
+```r
+## é um data.frame:
+class(notas[1, provas])
+```
+
+```
+## [1] "data.frame"
 ```
 
 
@@ -114,13 +279,13 @@ head(notas)
 ```
 
 ```
-##      nome prova1 prova2 prova3 media mediap
-## 1 Aluno_1      8      4      1 4.333    4.7
-## 2 Aluno_2      2      7      6 5.000    4.7
-## 3 Aluno_3      9      2      4 5.000    5.4
-## 4 Aluno_4      1     10      9 6.667    6.1
-## 5 Aluno_5      7      6      8 7.000    7.0
-## 6 Aluno_6     10      0      3 4.333    4.9
+##      nome prova1 prova2 prova3 media media2 media3 mediap
+## 1 Aluno_1      8      4      1 4.333  4.333  4.333    4.7
+## 2 Aluno_2      2      7      6 5.000  5.000  5.000    4.7
+## 3 Aluno_3      9      2      4 5.000  5.000  5.000    5.4
+## 4 Aluno_4      1     10      9 6.667  6.667  6.667    6.1
+## 5 Aluno_5      7      6      8 7.000  7.000  7.000    7.0
+## 6 Aluno_6     10      0      3 4.333  4.333  4.333    4.9
 ```
 
 
@@ -170,5 +335,17 @@ mediap(notas[, c("prova1", "prova2", "prova3")], c(4, 3, 3))
 ```
 ##  [1] 4.7 4.7 5.4 6.1 7.0 4.9 2.8 6.8 4.1 5.5 2.5 4.1 6.2 5.8 5.9 4.4 4.3
 ## [18] 5.9 5.5 3.9 6.1 4.5 3.5 3.3 2.7 6.6 5.2 7.8 3.5 7.0
+```
+
+```r
+
+## Podemos conferir o nosso cálculo através da função mean() do R
+apply(notas[, c("prova1", "prova2", "prova3")], 1, mean)
+```
+
+```
+##  [1] 4.333 5.000 5.000 6.667 7.000 4.333 3.000 7.000 4.000 5.000 2.667
+## [12] 4.000 6.000 5.667 6.000 4.333 4.667 6.333 5.000 4.333 6.333 4.667
+## [23] 3.667 3.333 2.667 7.000 5.667 8.000 3.667 7.333
 ```
 
