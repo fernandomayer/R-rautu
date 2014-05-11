@@ -92,7 +92,7 @@ funções prontas do R. No caso da média isso é possível pois a função
 `mean()` já existe. Em seguida veremos como fazer quando o cálculo que
 estamos utilizando não está implementado em nenhuma função pronta do R.
 
-```{r collapse=TRUE}
+```{r }
 ## Cria uma nova coluna apenas para comparação
 notas$media3 <- 0
 ## A estrutura de repetição fica

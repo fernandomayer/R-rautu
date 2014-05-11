@@ -29,7 +29,7 @@
 -   Exemplo: cálculo de notas de uma disciplina.
 
 
-```r
+```python
 
 ## Importa os dados
 notas <- read.table("../dados/notas.csv", header = TRUE, sep = ";", dec = ",")
@@ -45,7 +45,7 @@ str(notas)
 ##  $ prova3: int  1 6 4 9 8 3 0 7 1 3 ...
 ```
 
-```r
+```python
 head(notas)
 ```
 
@@ -59,7 +59,7 @@ head(notas)
 ## 6 Aluno_6     10      0      3
 ```
 
-```r
+```python
 summary(notas)
 ```
 
@@ -74,7 +74,7 @@ summary(notas)
 ##  (Other) :24
 ```
 
-```r
+```python
 
 ## Antes de seguir adiante, veja o resultado de
 for (i in 1:30) {
@@ -145,7 +145,7 @@ for (i in 1:30) {
 ## 30      4      9      9
 ```
 
-```r
+```python
 
 ## Para calcular as médias das 3 provas, precisamos inicialmente de um vetor
 ## para armazenar os resultados. Esse vetor pode ser um novo objeto ou uma
@@ -181,7 +181,7 @@ forma fica mais fácil fazer alterações e procurar erros. Uma forma de
 melhorar o código acima é generalizando alguns passos.
 
 
-```r
+```python
 ## Armazenamos o número de linhas no dataframe
 nlinhas <- nrow(notas)
 ## Identificamos as colunas de interesse no cálculo da média, e armazenamos
@@ -218,7 +218,7 @@ funções prontas do R. No caso da média isso é possível pois a função
 estamos utilizando não está implementado em nenhuma função pronta do R.
 
 
-```r
+```python
 ## Cria uma nova coluna apenas para comparação
 notas$media3 <- 0
 ## A estrutura de repetição fica
@@ -240,7 +240,7 @@ head(notas)
 ## 6 Aluno_6     10      0      3 4.333  4.333  4.333
 ```
 
-```r
+```python
 
 ## A única diferença é que aqui precisamos transformar cada linha em um vetor
 ## de números com as.numeric(), pois
@@ -252,7 +252,7 @@ notas[1, provas]
 ## 1      8      4      1
 ```
 
-```r
+```python
 ## é um data.frame:
 class(notas[1, provas])
 ```
@@ -266,7 +266,7 @@ Podemos agora inserir pesos para as provas: prova 1 = 4, prova 2 = 3,
 prova 3 = 3.
 
 
-```r
+```python
 ## Cria uma nova coluna para armazenar os resultados das médias ponderadas
 notas$mediap <- 0
 ## Estrutura de repetição
@@ -294,7 +294,7 @@ head(notas)
 -   Adicionando a condição do aluno de acordo com a nota.
 
 
-```r
+```python
 ## Nova coluna para armazenar os resultados
 notas$situacao <- NA
 ## Estrutura de repetição
@@ -317,7 +317,7 @@ Através do processo de vetorização do R, o mesmo algoritmo pode ser
 simplificado em duas etapas.
 
 
-```r
+```python
 ## Criando uma funcao para calcular a media ponderada
 mediap <- function(notas, pesos) {
     saida <- numeric(nrow(notas))
@@ -337,7 +337,7 @@ mediap(notas[, c("prova1", "prova2", "prova3")], c(4, 3, 3))
 ## [18] 5.9 5.5 3.9 6.1 4.5 3.5 3.3 2.7 6.6 5.2 7.8 3.5 7.0
 ```
 
-```r
+```python
 
 ## Podemos conferir o nosso cálculo através da função mean() do R
 apply(notas[, c("prova1", "prova2", "prova3")], 1, mean)
