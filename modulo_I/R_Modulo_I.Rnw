@@ -24,20 +24,8 @@
 \title{Introdução ao uso do R}
 
 \title[Módulo I\\ Básico]{Introdução ao uso do software R}
-%% \author[]{Fernando de Pol Mayer\inst{1} \and %\url{fernandomayer@gmail.com} \and
-%% Rodrigo Sant'Ana\inst{2}} %\\ \url{oc.rodrigosantana@gmail.com}}
-%% \date{}
-%% \institute{
-%%   \inst{1}%
-%%   Laboratório de Estatística Ambiental (LEA) \\
-%%   Instituto de Matemática, Estatística e Física (IMEF) \\
-%%   Universidade Federal do Rio Grande (FURG) \\
-%%   \url{fernando.mayer@furg.br}
-%%   \and
-%%   \inst{2}%
-%%   Instituto Albatroz \\
-%%   \url{oc.rodrigosantana@gmail.com}
-%% }
+\author{Software Carpentry\\ FURG}
+\date{12 e 13 de maio, 2014}
 \logo{\includegraphics[width=1cm]{../conf/Rlogo-5}}
 
 \AtBeginSection[]
