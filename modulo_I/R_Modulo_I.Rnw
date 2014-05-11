@@ -1125,9 +1125,9 @@ Os valores selecionados serão aqueles em que a condição for
 \begin{frame}[fragile]{Seleção condicional em data frames}
 Crie um data frame:
 <<>>=
-dados <- data.frame(ano=c(2001,2002,2003,2004,2005),
-                    captura=c(26,18,28,26,NA),
-                    porto=c("SP","RS","SC","SC","RN"))
+dados <- data.frame(ano = c(2001,2002,2003,2004,2005),
+                    captura = c(26,18,28,26,NA),
+                    porto = c("SP","RS","SC","SC","RN"))
 @
 Extraia deste objeto apenas a linha correspondente ao ano 2004:
 <<>>=
