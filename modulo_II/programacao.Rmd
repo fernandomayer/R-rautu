@@ -114,6 +114,34 @@ notas[1, provas]
 class(notas[1, provas])
 ```
 
+Np caso acima vimos que não era necessário calcularmos a média através
+de `soma/total` porque existe uma função pronta no R para fazer esse
+cálculo. Mas, e se quisessemos, por exemplo, calcular a Coeficiente de
+Variação (CV) entre as notas das três provas de cada aluno? Uma busca
+por
+```{r eval=FALSE}
+help.search("coefficient of variation")
+```
+não retorna nenhuma função (dos pacotes básicos) para fazer esse
+cálculo. O motivo é simples: como é uma conta simples de fazer não há
+necessidade de se criar uma função extra dentro dos pacotes. No entanto,
+nós podemos criar uma função que calcule o CV, e usá-la para o nosso
+propósito
+
+```{r }
+cv <- function(x){
+    desv.pad <- sd(x)
+    med <- mean(x)
+    cv <- desv.pad/med
+    return(cv)
+}
+```
+
+> NOTA: na função criada acima o único argumento que usamos foi `x`, que
+> neste caso deve ser um vetor de números para o cálculo do CV. Os
+> argumentos colocados dentro de `function()` devem ser apropriados para
+> o propósito de cada função.
+
 Podemos agora inserir pesos para as provas: prova 1 = 4, prova 2 = 3,
 prova 3 = 3.
 

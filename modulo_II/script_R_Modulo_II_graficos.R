@@ -6,7 +6,7 @@
 install.packages("ggplot2", dependencies = TRUE)
 
 ## Importa a base de dados
-dados <- read.table("Dados_ICCAT.csv", header = TRUE,
+dados <- read.table("../dados/Dados_ICCAT.csv", header = TRUE,
                      sep = ";", dec = ",")
 str(dados)
 summary(dados)
