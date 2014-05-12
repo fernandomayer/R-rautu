@@ -409,61 +409,186 @@ head(notas)
 
 ## Estrutura de seleção `if()`
 
--   Adicionando a condição do aluno de acordo com a nota.
+Podemos adicionar a condição do aluno: `aprovado` ou `reprovado` de
+acordo com a sua nota. Para isso precisamos criar uma condição (nesse
+caso se a nota e maior do que 7), e verificar se ela é verdadeira.
 
 
 ```python
-## Nova coluna para armazenar os resultados
-notas$situacao <- NA
-## Estrutura de repetição
-for (i in 1:30) {
-    pesos <- notas[i, c("prova1", "prova2", "prova3")] * c(4, 3, 3)
-    notas$mediap[i] <- sum(pesos)/10
-    ## Estrutura de seleção
-    if (notas$media[i] >= 7) {
+## Nova coluna para armazenar a situacao
+notas$situacao <- NA  # aqui usamos NA porque o resultado será um
+# caracter Estrutura de repetição
+for (i in 1:nlinhas) {
+    ## Estrutura de seleção (usando a média ponderada)
+    if (notas$MP[i] >= 7) {
         notas$situacao[i] <- "aprovado"
     } else {
         notas$situacao[i] <- "reprovado"
     }
 }
+
+## Confere
+head(notas)
+```
+
+```
+##      nome prova1 prova2 prova3 media media2 media3     CV  MP   MP2
+## 1 Aluno_1      8      4      1 4.333  4.333  4.333 0.8104 4.0 4.333
+## 2 Aluno_2      2      7      6 5.000  5.000  5.000 0.5292 5.1 5.000
+## 3 Aluno_3      9      2      4 5.000  5.000  5.000 0.7211 4.9 5.000
+## 4 Aluno_4      1     10      9 6.667  6.667  6.667 0.7399 6.9 6.667
+## 5 Aluno_5      7      6      8 7.000  7.000  7.000 0.1429 7.1 7.000
+## 6 Aluno_6     10      0      3 4.333  4.333  4.333 1.1842 4.2 4.333
+##    situacao
+## 1 reprovado
+## 2 reprovado
+## 3 reprovado
+## 4 reprovado
+## 5  aprovado
+## 6 reprovado
 ```
 
 
 ## O modo do R: vetorização
 
-Através do processo de vetorização do R, o mesmo algoritmo pode ser
-simplificado em duas etapas.
+As funções vetorizadas do R, além de facilitar e resumir a execução de
+tarefas repetitivas, também são computacionalmente mais eficientes,
+*i.e.* o tempo de execução das rotinas é muito mais rápido.
 
-
-```python
-## Criando uma funcao para calcular a media ponderada
-mediap <- function(notas, pesos) {
-    saida <- numeric(nrow(notas))
-    for (i in 1:nrow(notas)) {
-        aux <- notas[i, ] * pesos
-        saida[i] <- sum(aux)/10
-    }
-    return(saida)
-}
-
-## Confere o resultado
-mediap(notas[, c("prova1", "prova2", "prova3")], c(4, 3, 3))
-```
-
-```
-##  [1] 4.7 4.7 5.4 6.1 7.0 4.9 2.8 6.8 4.1 5.5 2.5 4.1 6.2 5.8 5.9 4.4 4.3
-## [18] 5.9 5.5 3.9 6.1 4.5 3.5 3.3 2.7 6.6 5.2 7.8 3.5 7.0
-```
+Por exemplo, o cálculo da média simples poderia ser feita diretamente
+com a função `apply()`
 
 ```python
-
-## Podemos conferir o nosso cálculo através da função mean() do R
-apply(notas[, c("prova1", "prova2", "prova3")], 1, mean)
+notas$media.apply <- apply(X = notas[, provas], MARGIN = 1, FUN = mean)
+head(notas)
 ```
 
 ```
-##  [1] 4.333 5.000 5.000 6.667 7.000 4.333 3.000 7.000 4.000 5.000 2.667
-## [12] 4.000 6.000 5.667 6.000 4.333 4.667 6.333 5.000 4.333 6.333 4.667
-## [23] 3.667 3.333 2.667 7.000 5.667 8.000 3.667 7.333
+##      nome prova1 prova2 prova3 media media2 media3     CV  MP   MP2
+## 1 Aluno_1      8      4      1 4.333  4.333  4.333 0.8104 4.0 4.333
+## 2 Aluno_2      2      7      6 5.000  5.000  5.000 0.5292 5.1 5.000
+## 3 Aluno_3      9      2      4 5.000  5.000  5.000 0.7211 4.9 5.000
+## 4 Aluno_4      1     10      9 6.667  6.667  6.667 0.7399 6.9 6.667
+## 5 Aluno_5      7      6      8 7.000  7.000  7.000 0.1429 7.1 7.000
+## 6 Aluno_6     10      0      3 4.333  4.333  4.333 1.1842 4.2 4.333
+##    situacao media.apply
+## 1 reprovado       4.333
+## 2 reprovado       5.000
+## 3 reprovado       5.000
+## 4 reprovado       6.667
+## 5  aprovado       7.000
+## 6 reprovado       4.333
 ```
 
+
+As médias ponderadas poderiam ser calculadas da mesma forma, e usando a
+função que criamos anteriormente
+
+```python
+notas$MP.apply <- apply(X = notas[, provas], MARGIN = 1, FUN = med.pond)
+head(notas)
+```
+
+```
+##      nome prova1 prova2 prova3 media media2 media3     CV  MP   MP2
+## 1 Aluno_1      8      4      1 4.333  4.333  4.333 0.8104 4.0 4.333
+## 2 Aluno_2      2      7      6 5.000  5.000  5.000 0.5292 5.1 5.000
+## 3 Aluno_3      9      2      4 5.000  5.000  5.000 0.7211 4.9 5.000
+## 4 Aluno_4      1     10      9 6.667  6.667  6.667 0.7399 6.9 6.667
+## 5 Aluno_5      7      6      8 7.000  7.000  7.000 0.1429 7.1 7.000
+## 6 Aluno_6     10      0      3 4.333  4.333  4.333 1.1842 4.2 4.333
+##    situacao media.apply MP.apply
+## 1 reprovado       4.333    4.333
+## 2 reprovado       5.000    5.000
+## 3 reprovado       5.000    5.000
+## 4 reprovado       6.667    6.667
+## 5  aprovado       7.000    7.000
+## 6 reprovado       4.333    4.333
+```
+
+
+Mas note que como temos o argumento `pesos` especificado com um padrão,
+devemos alterar na própria função `apply()`
+
+```python
+notas$MP.apply <- apply(X = notas[, provas], MARGIN = 1, FUN = med.pond, pesos = c(3, 
+    3, 4))
+head(notas)
+```
+
+```
+##      nome prova1 prova2 prova3 media media2 media3     CV  MP   MP2
+## 1 Aluno_1      8      4      1 4.333  4.333  4.333 0.8104 4.0 4.333
+## 2 Aluno_2      2      7      6 5.000  5.000  5.000 0.5292 5.1 5.000
+## 3 Aluno_3      9      2      4 5.000  5.000  5.000 0.7211 4.9 5.000
+## 4 Aluno_4      1     10      9 6.667  6.667  6.667 0.7399 6.9 6.667
+## 5 Aluno_5      7      6      8 7.000  7.000  7.000 0.1429 7.1 7.000
+## 6 Aluno_6     10      0      3 4.333  4.333  4.333 1.1842 4.2 4.333
+##    situacao media.apply MP.apply
+## 1 reprovado       4.333      4.0
+## 2 reprovado       5.000      5.1
+## 3 reprovado       5.000      4.9
+## 4 reprovado       6.667      6.9
+## 5  aprovado       7.000      7.1
+## 6 reprovado       4.333      4.2
+```
+
+
+> NOTA: veja que isso é possível devido à presença do argumento `...` na
+> função `apply()`, que permite passar argumentos de outras funções
+> dentro dela.
+
+Também poderíamos usar a função `weighted.mean()` implementada no R
+
+```python
+notas$MP2.apply <- apply(X = notas[, provas], MARGIN = 1, FUN = weighted.mean, 
+    w = c(3, 3, 4))
+head(notas)
+```
+
+```
+##      nome prova1 prova2 prova3 media media2 media3     CV  MP   MP2
+## 1 Aluno_1      8      4      1 4.333  4.333  4.333 0.8104 4.0 4.333
+## 2 Aluno_2      2      7      6 5.000  5.000  5.000 0.5292 5.1 5.000
+## 3 Aluno_3      9      2      4 5.000  5.000  5.000 0.7211 4.9 5.000
+## 4 Aluno_4      1     10      9 6.667  6.667  6.667 0.7399 6.9 6.667
+## 5 Aluno_5      7      6      8 7.000  7.000  7.000 0.1429 7.1 7.000
+## 6 Aluno_6     10      0      3 4.333  4.333  4.333 1.1842 4.2 4.333
+##    situacao media.apply MP.apply MP2.apply
+## 1 reprovado       4.333      4.0       4.0
+## 2 reprovado       5.000      5.1       5.1
+## 3 reprovado       5.000      4.9       4.9
+## 4 reprovado       6.667      6.9       6.9
+## 5  aprovado       7.000      7.1       7.1
+## 6 reprovado       4.333      4.2       4.2
+```
+
+
+O Coeficiente de Variação poderia ser calculado usando nossa função
+`cv()`
+
+```python
+notas$CV.apply <- apply(X = notas[, provas], MARGIN = 1, FUN = cv)
+head(notas)
+```
+
+```
+##      nome prova1 prova2 prova3 media media2 media3     CV  MP   MP2
+## 1 Aluno_1      8      4      1 4.333  4.333  4.333 0.8104 4.0 4.333
+## 2 Aluno_2      2      7      6 5.000  5.000  5.000 0.5292 5.1 5.000
+## 3 Aluno_3      9      2      4 5.000  5.000  5.000 0.7211 4.9 5.000
+## 4 Aluno_4      1     10      9 6.667  6.667  6.667 0.7399 6.9 6.667
+## 5 Aluno_5      7      6      8 7.000  7.000  7.000 0.1429 7.1 7.000
+## 6 Aluno_6     10      0      3 4.333  4.333  4.333 1.1842 4.2 4.333
+##    situacao media.apply MP.apply MP2.apply CV.apply
+## 1 reprovado       4.333      4.0       4.0   0.8104
+## 2 reprovado       5.000      5.1       5.1   0.5292
+## 3 reprovado       5.000      4.9       4.9   0.7211
+## 4 reprovado       6.667      6.9       6.9   0.7399
+## 5  aprovado       7.000      7.1       7.1   0.1429
+## 6 reprovado       4.333      4.2       4.2   1.1842
+```
+
+
+<!-- FALTA: colocar testes no inicio das funcoes (if(...)), problemas -->
+<!-- numericos entre contas diferentes -->

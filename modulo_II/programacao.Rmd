@@ -254,44 +254,73 @@ head(notas)
 
 ## Estrutura de seleção `if()`
 
--   Adicionando a condição do aluno de acordo com a nota.
+Podemos adicionar a condição do aluno: `aprovado` ou `reprovado` de
+acordo com a sua nota. Para isso precisamos criar uma condição (nesse
+caso se a nota e maior do que 7), e verificar se ela é verdadeira.
 
 ```{r }
-## Nova coluna para armazenar os resultados
-notas$situacao <- NA
+## Nova coluna para armazenar a situacao
+notas$situacao <- NA # aqui usamos NA porque o resultado será um
+                     # caracter
 ## Estrutura de repetição
-for(i in 1:30){
-    pesos <- notas[i, c("prova1", "prova2", "prova3")] *
-        c(4,3,3)
-    notas$mediap[i] <- sum(pesos)/10
-    ## Estrutura de seleção
-    if(notas$media[i] >= 7){
+for(i in 1:nlinhas){
+    ## Estrutura de seleção (usando a média ponderada)
+    if(notas$MP[i] >= 7){
         notas$situacao[i] <- "aprovado"
     } else{
         notas$situacao[i] <- "reprovado"
     }
 }
+
+## Confere
+head(notas)
 ```
 
 ## O modo do R: vetorização
 
-Através do processo de vetorização do R, o mesmo algoritmo pode ser
-simplificado em duas etapas.
+As funções vetorizadas do R, além de facilitar e resumir a execução de
+tarefas repetitivas, também são computacionalmente mais eficientes,
+*i.e.* o tempo de execução das rotinas é muito mais rápido.
 
+Por exemplo, o cálculo da média simples poderia ser feita diretamente
+com a função `apply()`
 ```{r }
-## Criando uma funcao para calcular a media ponderada
-mediap <- function(notas, pesos){
-    saida <- numeric(nrow(notas))
-    for(i in 1:nrow(notas)){
-        aux <- notas[i,] * pesos
-        saida[i] <- sum(aux)/10
-    }
-    return(saida)
-}
-
-## Confere o resultado
-mediap(notas[,c("prova1", "prova2", "prova3")], c(4,3,3))
-
-## Podemos conferir o nosso cálculo através da função mean() do R
-apply(notas[, c("prova1", "prova2", "prova3")], 1, mean)
+notas$media.apply <- apply(X = notas[, provas], MARGIN = 1, FUN = mean)
+head(notas)
 ```
+
+As médias ponderadas poderiam ser calculadas da mesma forma, e usando a
+função que criamos anteriormente
+```{r }
+notas$MP.apply <- apply(X = notas[, provas], MARGIN = 1, FUN = med.pond)
+head(notas)
+```
+
+Mas note que como temos o argumento `pesos` especificado com um padrão,
+devemos alterar na própria função `apply()`
+```{r }
+notas$MP.apply <- apply(X = notas[, provas], MARGIN = 1,
+                        FUN = med.pond, pesos = c(3,3,4))
+head(notas)
+```
+
+> NOTA: veja que isso é possível devido à presença do argumento `...` na
+> função `apply()`, que permite passar argumentos de outras funções
+> dentro dela.
+
+Também poderíamos usar a função `weighted.mean()` implementada no R
+```{r }
+notas$MP2.apply <- apply(X = notas[, provas], MARGIN = 1,
+                         FUN = weighted.mean, w = c(3,3,4))
+head(notas)
+```
+
+O Coeficiente de Variação poderia ser calculado usando nossa função
+`cv()`
+```{r }
+notas$CV.apply <- apply(X = notas[, provas], MARGIN = 1, FUN = cv)
+head(notas)
+```
+
+<!-- FALTA: colocar testes no inicio das funcoes (if(...)), problemas -->
+<!-- numericos entre contas diferentes -->
