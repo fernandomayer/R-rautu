@@ -142,19 +142,113 @@ cv <- function(x){
 > argumentos colocados dentro de `function()` devem ser apropriados para
 > o propósito de cada função.
 
-Podemos agora inserir pesos para as provas: prova 1 = 4, prova 2 = 3,
-prova 3 = 3.
-
+Antes de aplicar a função dentro de um `for()` devemos testá-la para ver
+se ela está funcioanando de maneira correta. Por exemplo, o CV para as
+notas do primeiro aluno pode ser calculado "manualmente" por
 ```{r }
-## Cria uma nova coluna para armazenar os resultados das médias
-## ponderadas
-notas$mediap <- 0
-## Estrutura de repetição
-for(i in 1:30){
-    pesos <- notas[i, c("prova1", "prova2", "prova3")] * c(4,3,3)
-    notas$mediap[i] <- sum(pesos)/10
+sd(as.numeric(notas[1, provas]))/mean(as.numeric(notas[1, provas]))
+```
+E através da função, o resultado é
+```{r }
+cv(as.numeric(notas[1, provas]))
+```
+o que mostra que a função está funcionando corretamente, e podemos
+aplicá-la em todas as linhas usando a repetição
+```{r }
+## Cria uma nova coluna para o CV
+notas$CV <- 0
+## A estrutura de repetição fica
+for(i in 1:nlinhas){
+    notas$CV[i] <- cv(as.numeric(notas[i, provas]))
 }
-## Confere os resultados
+
+## Confere
+head(notas)
+```
+
+Podemos agora querer calcular as médias ponderadas para as provas. Por
+exemplo:
+
+- Prova 1: peso 3
+- Prova 2: peso 3
+- Prova 2: peso 4
+
+Como já vimos que criar uma função é uma forma mais prática (e elegante)
+de executar determinada tarefa, vamos criar uma função que calcule as
+médias ponderadas.
+```{r }
+med.pond <- function(notas, pesos){
+    ## Multiplica o valor de cada prova pelo seu peso
+    pond <- notas * pesos
+    ## Calcula o valor total dos pesos
+    peso.total <- sum(pesos)
+    ## Calcula a soma da ponderação
+    sum.pond <- sum(pond)
+    ## Finalmente calcula a média ponderada
+    saida <- sum.pond/peso.total
+    return(saida)
+}
+```
+Antes de aplicar a função para o caso geral, sempre é importante testar
+e conferir o resultado em um caso menor. Podemos verificar o resultado
+da média ponderada para o primeiro aluno
+```{r }
+sum(notas[1, provas] * c(3,3,4))/10
+```
+e testar a função para o mesmo caso
+```{r }
+med.pond(notas = notas[1, provas], pesos = c(3,3,4))
+```
+Como o resultado é o mesmo podemos aplicar a função para todas as linhas
+através do `for()`
+```{r }
+## Cria uma nova coluna para a média ponderada
+notas$MP <- 0
+## A estrutura de repetição fica
+for(i in 1:nlinhas){
+    notas$MP[i] <- med.pond(notas = notas[i, provas], pesos = c(3,3,4))
+}
+
+## Confere
+head(notas)
+```
+
+> NOTA: uma função para calcular a média ponderada já existe
+> implementada no R. Veja `?weighted.mean()` e confira os resultados
+> obtidos aqui
+
+Repare na construção da função acima: agora usamos dois argumentos,
+`notas` e `pesos`, pois precisamos das duas coisas para calcular a média
+ponderada. Repare também que ambos argumentos não possuem um valor
+padrão. Poderíamos, por exemplo, assumir valores padrão para os pesos, e
+deixar para que o usuário mude apenas se achar necessário.
+```{r }
+## Atribuindo pesos iguais para as provas como padrão
+med.pond <- function(notas, pesos = rep(1, length(notas))){
+    ## Multiplica o valor de cada prova pelo seu peso
+    pond <- notas * pesos
+    ## Calcula o valor total dos pesos
+    peso.total <- sum(pesos)
+    ## Calcula a soma da ponderação
+    sum.pond <- sum(pond)
+    ## Finalmente calcula a média ponderada
+    saida <- sum.pond/peso.total
+    return(saida)
+}
+```
+
+Repare que neste caso, como os pesos são iguais, a chamada da função sem
+alterar o argumento `pesos` gera o mesmo resultado do cálculo da média
+comum.
+```{r }
+## Cria uma nova coluna para a média ponderada para comparação
+notas$MP2 <- 0
+## A estrutura de repetição fica
+for(i in 1:nlinhas){
+    notas$MP2[i] <- med.pond(notas = notas[i, provas])
+}
+
+## Confere
 head(notas)
 ```
 
