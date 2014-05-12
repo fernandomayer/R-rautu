@@ -228,6 +228,8 @@ cv <- function(x) {
 ```
 
 
+**Salve essa função em um arquivo chamdo `cv.R` (usaremos mais tarde)**
+
 > NOTA: na função criada acima o único argumento que usamos foi `x`, que
 > neste caso deve ser um vetor de números para o cálculo do CV. Os
 > argumentos colocados dentro de `function()` devem ser apropriados para
