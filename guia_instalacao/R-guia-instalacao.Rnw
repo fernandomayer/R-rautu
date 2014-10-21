@@ -34,15 +34,15 @@
 
 \begin{document}
 
-<<setup, include=FALSE>>=
+<<setup, include=FALSE, cache=FALSE>>=
 # smaller font size for chunks
 opts_chunk$set(size = "small",
                prompt = TRUE,
                comment = NA,
                tidy = FALSE)
-thm <- knit_theme$get("beamer3")
-knit_theme$set(thm)
-options(width = 65, digits = 5, prompt = " ")
+## thm <- knit_theme$get("beamer3")
+## knit_theme$set(thm)
+options(width = 65, digits = 5) #, prompt = " ")
 @
 
 \maketitle
@@ -68,9 +68,9 @@ detalhes).
 
 \begin{enumerate}
 \item \textbf{\R}:
-  \url{http://cran-r.c3sl.ufpr.br/bin/windows/base/R-2.15.2-win.exe}
+  \url{http://cran-r.c3sl.ufpr.br/bin/windows/base/R-3.1.1-win.exe}
 \item \textbf{\RStudio}:
-  \url{http://download1.rstudio.org/RStudio-0.97.173.exe}
+  \url{http://download1.rstudio.org/RStudio-0.98.1079.exe}
 \end{enumerate}
 
 \textbf{Importante!} Instale nessa ordem: primeiro o \R e só depois o
@@ -96,8 +96,8 @@ precisa encontrar a instalação do \R para poder ser instalado.
   \texttt{Download R for Windows} para baixar a versão para esse
   sistema.
 \item Clique sobre o link \texttt{base}.
-\item Clique sobre o link \texttt{Download R 2.15.2 for Windows} para
-  fazer o download do arquivo \texttt{R-2.15.2-win.exe}.
+\item Clique sobre o link \texttt{Download R 3.1.1 for Windows} para
+  fazer o download do arquivo \texttt{R-3.1.1-win.exe}.
 \item A instalação segue o formato padrão de instalação de programas no
   Windows, e portanto não são necessários maiores detalhes.
 \end{enumerate}
@@ -128,13 +128,13 @@ que vamos utilizar.
 
 \begin{enumerate}
 \item Para baixar o \RStudio entre no endereço
-  \url{www.rstudio.org}
-\item Clique no link \texttt{Download RStudio}
-\item Clique em \texttt{Download RStudio Desktop}
+  \url{www.rstudio.com}
+\item Clique no link \texttt{Products > RStudio}
+\item Clique em \texttt{RStudio Desktop}
 \item Será exibida uma página com a recomendação para você baixar o
-  \texttt{RStudio 0.97.173 - Windows XP/Vista/7}
+  \texttt{RStudio 0.98.1079 - Windows XP/Vista/7/8}
 \item Clicando nesse link, você irá baixar o arquivo
-  \texttt{RStudio-0.97.173.exe}
+  \texttt{RStudio-0.98.1079.exe}
 \item Depois é só clicar e instalar da forma convencional do Windows
 \end{enumerate}
 
@@ -159,15 +159,16 @@ pronto para ser utilizado.
   necessário compilar o código-fonte (veja na
   \hyperref[sec:ill]{Instalação longa} abaixo).
 \item \textbf{\RStudio}: Entre em
-  \url{http://rstudio.org/download/desktop} e procure um pacote
+  \url{http://www.rstudio.com/products/rstudio/download}
+  e procure um pacote
   pré-compilado para sua distribuição. Normalmente, após baixar esse
   pacote, a instalação pode ser executada apenas abrindo o arquivo. Em
   todo caso, tomando o Ubuntu novamente como exemplo, a instalação pode
   ser feita também via terminal com
 <<eval=FALSE, engine="bash">>=
-  sudo dpkg -i rstudio-0.97.173-amd64.deb
+  sudo dpkg -i rstudio-0.98.1079-amd64.deb
 @
-  Note que o arquivo \texttt{rstudio-0.97.173-amd64.deb} é uma versão
+  Note que o arquivo \texttt{rstudio-0.98.1079-amd64.deb} é uma versão
   específica para o Ubuntu 64 bits, e você deve estar no diretório onde
   o arquivo foi baixado (use o comando \texttt{cd} para mudar
   diretórios).
@@ -202,7 +203,7 @@ de performance do programa quando comparado com versões pré-compiladas.
   ele.
 \item Na seção \texttt{Source Code for all Platforms}, baixe o arquivo
   \texttt{R-2.15.2.tar.gz} (link direto:
-  \url{http://cran-r.c3sl.ufpr.br/src/base/R-2/R-2.15.2.tar.gz})
+  \url{http://cran-r.c3sl.ufpr.br/src/base/R-3/R-3.1.1.tar.gz})
 \item Coloque esse arquivo em um diretório de sua escolha, abra um
   terminal e acesse esse diretório (usando \texttt{cd}). Por exemplo, se
   o arquivo estiver dentro de um diretório chamado \texttt{Programas},
@@ -212,12 +213,12 @@ de performance do programa quando comparado com versões pré-compiladas.
 @
 \item Descompacte o arquivo com o comando \texttt{tar}
 <<eval=FALSE, engine="bash">>=
-  tar -zxvf R-2.15.2.tar.gz
+  tar -zxvf R-3.1.1.tar.gz
 @
-  Isso irá criar um diretório chamado \texttt{R-2.15.2}. Entre nesse
+  Isso irá criar um diretório chamado \texttt{R-3.1.1}. Entre nesse
   diretório
 <<eval=FALSE, engine="bash">>=
-  cd R-2.15.2
+  cd R-3.1.1
 @
 \item Agora você pode configurar (\texttt{configure}), compilar
   (\texttt{make}), verificar a compilação (\texttt{make check-all})
@@ -261,8 +262,8 @@ Linux, e funciona exatamente da mesma forma como no Windows.
 \begin{enumerate}
 \item Para baixar o \RStudio entre no endereço
   \url{www.rstudio.org}
-\item Clique no link \texttt{Download RStudio}
-\item Clique em \texttt{Download RStudio Desktop}
+\item Clique no link \texttt{Products > RStudio}
+\item Clique em \texttt{RStudio Desktop}
 \item Será exibida uma página com a recomendação para você baixar o
   \RStudio de acordo com a distribuição que você estiver usando
 \item Clique no link recomendado para baixar o arquivo

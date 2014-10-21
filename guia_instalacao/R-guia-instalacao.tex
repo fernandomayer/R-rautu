@@ -13,14 +13,14 @@
 
 \definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
 \newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
-\newcommand{\hlstr}[1]{\textcolor[rgb]{0.282,0.239,0.545}{#1}}%
-\newcommand{\hlcom}[1]{\textcolor[rgb]{0.498,0.498,0.498}{\textit{#1}}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
 \newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
 \newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
 \newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
 \newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
 \newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
-\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.282,0.239,0.545}{\textbf{#1}}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
 
 \usepackage{framed}
 \makeatletter
@@ -47,6 +47,7 @@
 \definecolor{errorcolor}{rgb}{1, 0, 0}
 \newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
 
+\let\hlesc\hlstd \let\hlpps\hlstd \let\hllin\hlstd \let\hlslc\hlcom
 \usepackage{alltt}
 
 \usepackage[brazilian]{babel}
@@ -81,9 +82,7 @@
 
 \hyphenation{e-la-bo-ra-das}
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-
 \begin{document}
-
 
 
 
@@ -110,9 +109,9 @@ detalhes).
 
 \begin{enumerate}
 \item \textbf{\R}:
-  \url{http://cran-r.c3sl.ufpr.br/bin/windows/base/R-2.15.2-win.exe}
+  \url{http://cran-r.c3sl.ufpr.br/bin/windows/base/R-3.1.1-win.exe}
 \item \textbf{\RStudio}:
-  \url{http://download1.rstudio.org/RStudio-0.97.173.exe}
+  \url{http://download1.rstudio.org/RStudio-0.98.1079.exe}
 \end{enumerate}
 
 \textbf{Importante!} Instale nessa ordem: primeiro o \R e só depois o
@@ -138,8 +137,8 @@ precisa encontrar a instalação do \R para poder ser instalado.
   \texttt{Download R for Windows} para baixar a versão para esse
   sistema.
 \item Clique sobre o link \texttt{base}.
-\item Clique sobre o link \texttt{Download R 2.15.2 for Windows} para
-  fazer o download do arquivo \texttt{R-2.15.2-win.exe}.
+\item Clique sobre o link \texttt{Download R 3.1.1 for Windows} para
+  fazer o download do arquivo \texttt{R-3.1.1-win.exe}.
 \item A instalação segue o formato padrão de instalação de programas no
   Windows, e portanto não são necessários maiores detalhes.
 \end{enumerate}
@@ -170,13 +169,13 @@ que vamos utilizar.
 
 \begin{enumerate}
 \item Para baixar o \RStudio entre no endereço
-  \url{www.rstudio.org}
-\item Clique no link \texttt{Download RStudio}
-\item Clique em \texttt{Download RStudio Desktop}
+  \url{www.rstudio.com}
+\item Clique no link \texttt{Products > RStudio}
+\item Clique em \texttt{RStudio Desktop}
 \item Será exibida uma página com a recomendação para você baixar o
-  \texttt{RStudio 0.97.173 - Windows XP/Vista/7}
+  \texttt{RStudio 0.98.1079 - Windows XP/Vista/7/8}
 \item Clicando nesse link, você irá baixar o arquivo
-  \texttt{RStudio-0.97.173.exe}
+  \texttt{RStudio-0.98.1079.exe}
 \item Depois é só clicar e instalar da forma convencional do Windows
 \end{enumerate}
 
@@ -195,7 +194,7 @@ pronto para ser utilizado.
   (Debian, RedHat [Fedora], Suse [OpenSuse], Ubuntu). Por exemplo, para
   instalar no Ubuntu, execute em um terminal
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \noindent
 \ttfamily
 \hlstd{}\hlstd{\ \ }\hlstd{sudo\ apt}\hlopt{{-}}\hlstd{get\ }\hlkwc{install\ }\hlstd{r}\hlopt{{-}}\hlstd{base\ r}\hlopt{{-}}\hlstd{base}\hlopt{{-}}\hlstd{core}\hspace*{\fill}
@@ -204,28 +203,27 @@ pronto para ser utilizado.
 \normalsize
 \end{kframe}
 \end{knitrout}
-
   Se a sua distribuição não está listada ali, provavelmente será
   necessário compilar o código-fonte (veja na
   \hyperref[sec:ill]{Instalação longa} abaixo).
 \item \textbf{\RStudio}: Entre em
-  \url{http://rstudio.org/download/desktop} e procure um pacote
+  \url{http://www.rstudio.com/products/rstudio/download}
+  e procure um pacote
   pré-compilado para sua distribuição. Normalmente, após baixar esse
   pacote, a instalação pode ser executada apenas abrindo o arquivo. Em
   todo caso, tomando o Ubuntu novamente como exemplo, a instalação pode
   ser feita também via terminal com
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \noindent
 \ttfamily
-\hlstd{}\hlstd{\ \ }\hlstd{sudo\ dpkg\ }\hlopt{{-}}\hlstd{i\ rstudio}\hlopt{{-}}\hlstd{}\hlnum{0.97.173}\hlstd{}\hlopt{{-}}\hlstd{amd64.deb}\hspace*{\fill}
+\hlstd{}\hlstd{\ \ }\hlstd{sudo\ dpkg\ }\hlopt{{-}}\hlstd{i\ rstudio}\hlopt{{-}}\hlstd{}\hlnum{0.98.1079}\hlstd{}\hlopt{{-}}\hlstd{amd64.deb}\hspace*{\fill}
 \mbox{}
 \normalfont
 \normalsize
 \end{kframe}
 \end{knitrout}
-
-  Note que o arquivo \texttt{rstudio-0.97.173-amd64.deb} é uma versão
+  Note que o arquivo \texttt{rstudio-0.98.1079-amd64.deb} é uma versão
   específica para o Ubuntu 64 bits, e você deve estar no diretório onde
   o arquivo foi baixado (use o comando \texttt{cd} para mudar
   diretórios).
@@ -260,13 +258,13 @@ de performance do programa quando comparado com versões pré-compiladas.
   ele.
 \item Na seção \texttt{Source Code for all Platforms}, baixe o arquivo
   \texttt{R-2.15.2.tar.gz} (link direto:
-  \url{http://cran-r.c3sl.ufpr.br/src/base/R-2/R-2.15.2.tar.gz})
+  \url{http://cran-r.c3sl.ufpr.br/src/base/R-3/R-3.1.1.tar.gz})
 \item Coloque esse arquivo em um diretório de sua escolha, abra um
   terminal e acesse esse diretório (usando \texttt{cd}). Por exemplo, se
   o arquivo estiver dentro de um diretório chamado \texttt{Programas},
   no diretório padrão do usuário
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \noindent
 \ttfamily
 \hlstd{}\hlstd{\ \ }\hlstd{}\hlkwb{cd\ }\hlstd{Programas}\hlopt{/}\hlstd{}\hspace*{\fill}
@@ -275,38 +273,35 @@ de performance do programa quando comparado com versões pré-compiladas.
 \normalsize
 \end{kframe}
 \end{knitrout}
-
 \item Descompacte o arquivo com o comando \texttt{tar}
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \noindent
 \ttfamily
-\hlstd{}\hlstd{\ \ }\hlstd{}\hlkwc{tar\ }\hlstd{}\hlopt{{-}}\hlstd{zxvf\ R}\hlopt{{-}}\hlstd{}\hlnum{2.15.2}\hlstd{.}\hlkwc{tar}\hlstd{.gz}\hspace*{\fill}
+\hlstd{}\hlstd{\ \ }\hlstd{}\hlkwc{tar\ }\hlstd{}\hlopt{{-}}\hlstd{zxvf\ R}\hlopt{{-}}\hlstd{}\hlnum{3.1.1}\hlstd{.}\hlkwc{tar}\hlstd{.gz}\hspace*{\fill}
 \mbox{}
 \normalfont
 \normalsize
 \end{kframe}
 \end{knitrout}
-
-  Isso irá criar um diretório chamado \texttt{R-2.15.2}. Entre nesse
+  Isso irá criar um diretório chamado \texttt{R-3.1.1}. Entre nesse
   diretório
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \noindent
 \ttfamily
-\hlstd{}\hlstd{\ \ }\hlstd{}\hlkwb{cd\ }\hlstd{R}\hlopt{{-}}\hlstd{}\hlnum{2.15.2}\hlstd{}\hspace*{\fill}
+\hlstd{}\hlstd{\ \ }\hlstd{}\hlkwb{cd\ }\hlstd{R}\hlopt{{-}}\hlstd{}\hlnum{3.1.1}\hlstd{}\hspace*{\fill}
 \mbox{}
 \normalfont
 \normalsize
 \end{kframe}
 \end{knitrout}
-
 \item Agora você pode configurar (\texttt{configure}), compilar
   (\texttt{make}), verificar a compilação (\texttt{make check-all})
   (esse processo pode ser demorado), e finalmente instalar (\texttt{make
   install}). O processo todo fica assim
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \noindent
 \ttfamily
 \hlstd{}\hlstd{\ \ }\hlstd{.}\hlopt{/}\hlstd{configure\hspace*{\fill}\\
@@ -318,12 +313,11 @@ de performance do programa quando comparado com versões pré-compiladas.
 \normalsize
 \end{kframe}
 \end{knitrout}
-
   Detalhe: se você for realmente utilizar o \RStudio como interface no
   Linux, é necessário compilar o \R como um \textit{shared
     library}. Para isso, substitua a primeira linha acima por
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \noindent
 \ttfamily
 \hlstd{}\hlstd{\ \ }\hlstd{.}\hlopt{/}\hlstd{configure\ }\hlopt{{-}{-}}\hlstd{}\hlkwb{enable}\hlstd{}\hlopt{{-}}\hlstd{R}\hlopt{{-}}\hlstd{shlib}\hspace*{\fill}
@@ -332,12 +326,11 @@ de performance do programa quando comparado com versões pré-compiladas.
 \normalsize
 \end{kframe}
 \end{knitrout}
-
   e continue com os demais comandos.
 \item No Linux, o \R não tem interface alguma, ele é um programa que
   roda no terminal. Por isso, você pode verificar a instalação apenas digitando
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \noindent
 \ttfamily
 \hlstd{}\hlstd{\ \ }\hlstd{R}\hspace*{\fill}
@@ -346,7 +339,6 @@ de performance do programa quando comparado com versões pré-compiladas.
 \normalsize
 \end{kframe}
 \end{knitrout}
-
   no terminal.
 \end{enumerate}
 
@@ -367,8 +359,8 @@ Linux, e funciona exatamente da mesma forma como no Windows.
 \begin{enumerate}
 \item Para baixar o \RStudio entre no endereço
   \url{www.rstudio.org}
-\item Clique no link \texttt{Download RStudio}
-\item Clique em \texttt{Download RStudio Desktop}
+\item Clique no link \texttt{Products > RStudio}
+\item Clique em \texttt{RStudio Desktop}
 \item Será exibida uma página com a recomendação para você baixar o
   \RStudio de acordo com a distribuição que você estiver usando
 \item Clique no link recomendado para baixar o arquivo
@@ -501,31 +493,29 @@ comentários usando o símbolo \texttt{\#} na frente de qualquer frase que
 não seja um comando. Por exemplo:
 
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{ }\hlcom{# isso é um comentário e não será executado pelo R}
-\hlstd{ }\hlstd{x} \hlkwb{<-} \hlnum{2} \hlopt{+} \hlnum{2}
-\hlstd{ }\hlstd{y} \hlkwb{<-} \hlnum{4} \hlopt{*} \hlnum{4} \hlcom{# comentários também podem ser colocados ao lado de comandos}
-\hlstd{ }\hlcom{# use esse recurso para descrever o que está sendo feito}
-\hlstd{ }\hlcom{# o comando abaixo serve para listar os objetos criados}
-\hlstd{ }\hlkwd{ls}\hlstd{()}
+\hlstd{> }\hlcom{# isso é um comentário e não será executado pelo R}
+\hlstd{> }\hlstd{x} \hlkwb{<-} \hlnum{2} \hlopt{+} \hlnum{2}
+\hlstd{> }\hlstd{y} \hlkwb{<-} \hlnum{4} \hlopt{*} \hlnum{4} \hlcom{# comentários também podem ser colocados ao lado de comandos}
+\hlstd{> }\hlcom{# use esse recurso para descrever o que está sendo feito}
+\hlstd{> }\hlcom{# o comando abaixo serve para listar os objetos criados}
+\hlstd{> }\hlkwd{ls}\hlstd{()}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
-
 
 Para ajuda com o \RStudio, você pode clicar na aba \texttt{Help} do
 \RStudio (no quadro inferior direito) para ir se familiarizando com o
 programa. Se você quiser ir se familiarizando com a linguagem em si,
 digite
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{ }\hlkwd{help.start}\hlstd{()}
+\hlstd{> }\hlkwd{help.start}\hlstd{()}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
-
 \noindent para ter acesso aos manuais e outras referências. Para uma boa
 referência inicial em português recomendo seguir o material e os
 exemplos de ``Introdução ao Ambiente Estatístico R'', do Prof. Paulo
