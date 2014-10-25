@@ -37,4 +37,5 @@
 *.RData
 .#*
 cache/
+figure/
 Rplots.pdf
