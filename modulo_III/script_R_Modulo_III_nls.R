@@ -1,15 +1,21 @@
 ##======================================================================
-## Curso R - UNIVALI
-## 26-27, novembro, 2012
+##
 ## Modelos não-lineares
+##
+## Congresso Brasileiro de Oceanografia - CBO 2014
+## Itajaí, SC, Brasil
+## 25 de outubro, 2014
+##
+##
 ##======================================================================
+
 
 ##----------------------------------------------------------------------
 ## Estimativas de parâmetros do modelo de von Bertalanffy
 ##----------------------------------------------------------------------
 
 ## Importação de dados de comprimento e idade
-dados.comp <- read.csv2("dados_comprimento.csv")
+dados.comp <- read.csv2("../dados/dados_comprimento.csv")
 str(dados.comp)
 summary(dados.comp)
 
