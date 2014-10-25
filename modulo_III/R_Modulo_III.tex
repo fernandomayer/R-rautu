@@ -13,14 +13,14 @@
 
 \definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
 \newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
-\newcommand{\hlstr}[1]{\textcolor[rgb]{0.282,0.239,0.545}{#1}}%
-\newcommand{\hlcom}[1]{\textcolor[rgb]{0.498,0.498,0.498}{\textit{#1}}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
 \newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
 \newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
 \newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
 \newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
 \newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
-\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.282,0.239,0.545}{\textbf{#1}}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
 
 \usepackage{framed}
 \makeatletter
@@ -58,6 +58,12 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage[normalem]{ulem}
+\usepackage{paralist}
+\usepackage{xfrac}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{multirow}
 \usepackage[scaled]{beramono} % truetype: Bistream Vera Sans Mono
 %\usepackage{inconsolata}
 
@@ -68,9 +74,19 @@
 \providecommand{\eg}{\textit{e.g.}\xspace}
 \providecommand{\ie}{\textit{i.e.}\xspace}
 \providecommand{\R}{\textsf{R}\xspace}
+\newcommand{\mb}[1]{\mathbf{#1}}
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+\providecommand{\E}{\text{E}}
+\providecommand{\Var}{\text{Var}}
+\providecommand{\DP}{\text{DP}}
+\theoremstyle{definition}
+\newtheorem*{mydef}{Definição}
+\newtheorem*{mythm}{Teorema}
+
+
 
 \title[Módulo III\\ Inferência e Modelagem]{Introdução ao uso do software R}
-\author[]{Fernando de Pol Mayer\inst{1} \and %\url{fernandomayer@gmail.com} \and
+\author[CBO 2014]{Fernando de Pol Mayer\inst{1} \and %\url{fernandomayer@gmail.com} \and
 Rodrigo Sant'Ana\inst{2}} %\\ \url{oc.rodrigosantana@gmail.com}}
 \date{}
 \institute{
@@ -102,9 +118,7 @@ Rodrigo Sant'Ana\inst{2}} %\\ \url{oc.rodrigosantana@gmail.com}}
   \end{frame}
 }
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-
 \begin{document}
-
 
 
 
@@ -155,65 +169,76 @@ Uniforme & \texttt{*unif} & \texttt{min, max}\\
 \begin{frame}[fragile=singleslide]{Distribuições de probabilidade}
 Alguns exemplos:
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlcom{# valores críticos de z com alfa = 0,05 (bilateral)}
-\hlstd{> }\hlkwd{qnorm}\hlstd{(}\hlnum{0.025}\hlstd{)}
+\hlcom{# valores críticos de z com alfa = 0,05 (bilateral)}
+\hlkwd{qnorm}\hlstd{(}\hlnum{0.025}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
 [1] -1.96
 \end{verbatim}
 \begin{alltt}
-\hlstd{> }\hlkwd{qnorm}\hlstd{(}\hlnum{0.975}\hlstd{)}
+\hlkwd{qnorm}\hlstd{(}\hlnum{0.975}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
 [1] 1.96
 \end{verbatim}
 \begin{alltt}
-\hlstd{> }\hlcom{# valores críticos de t com diferentes G.L.}
-\hlstd{> }\hlkwd{qt}\hlstd{(}\hlnum{0.025}\hlstd{,} \hlkwc{df} \hlstd{=} \hlnum{9}\hlstd{)}
+\hlcom{# valores críticos de t com diferentes G.L.}
+\hlkwd{qt}\hlstd{(}\hlnum{0.025}\hlstd{,} \hlkwc{df} \hlstd{=} \hlnum{9}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
 [1] -2.2622
 \end{verbatim}
 \begin{alltt}
-\hlstd{> }\hlkwd{qt}\hlstd{(}\hlnum{0.025}\hlstd{,}\hlkwc{df} \hlstd{=} \hlnum{900}\hlstd{)}
+\hlkwd{qt}\hlstd{(}\hlnum{0.025}\hlstd{,}\hlkwc{df} \hlstd{=} \hlnum{900}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
 [1] -1.9626
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
-
 \end{frame}
 
-% \begin{frame}[fragile=singleslide]{Distribuições de probabilidade}
-% Intervalos de confiança: suponha uma amostra de $n=5$, com $\bar{x}=83$
-% e $s=12$. Um intervalo de 95\% de confiança ($\alpha = 0.05$) para $\mu$
-% pode ser calculado como:
-% \begin{verbatim}
-% > xbarra <- 83
-% > desvio <- 12
-% > n <- 5
-% > erro <- desvio/sqrt(n)
-% > erro
-% [1] 5.366563
-% > xbarra + erro * qt(0.025, df=n)
-% [1] 69.20481
-% > xbarra + erro * qt(0.975, df=n)
-% [1] 96.79519
-% \end{verbatim}
-% \end{frame}
+\begin{frame}[fragile=singleslide]{Distribuições de probabilidade}
+Intervalos de confiança: suponha uma amostra de $n=5$, com $\bar{x}=83$
+e $s=12$. Um intervalo de 95\% de confiança ($\alpha = 0.05$) para $\mu$
+pode ser calculado como:
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{## Dados}
+\hlstd{xbarra} \hlkwb{<-} \hlnum{83}
+\hlstd{desvio} \hlkwb{<-} \hlnum{12}
+\hlstd{n} \hlkwb{<-} \hlnum{5}
+\hlcom{## Erro padrão}
+\hlstd{erro} \hlkwb{<-} \hlstd{desvio}\hlopt{/}\hlkwd{sqrt}\hlstd{(n)}
+\hlcom{## Média - erro}
+\hlstd{xbarra} \hlopt{+} \hlstd{erro} \hlopt{*} \hlkwd{qt}\hlstd{(}\hlnum{0.025}\hlstd{,} \hlkwc{df} \hlstd{= n)}
+\end{alltt}
+\begin{verbatim}
+[1] 69.205
+\end{verbatim}
+\begin{alltt}
+\hlcom{## Média + erro}
+\hlstd{xbarra} \hlopt{+} \hlstd{erro} \hlopt{*} \hlkwd{qt}\hlstd{(}\hlnum{0.975}\hlstd{,} \hlkwc{df} \hlstd{= n)}
+\end{alltt}
+\begin{verbatim}
+[1] 96.795
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
 
 \section{Inferência}
 
 \begin{frame}[fragile=singleslide]{Base de dados}
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{dados} \hlkwb{<-} \hlkwd{read.table}\hlstd{(}\hlstr{"../dados/crabs.csv"}\hlstd{,} \hlkwc{header} \hlstd{= T,}
-\hlstd{  }                    \hlkwc{sep} \hlstd{=} \hlstr{";"}\hlstd{,} \hlkwc{dec} \hlstd{=} \hlstr{","}\hlstd{)}
-\hlstd{> }\hlkwd{str}\hlstd{(dados)}
+\hlstd{dados} \hlkwb{<-} \hlkwd{read.table}\hlstd{(}\hlstr{"../dados/crabs.csv"}\hlstd{,} \hlkwc{header} \hlstd{= T,}
+                    \hlkwc{sep} \hlstd{=} \hlstr{";"}\hlstd{,} \hlkwc{dec} \hlstd{=} \hlstr{","}\hlstd{)}
+\hlkwd{str}\hlstd{(dados)}
 \end{alltt}
 \begin{verbatim}
 'data.frame':	156 obs. of  7 variables:
@@ -227,33 +252,31 @@ Alguns exemplos:
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
-
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t
     para uma amostra}
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{hist}\hlstd{(dados}\hlopt{$}\hlstd{CL,} \hlkwc{main} \hlstd{=} \hlstr{""}\hlstd{,} \hlkwc{ylab} \hlstd{=} \hlstr{"Frequência absoluta"}\hlstd{,}
-\hlstd{  }     \hlkwc{xlab} \hlstd{=} \hlstr{"Comprimento da carapaça (mm)"}\hlstd{,} \hlkwc{col} \hlstd{=} \hlstr{"grey"}\hlstd{)}
+\hlkwd{hist}\hlstd{(dados}\hlopt{$}\hlstd{CL,} \hlkwc{main} \hlstd{=} \hlstr{""}\hlstd{,} \hlkwc{ylab} \hlstd{=} \hlstr{"Frequência absoluta"}\hlstd{,}
+     \hlkwc{xlab} \hlstd{=} \hlstr{"Comprimento da carapaça (mm)"}\hlstd{,} \hlkwc{col} \hlstd{=} \hlstr{"grey"}\hlstd{)}
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=.6\textwidth]{figure/unnamed-chunk-3} 
+{\centering \includegraphics[width=.6\textwidth]{figure/unnamed-chunk-4-1} 
 
 }
 
 
 
 \end{knitrout}
-
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t
     para uma amostra}
 Procedimentos gerais para um teste de hipótese
-\begin{enumerate}
+\begin{compactenum}[(1)]
 \item Definir a hipótese nula ($H_0$) e a alternativa ($H_1$)
 \item Definir um nível de \textbf{significância} $\alpha$ (ex.: $\alpha
   = 0,05$), que irá determinar o nível de \textbf{confiança}
@@ -270,7 +293,7 @@ Procedimentos gerais para um teste de hipótese
   \item Alternativamente, calcula-se o p-valor, que é a probabilidade de
     se obter um valor de $t$ igual ou maior do que $t_{calc}$
   \end{itemize}
-\end{enumerate}
+\end{compactenum}
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para uma
@@ -289,10 +312,10 @@ Procedimentos gerais para um teste de hipótese
 \begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para uma
     amostra}
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{t.test}\hlstd{(dados}\hlopt{$}\hlstd{CL,} \hlkwc{mu} \hlstd{=} \hlnum{30}\hlstd{,} \hlkwc{alternative} \hlstd{=} \hlstr{"two.sided"}\hlstd{,}
-\hlstd{  }       \hlkwc{conf.level} \hlstd{=} \hlnum{0.95}\hlstd{)}
+\hlkwd{t.test}\hlstd{(dados}\hlopt{$}\hlstd{CL,} \hlkwc{mu} \hlstd{=} \hlnum{30}\hlstd{,} \hlkwc{alternative} \hlstd{=} \hlstr{"two.sided"}\hlstd{,}
+       \hlkwc{conf.level} \hlstd{=} \hlnum{0.95}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
 
@@ -309,7 +332,41 @@ mean of x
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
+\end{frame}
 
+\begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para uma
+    amostra}
+  Fazendo manualmente
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{## Dados}
+\hlstd{xbarra} \hlkwb{<-} \hlkwd{mean}\hlstd{(dados}\hlopt{$}\hlstd{CL)}
+\hlstd{mu0} \hlkwb{<-} \hlnum{30}
+\hlstd{dp} \hlkwb{<-} \hlkwd{sd}\hlstd{(dados}\hlopt{$}\hlstd{CL)}
+\hlstd{n} \hlkwb{<-} \hlkwd{nrow}\hlstd{(dados)}
+\hlcom{# t calculado}
+\hlstd{(tcalc} \hlkwb{<-} \hlstd{(xbarra} \hlopt{-} \hlstd{mu0)}\hlopt{/}\hlstd{(dp}\hlopt{/}\hlkwd{sqrt}\hlstd{(n)))}
+\end{alltt}
+\begin{verbatim}
+[1] 3.4627
+\end{verbatim}
+\begin{alltt}
+\hlcom{# t critico (não é apresentado no resultado)}
+\hlkwd{qt}\hlstd{(}\hlnum{0.025}\hlstd{,} \hlkwc{df} \hlstd{= n} \hlopt{-} \hlnum{1}\hlstd{,} \hlkwc{lower.tail} \hlstd{=} \hlnum{FALSE}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+[1] 1.9754
+\end{verbatim}
+\begin{alltt}
+\hlcom{# valor p (multiplicado por 2 pois o teste é bilateral)}
+\hlkwd{pt}\hlstd{(tcalc,} \hlkwc{df} \hlstd{= n} \hlopt{-} \hlnum{1}\hlstd{,} \hlkwc{lower.tail} \hlstd{=} \hlnum{FALSE}\hlstd{)} \hlopt{*} \hlnum{2}
+\end{alltt}
+\begin{verbatim}
+[1] 0.00069135
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para uma
@@ -317,11 +374,11 @@ mean of x
 \textbf{Detalhe:} O teste pode ser armazenado em um objeto para futuras
 referências
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{teste} \hlkwb{<-} \hlkwd{t.test}\hlstd{(dados}\hlopt{$}\hlstd{CL,} \hlkwc{mu} \hlstd{=} \hlnum{30}\hlstd{,} \hlkwc{alternative} \hlstd{=} \hlstr{"two.sided"}\hlstd{,}
-\hlstd{  }                \hlkwc{conf.level} \hlstd{=} \hlnum{0.95}\hlstd{)}
-\hlstd{> }\hlkwd{names}\hlstd{(teste)}
+\hlstd{teste} \hlkwb{<-} \hlkwd{t.test}\hlstd{(dados}\hlopt{$}\hlstd{CL,} \hlkwc{mu} \hlstd{=} \hlnum{30}\hlstd{,} \hlkwc{alternative} \hlstd{=} \hlstr{"two.sided"}\hlstd{,}
+                \hlkwc{conf.level} \hlstd{=} \hlnum{0.95}\hlstd{)}
+\hlkwd{names}\hlstd{(teste)}
 \end{alltt}
 \begin{verbatim}
 [1] "statistic"   "parameter"   "p.value"     "conf.int"   
@@ -329,21 +386,20 @@ referências
 [9] "data.name"  
 \end{verbatim}
 \begin{alltt}
-\hlstd{> }\hlstd{teste}\hlopt{$}\hlstd{statistic}
+\hlstd{teste}\hlopt{$}\hlstd{statistic}
 \end{alltt}
 \begin{verbatim}
      t 
 3.4627 
 \end{verbatim}
 \begin{alltt}
-\hlstd{> }\hlstd{teste}\hlopt{$}\hlstd{p.value}
+\hlstd{teste}\hlopt{$}\hlstd{p.value}
 \end{alltt}
 \begin{verbatim}
 [1] 0.00069135
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
-
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para uma
@@ -362,10 +418,10 @@ referências
 \begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para uma
     amostra}
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{t.test}\hlstd{(dados}\hlopt{$}\hlstd{CL,} \hlkwc{mu} \hlstd{=} \hlnum{30}\hlstd{,} \hlkwc{alternative} \hlstd{=} \hlstr{"greater"}\hlstd{,}
-\hlstd{  }       \hlkwc{conf.level} \hlstd{=} \hlnum{0.95}\hlstd{)}
+\hlkwd{t.test}\hlstd{(dados}\hlopt{$}\hlstd{CL,} \hlkwc{mu} \hlstd{=} \hlnum{30}\hlstd{,} \hlkwc{alternative} \hlstd{=} \hlstr{"greater"}\hlstd{,}
+       \hlkwc{conf.level} \hlstd{=} \hlnum{0.95}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
 
@@ -382,7 +438,6 @@ mean of x
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
-
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para uma
@@ -401,10 +456,10 @@ mean of x
 \begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para uma
     amostra}
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{t.test}\hlstd{(dados}\hlopt{$}\hlstd{CL,} \hlkwc{mu} \hlstd{=} \hlnum{30}\hlstd{,} \hlkwc{alternative} \hlstd{=} \hlstr{"less"}\hlstd{,}
-\hlstd{  }       \hlkwc{conf.level} \hlstd{=} \hlnum{0.95}\hlstd{)}
+\hlkwd{t.test}\hlstd{(dados}\hlopt{$}\hlstd{CL,} \hlkwc{mu} \hlstd{=} \hlnum{30}\hlstd{,} \hlkwc{alternative} \hlstd{=} \hlstr{"less"}\hlstd{,}
+       \hlkwc{conf.level} \hlstd{=} \hlnum{0.95}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
 
@@ -421,33 +476,31 @@ mean of x
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
-
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para duas amostras}
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{require}\hlstd{(lattice)} \hlcom{# pacote para gráficos avançados}
-\hlstd{> }\hlkwd{histogram}\hlstd{(}\hlopt{~}\hlstd{CL} \hlopt{|} \hlstd{especie,} \hlkwc{data} \hlstd{= dados)}
+\hlkwd{require}\hlstd{(lattice)} \hlcom{# pacote para gráficos avançados}
+\hlkwd{histogram}\hlstd{(}\hlopt{~}\hlstd{CL} \hlopt{|} \hlstd{especie,} \hlkwc{data} \hlstd{= dados)}
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=.6\textwidth]{figure/unnamed-chunk-8} 
+{\centering \includegraphics[width=.6\textwidth]{figure/unnamed-chunk-10-1} 
 
 }
 
 
 
 \end{knitrout}
-
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para duas amostras}
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{with}\hlstd{(dados,} \hlkwd{tapply}\hlstd{(CL, especie, summary))}
+\hlkwd{with}\hlstd{(dados,} \hlkwd{tapply}\hlstd{(CL, especie, summary))}
 \end{alltt}
 \begin{verbatim}
 $azul
@@ -460,7 +513,6 @@ $laranja
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
-
 Existem evidências de que uma espécie é maior do que a outra?
 \end{frame}
 
@@ -479,10 +531,10 @@ Existem evidências de que uma espécie é maior do que a outra?
 
 \begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para duas amostras}
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{t.test}\hlstd{(CL} \hlopt{~} \hlstd{especie,} \hlkwc{data} \hlstd{= dados,} \hlkwc{mu} \hlstd{=} \hlnum{0}\hlstd{,}
-\hlstd{  }       \hlkwc{alternative} \hlstd{=} \hlstr{"two.sided"}\hlstd{,} \hlkwc{conf.level} \hlstd{=} \hlnum{0.95}\hlstd{)}
+\hlkwd{t.test}\hlstd{(CL} \hlopt{~} \hlstd{especie,} \hlkwc{data} \hlstd{= dados,} \hlkwc{mu} \hlstd{=} \hlnum{0}\hlstd{,}
+       \hlkwc{alternative} \hlstd{=} \hlstr{"two.sided"}\hlstd{,} \hlkwc{conf.level} \hlstd{=} \hlnum{0.95}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
 
@@ -499,7 +551,6 @@ sample estimates:
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
-
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para duas amostras}
@@ -518,10 +569,10 @@ sample estimates:
 
 \begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para duas amostras}
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{t.test}\hlstd{(CL} \hlopt{~} \hlstd{especie,} \hlkwc{data} \hlstd{= dados,} \hlkwc{mu} \hlstd{=} \hlnum{0}\hlstd{,}
-\hlstd{  }       \hlkwc{alternative} \hlstd{=} \hlstr{"greater"}\hlstd{,} \hlkwc{conf.level} \hlstd{=} \hlnum{0.95}\hlstd{)}
+\hlkwd{t.test}\hlstd{(CL} \hlopt{~} \hlstd{especie,} \hlkwc{data} \hlstd{= dados,} \hlkwc{mu} \hlstd{=} \hlnum{0}\hlstd{,}
+       \hlkwc{alternative} \hlstd{=} \hlstr{"greater"}\hlstd{,} \hlkwc{conf.level} \hlstd{=} \hlnum{0.95}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
 
@@ -538,155 +589,230 @@ sample estimates:
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
-
 Como você faria para calcular a diferença observada das médias de CL
 entre as duas espécies?
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Exercícios}
 Com base no objeto \texttt{dados}:
-  \begin{enumerate}
+  \begin{compactenum}[(1)]
   \item Faça um histograma de CW
   \item Com base no histograma, construa uma hipótese para a média de CW
-    \begin{enumerate}
+    \begin{compactenum}[(a)]
     \item Teste a igualdade dessa hipótese
     \item Teste uma desigualdade dessa hipótese
-    \end{enumerate}
+    \end{compactenum}
     Em ambos os casos use um nível de confiança de 90\%, e escreva uma
     frase com a sua conclusão.
   \item Faça um histograma de CW para cada sexo
   \item Com base nesses histogramas, construa uma hipótese para a
     diferença média de CW entre os sexos
-    \begin{enumerate}
+    \begin{compactenum}[(a)]
     \item Teste a igualdade dessa hipótese
     \item Teste uma desigualdade dessa hipótese
-    \end{enumerate}
+    \end{compactenum}
     Em ambos os casos use um nível de confiança de 90\%, e escreva uma
     frase com a sua conclusão.
-  \end{enumerate}
+  \end{compactenum}
 \end{frame}
 
-\section{Correlação e regressão}
+\section{Regressão e correlação}
 
-\begin{frame}[fragile=singleslide]{Correlação e regressão}
-Vamos analisar a correlação que existe entre CL e CW
+\begin{frame}[fragile=singleslide]{Regressão e correlação}
+Vamos analisar a relação que existe entre CL e CW
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{plot}\hlstd{(CW} \hlopt{~} \hlstd{CL,} \hlkwc{data} \hlstd{= dados)}
+\hlkwd{plot}\hlstd{(CW} \hlopt{~} \hlstd{CL,} \hlkwc{data} \hlstd{= dados)}
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=.6\textwidth]{figure/unnamed-chunk-12} 
+{\centering \includegraphics[width=.6\textwidth]{figure/unnamed-chunk-14-1} 
 
 }
 
 
 
 \end{knitrout}
-
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Correlação}
-A correlação entre duas variáveis é simbolizada por $\rho$ (para a
-população) e $r$ (para a amostra), e varia no intervalo $[-1,1]$
-\begin{equation*}
-  r = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}
-  {\sqrt{\sum (x_i - \bar{x})^2 \sum (y_i - \bar{y})^2}}
-\end{equation*}
-\begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}
-
-{\centering \includegraphics[width=.33\textwidth]{figure/unnamed-chunk-131} 
-\includegraphics[width=.33\textwidth]{figure/unnamed-chunk-132} 
-\includegraphics[width=.33\textwidth]{figure/unnamed-chunk-133} 
-
-}
-
-
-
-\end{knitrout}
-
-Portanto, um \textbf{teste de correlação} tem as seguintes hipóteses
-\begin{align*}
-  H_0: \rho = 0 \\
-  H_1: \rho \neq 0
-\end{align*}
+\begin{frame}[fragile]{Regressão e correlação}
+  Um \textbf{modelo linear} entre duas variáveis $X$ e $Y$, é definido
+  matematicamente como uma equação com dois parâmetros desconhecidos,
+  \begin{equation*}
+    Y = \beta_0 + \beta_1 X
+  \end{equation*}
+  A \textbf{análise de regressão} é a técnica estatística que analisa as
+  relações existentes entre uma única variável \textbf{dependente}, e
+  uma ou mais variáveis \textbf{independentes} \\~\\
+  O objetivo é estudar as relações entre as variáveis, a partir de um
+  \textbf{modelo matemático}, permitindo \textbf{estimar} o valor de uma
+  variável a partir da outra
+  \begin{itemize}
+  \item Exemplo: sabendo a altura podemos determinar o peso de uma
+    pessoa, se conhecemos os parâmetros do modelo anterior
+  \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Correlação}
-Teste de correlação entre CL e CW
-\begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlstd{> }\hlkwd{cor}\hlstd{(dados}\hlopt{$}\hlstd{CL, dados}\hlopt{$}\hlstd{CW)}
-\end{alltt}
-\begin{verbatim}
-[1] 0.9952
-\end{verbatim}
-\begin{alltt}
-\hlstd{> }\hlkwd{cor.test}\hlstd{(dados}\hlopt{$}\hlstd{CL, dados}\hlopt{$}\hlstd{CW)}
-\end{alltt}
-\begin{verbatim}
-
-	Pearson's product-moment correlation
-
-data:  dados$CL and dados$CW
-t = 126.17, df = 154, p-value < 2.2e-16
-alternative hypothesis: true correlation is not equal to 0
-95 percent confidence interval:
- 0.99341 0.99650
-sample estimates:
-   cor 
-0.9952 
-\end{verbatim}
-\end{kframe}
-\end{knitrout}
-
+\begin{frame}[fragile]{Regressão linear}
+  O problema da análise de regressão consiste em definir a
+  \textbf{forma} de relação existente entre as variáveis. \\~\\
+  Por exemplo, podemos ter as seguintes relações
+  \begin{align*}
+    Y &= \beta_0 + \beta_1 X &\qquad \text{linear} \\
+    Y &= \beta_0 X^{\beta_1} &\qquad \text{potência} \\
+    Y &= \beta_0 e^{\beta_1 X} &\qquad \text{exponencial} \\
+    Y &= \beta_0 + \beta_1 X + \beta_2 X^2 &\qquad \text{polinomial} \\
+  \end{align*}
+  Em todos os casos, a variável \textbf{dependente} é $Y$, aquela que
+  será \textbf{predita} a partir da relação e da variável
+  \textbf{independente} $X$
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Regressão}
-O modelo linear é definido por:
-\begin{equation*}
-  y_i = \beta_0 + \beta_1 x_{i} + \epsilon_i
-\end{equation*}
-onde
-\begin{itemize}
-\item $y$ é a variável resposta
-\item $x$ é a variável explicativa
-\item $\beta_0$ é o intercepto da reta (valor de $y$ quando $x = 0$)
-\item $\beta_1$ é a inclinação da reta (\textbf{efeito} de $x$ sobre $y$)
-\item $i = 1, 2, \ldots, n$ observações
-\item $\epsilon \sim N(0, \sigma^2)$
-\end{itemize}
+\subsection{Regressão}
+
+\begin{frame}[fragile]{Regressão linear}
+  Em uma \textbf{análise de regressão linear} consideraremos apenas as
+  variáveis que possuem uma \textbf{relação linear} entre si. \\~\\
+  Uma análise de regressão linear \textbf{múltipla} pode associar $k$
+  variáveis independentes ($X$) para ``explicar'' uma única variável
+  dependente ($Y$),
+  \begin{equation*}
+    Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_k X_k + e
+  \end{equation*}
+  Uma análise de regressão linear \textbf{simples} associa uma única
+  variável independente ($X$) com uma variável dependente ($Y$),
+  \begin{equation*}
+    Y = \beta_0 + \beta_1 X + e
+  \end{equation*}
 \end{frame}
 
-\begin{frame}[fragile=singleslide]{Regressão}
-Os parâmetros $\beta_0$ e $\beta_1$ são estimados pelo \textbf{método dos
-mínimos quadrados}. Os resíduos são
-\begin{equation*}
-  \epsilon_i = y_i - (\beta_0 - \beta_1 x_i)
+\begin{frame}[fragile]{Regressão linear}
+  Assim, dados $n$ pares de valores, $(X_1, Y_1), (X_2, Y_2), \ldots,
+  (X_n, Y_n)$, se for admitido que $Y$ é função linear de $X$, pode-se
+  estabelecer uma regressão linear simples, cujo modelo estatístico é
+  \begin{equation*}
+    Y_i = \beta_0 + \beta_1 X_i + e_i, \quad i = 1, 2, \ldots, n
+  \end{equation*}
+  onde:
+  \begin{itemize}
+  \item $Y$ é a variável \textbf{resposta} (ou \textbf{dependente})
+  \item $X$ é a variável \textbf{explicativa} (ou \textbf{independente})
+  \item $\beta_0$ é o \textbf{intercepto} da reta (valor de $Y$ quando
+    $X = 0$)
+    %% melhorar aqui: beta1 eh tg \alpha, onde \alpha eh o angulo
+    %% ver se eh possivel calcular por trigonometria
+  \item $\beta_1$ é o \textbf{coeficiente angular} da reta
+    (\textbf{efeito} de $X$ sobre $Y$)
+  \item $e_i \sim \text{N}(0, \sigma^2)$ é o \textbf{erro}, ou
+    \textbf{desvio}, ou \textbf{resíduo}
+  \end{itemize}
+  O problema agora consiste em \textbf{estimar} os parâmetros $\beta_0$
+  e $\beta_1$. \\~\\
+\end{frame}
+
+\begin{frame}[fragile]{Regressão linear}
+  \textbf{Interpretação dos parâmetros:} \\~\\
+  $\beta_0$ representa o ponto onde a reta corta o eixo $Y$ (na maioria
+  das vezes não possui interpretação prática) \\~\\
+  $\beta_1$ representa a variabilidade em $Y$ causada pelo aumento de
+  uma unidade em $X$. Além disso,
+  \begin{itemize}
+  \item $\beta_1 > 0$ mostra que com o aumento de $X$, também há um
+    aumento em $Y$
+  \item $\beta_1 = 0$ mostra que \textbf{não há efeito} de $X$ sobre $Y$
+  \item $\beta_1 < 0$ mostra que com a aumento de $X$, há uma diminuição
+    em $Y$
+  \end{itemize}
+  %% tirei pq o beta1 eh muito grande, fica dificil interpretar
+%% <<echo=FALSE, pdfcrop=TRUE, out.width=".7\\textwidth", fig.width=6,fig.height=5>>=
+%% plot(peso ~ alt, xlab = "Altura (cm)", ylab = "Peso (kg)", pch = 19)
+%% abline(m0)
+%% beta0 <- round(coef(m0)[1], 2)
+%% beta1 <- round(coef(m0)[2], 2)
+%% text(x = 1.75, y = 60,
+%%      labels = bquote(hat(Y) == .(beta0) + .(beta1) * X))
+%% @
+\end{frame}
+
+\subsubsection[Estimação]{Estimação dos parâmetros}
+
+\begin{frame}[fragile]{Estimação dos parâmetros}
+  Como através de uma amostra obtemos uma estimativa da verdadeira
+  equação de regressão, denominamos
+  \begin{equation*}
+    \hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_i
+  \end{equation*}
+  ou seja, $\hat{Y}_i$ é o valor \textbf{estimado} de $Y_i$, através
+  das \textbf{estimativas} de $\beta_0$ e $\beta_1$, que chamaremos de
+  $\hat{\beta}_0$ e $\hat{\beta}_1$. \\~\\
+  Para cada valor de $Y_i$, temos um valor $\hat{Y}_i$ estimado pela
+  equação de regressão,
+  \begin{equation*}
+    Y_i = \hat{Y}_i + e_i
+  \end{equation*}
+\end{frame}
+
+\begin{frame}[fragile]{Estimação dos parâmetros}
+  Portanto, o erro (ou desvio) de cada observação em relação ao modelo
+  adotado será
+  \begin{align*}
+    e_i &= Y_i - \hat{Y}_i \\
+    e_i &= Y_i - (\beta_0 + \beta_1 X_i)
+  \end{align*}
+  % lembre qe soh colca o chapeu quando iguala a zero depois
+  Devemos então adotar um modelo cujos parâmetros $\beta_0$ e
+  $\beta_1$, tornem esse diferença a menor possível. \\~\\
+  Isso equivale a \textbf{minimizar} a \textbf{soma de quadrados dos
+  resíduos} ($SQR$), ou do erro,
+  \begin{equation*}
+  SQR = \sum_{i=1}^{n} [Y_i - (\beta_0 + \beta_1 X_i)]^2
 \end{equation*}
-Portanto, a \textbf{soma dos quadrados dos resíduos} (SQR) é
-\begin{equation*}
-  SQR = \sum_{i=1}^{n} (y_i - (\beta_0 - \beta_1 x_i))^2
-\end{equation*}
-Através das derivadas da SQR em relação à $\beta_0$ e $\beta_1$ chega-se
-aos resultados
-\begin{align*}
-  \hat{\beta_1} &= \frac{\sum (y_i - \bar{y}) (x_i - \bar{x})}
-  {\sum (x_i - \bar{x})^2} \\
-  \hat{\beta_0} &= \bar{y} - \hat{\beta_1} \bar{x}
-\end{align*}
+\end{frame}
+
+\begin{frame}[fragile]{Estimação dos parâmetros}
+  O método de minimizar a soma de quadrados dos resíduos é denominado de
+  \textbf{método dos mínimos quadrados}. \\~\\
+  Para se encontrar o ponto mínimo de uma função, temos que obter as
+  derivadas parciais em relação a cada parâmetro,
+  \begin{align*}
+    \frac{\partial SQR}{\partial \beta_0} &= 2 \sum_{i=1}^{n} [Y_i -
+    \beta_0 - \beta_1 X_i] (-1) \\
+    \frac{\partial SQR}{\partial \beta_1} &= 2 \sum_{i=1}^{n} [Y_i -
+    \beta_0 - \beta_1 X_i] (-X_i)
+  \end{align*}
+  e igualar os resultados a zero
+  \begin{equation*}
+    \hat{\beta}_0 = \frac{\partial SQR}{\partial \beta_0} = 0 \qquad
+    \text{e} \qquad
+    \hat{\beta}_1 = \frac{\partial SQR}{\partial \beta_1} = 0
+  \end{equation*}
+\end{frame}
+
+\begin{frame}[fragile]{Estimação dos parâmetros}
+  Dessa forma, chegamos às \textbf{estimativas de mínimos quadrados}
+  para os parâmetros $\beta_0$ e $\beta_1$:
+  \begin{align*}
+    \hat{\beta}_1 &= \frac{\sum_{i=1}^{n} X_iY_i - \frac{\sum_{i=1}^{n}
+        X_i \sum_{i=1}^{n} Y_i}{n}}{\sum_{i=1}^{n}X_i^2 -
+      \frac{(\sum_{i=1}^{n} X_i)^2}{n}} \\
+    & \\
+    \hat{\beta_0} &= \bar{Y} - \hat{\beta}_1 \bar{X}
+  \end{align*}
+  onde
+  \begin{align*}
+    \bar{Y} = \frac{1}{n} \sum_{i=1}^{n} Y_i \qquad \text{e} \qquad
+    \bar{X} = \frac{1}{n} \sum_{i=1}^{n} X_i
+  \end{align*}
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Regressão}
 Ajustando um modelo linear no \R
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{mod} \hlkwb{<-} \hlkwd{lm}\hlstd{(CW} \hlopt{~} \hlstd{CL,} \hlkwc{data} \hlstd{= dados)}
-\hlstd{> }\hlstd{mod}
+\hlstd{mod} \hlkwb{<-} \hlkwd{lm}\hlstd{(CW} \hlopt{~} \hlstd{CL,} \hlkwc{data} \hlstd{= dados)}
+\hlstd{mod}
 \end{alltt}
 \begin{verbatim}
 
@@ -699,14 +825,13 @@ Coefficients:
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
-
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Regressão}{Sumário}
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{summary}\hlstd{(mod)}
+\hlkwd{summary}\hlstd{(mod)}
 \end{alltt}
 \begin{verbatim}
 
@@ -730,57 +855,54 @@ F-statistic: 1.59e+04 on 1 and 154 DF,  p-value: <2e-16
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
-
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Regressão}{Ajuste gráfico}
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{plot}\hlstd{(CW} \hlopt{~} \hlstd{CL,} \hlkwc{data} \hlstd{= dados)}
-\hlstd{> }\hlkwd{abline}\hlstd{(mod)}
-\hlstd{> }\hlkwd{plot}\hlstd{(CW} \hlopt{~} \hlstd{CL,} \hlkwc{data} \hlstd{= dados,} \hlkwc{xlim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{50}\hlstd{),} \hlkwc{ylim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{55}\hlstd{))}
-\hlstd{> }\hlkwd{abline}\hlstd{(mod)}
+\hlkwd{plot}\hlstd{(CW} \hlopt{~} \hlstd{CL,} \hlkwc{data} \hlstd{= dados)}
+\hlkwd{abline}\hlstd{(mod)}
+\hlkwd{plot}\hlstd{(CW} \hlopt{~} \hlstd{CL,} \hlkwc{data} \hlstd{= dados,} \hlkwc{xlim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{50}\hlstd{),} \hlkwc{ylim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{55}\hlstd{))}
+\hlkwd{abline}\hlstd{(mod)}
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=.49\textwidth]{figure/unnamed-chunk-171} 
-\includegraphics[width=.49\textwidth]{figure/unnamed-chunk-172} 
+{\centering \includegraphics[width=.49\textwidth]{figure/unnamed-chunk-17-1} 
+\includegraphics[width=.49\textwidth]{figure/unnamed-chunk-17-2} 
 
 }
 
 
 
 \end{knitrout}
-
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Regressão}{Análise dos resíduos}
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{par}\hlstd{(}\hlkwc{mfrow} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,}\hlnum{2}\hlstd{))}
-\hlstd{> }\hlkwd{plot}\hlstd{(mod)}
-\hlstd{> }\hlkwd{par}\hlstd{(}\hlkwc{mfrow} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{1}\hlstd{))}
+\hlkwd{par}\hlstd{(}\hlkwc{mfrow} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,}\hlnum{2}\hlstd{))}
+\hlkwd{plot}\hlstd{(mod)}
+\hlkwd{par}\hlstd{(}\hlkwc{mfrow} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{1}\hlstd{))}
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=.6\textwidth]{figure/unnamed-chunk-18} 
+{\centering \includegraphics[width=.6\textwidth]{figure/unnamed-chunk-18-1} 
 
 }
 
 
 
 \end{knitrout}
-
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Regressão}
 Acessando os componentes do objeto \texttt{mod}:
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{names}\hlstd{(mod)}
+\hlkwd{names}\hlstd{(mod)}
 \end{alltt}
 \begin{verbatim}
  [1] "coefficients"  "residuals"     "effects"      
@@ -789,7 +911,7 @@ Acessando os componentes do objeto \texttt{mod}:
 [10] "call"          "terms"         "model"        
 \end{verbatim}
 \begin{alltt}
-\hlstd{> }\hlkwd{names}\hlstd{(}\hlkwd{summary}\hlstd{(mod))}
+\hlkwd{names}\hlstd{(}\hlkwd{summary}\hlstd{(mod))}
 \end{alltt}
 \begin{verbatim}
  [1] "call"          "terms"         "residuals"    
@@ -799,21 +921,98 @@ Acessando os componentes do objeto \texttt{mod}:
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
+\end{frame}
 
+\subsection{Correlação}
+
+\begin{frame}[fragile]{Correlação}
+  Até agora o interesse estava em estudar qual a influência de uma
+  V.A. $X$ sobre uma V.A. $Y$, por meio de uma \textbf{relação linear}. \\~\\
+  Assim, em uma análise de regressão é indispensável identificar qual
+  variável é dependente. \\~\\
+  Na \textbf{análise de correlação} isto não é necessário, pois queremos
+  estudar o \textbf{grau de relacionamento} entre as variáveis $X$ e
+  $Y$, ou seja, uma medida de \textbf{covariabilidade} entre elas. \\~\\
+  A correlação é considerada como uma medida de \textbf{influência
+    mútua} entre variáveis, por isso não é necessário especificar quem
+  influencia e quem é influenciado.
+\end{frame}
+
+\begin{frame}[fragile]{Correlação}
+  O \textbf{grau de relação} entre duas variáveis pode ser medido
+  através do \textbf{coeficiente de correlação linear} ($r$), dado por
+  \begin{equation*}
+    r = \frac{\sum_{i=1}^{n} X_iY_i - \frac{\sum_{i=1}^{n}
+        X_i \sum_{i=1}^{n} Y_i}{n}}{\sqrt{\sum_{i=1}^{n}X_i^2 -
+      \frac{(\sum_{i=1}^{n} X_i)^2}{n}} \cdot \sqrt{\sum_{i=1}^{n}Y_i^2 -
+      \frac{(\sum_{i=1}^{n} Y_i)^2}{n}}}
+  \end{equation*}
+  onde
+  \begin{equation*}
+    -1 \leq r \leq 1
+  \end{equation*}
+  Portanto,
+  \begin{itemize}
+  \item $r=1$ correlação \textbf{positiva} perfeita entre as variáveis
+  \item $r=0$ \textbf{não há} correlação entre as variáveis
+  \item $r= -1$ correlação \textbf{negativa} perfeita entre as variáveis
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Correlação}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=.33\textwidth]{figure/unnamed-chunk-20-1} 
+\includegraphics[width=.33\textwidth]{figure/unnamed-chunk-20-2} 
+\includegraphics[width=.33\textwidth]{figure/unnamed-chunk-20-3} 
+
+}
+
+
+
+\end{knitrout}
+\end{frame}
+
+%% Exemplos de que correlacao nao implica em causação
+
+\begin{frame}[fragile]{Correlação}
+  O \textbf{coeficiente de determinação} ($r^2$) é o quadrado do
+  coeficiente de correlação, por consequência
+  \begin{equation*}
+    0 \leq r^2 \leq 1
+  \end{equation*}
+  O $r^2$ nos dá a \textbf{porcentagem de variação em $Y$ que pode ser explicada
+  pela variável independente $X$}. \\~\\
+  Quanto mais próximo de 1, maior é a explicação da variável $Y$ pela
+  variável $X$.
+\end{frame}
+
+\begin{frame}[fragile]{Correlação}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/unnamed-chunk-21-1} 
+
+}
+
+
+
+\end{knitrout}
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Exercícios}
 Com as colunas BD e CL do objeto \texttt{dados}
-\begin{enumerate}
+\begin{compactenum}[(1)]
 \item Faça um gráfico da relação entre estas variáveis
 \item Faça um teste de correlação
 \item Ajuste um modelo linear
-  \begin{enumerate}
+  \begin{compactenum}[(a)]
   \item Veja o sumário
   \item Ajuste a linha do modelo no gráfico
   \item Verifique os resíduos
-  \end{enumerate}
-\end{enumerate}
+  \end{compactenum}
+\end{compactenum}
 Qual sua conclusão?
 \small
 \begin{itemize}
@@ -861,9 +1060,9 @@ Voltando ao exemplo da diferença de CL entre as duas espécies:\\
 $\bar{y}_A = 29.9$ e
 $\bar{y}_L = 34.1$
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{with}\hlstd{(dados,} \hlkwd{tapply}\hlstd{(CL, especie, summary))}
+\hlkwd{with}\hlstd{(dados,} \hlkwd{tapply}\hlstd{(CL, especie, summary))}
 \end{alltt}
 \begin{verbatim}
 $azul
@@ -876,62 +1075,58 @@ $laranja
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
-
 Média geral $\bar{y} = 32$
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{mean}\hlstd{(dados}\hlopt{$}\hlstd{CL)}
+\hlkwd{mean}\hlstd{(dados}\hlopt{$}\hlstd{CL)}
 \end{alltt}
 \begin{verbatim}
 [1] 32.004
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
-
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Análise de Variância}
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{boxplot}\hlstd{(CL} \hlopt{~} \hlstd{especie,} \hlkwc{data} \hlstd{= dados)}
-\hlstd{> }\hlkwd{abline}\hlstd{(}\hlkwc{h} \hlstd{=} \hlkwd{mean}\hlstd{(dados}\hlopt{$}\hlstd{CL),} \hlkwc{lty} \hlstd{=} \hlnum{2}\hlstd{,} \hlkwc{col} \hlstd{=} \hlstr{"red"}\hlstd{,} \hlkwc{lwd} \hlstd{=} \hlnum{2}\hlstd{)}
+\hlkwd{boxplot}\hlstd{(CL} \hlopt{~} \hlstd{especie,} \hlkwc{data} \hlstd{= dados)}
+\hlkwd{abline}\hlstd{(}\hlkwc{h} \hlstd{=} \hlkwd{mean}\hlstd{(dados}\hlopt{$}\hlstd{CL),} \hlkwc{lty} \hlstd{=} \hlnum{2}\hlstd{,} \hlkwc{col} \hlstd{=} \hlstr{"red"}\hlstd{,} \hlkwc{lwd} \hlstd{=} \hlnum{2}\hlstd{)}
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=.6\textwidth]{figure/unnamed-chunk-22} 
+{\centering \includegraphics[width=.6\textwidth]{figure/unnamed-chunk-24-1} 
 
 }
 
 
 
 \end{knitrout}
-
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Análise de Variância}
 Geometricamente
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.7\textwidth]{figure/unnamed-chunk-23} 
+{\centering \includegraphics[width=.7\textwidth]{figure/unnamed-chunk-25-1} 
 
 }
 
 
 
 \end{knitrout}
-
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Análise de Variância}
 Podemos ajustar um modelo linear entre CL e espécie
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{mod} \hlkwb{<-} \hlkwd{lm}\hlstd{(CL} \hlopt{~} \hlstd{especie,} \hlkwc{data} \hlstd{= dados)}
-\hlstd{> }\hlkwd{summary}\hlstd{(mod)}
+\hlstd{mod} \hlkwb{<-} \hlkwd{lm}\hlstd{(CL} \hlopt{~} \hlstd{especie,} \hlkwc{data} \hlstd{= dados)}
+\hlkwd{summary}\hlstd{(mod)}
 \end{alltt}
 \begin{verbatim}
 
@@ -955,32 +1150,30 @@ F-statistic: 14.4 on 1 and 154 DF,  p-value: 0.00021
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
-
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Análise de Variância}
 Ajustando o modelo
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.7\textwidth]{figure/unnamed-chunk-25} 
+{\centering \includegraphics[width=.7\textwidth]{figure/unnamed-chunk-27-1} 
 
 }
 
 
 
 \end{knitrout}
-
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Análise de Variância}
 Você lembra do teste-t feito anteriormente?
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{teste} \hlkwb{<-} \hlkwd{t.test}\hlstd{(CL} \hlopt{~} \hlstd{especie,} \hlkwc{data} \hlstd{= dados,} \hlkwc{mu} \hlstd{=} \hlnum{0}\hlstd{,}
-\hlstd{  }                \hlkwc{alternative} \hlstd{=} \hlstr{"two.sided"}\hlstd{,} \hlkwc{conf.level} \hlstd{=} \hlnum{0.95}\hlstd{)}
-\hlstd{> }\hlstd{teste}
+\hlstd{teste} \hlkwb{<-} \hlkwd{t.test}\hlstd{(CL} \hlopt{~} \hlstd{especie,} \hlkwc{data} \hlstd{= dados,} \hlkwc{mu} \hlstd{=} \hlnum{0}\hlstd{,}
+                \hlkwc{alternative} \hlstd{=} \hlstr{"two.sided"}\hlstd{,} \hlkwc{conf.level} \hlstd{=} \hlnum{0.95}\hlstd{)}
+\hlstd{teste}
 \end{alltt}
 \begin{verbatim}
 
@@ -997,15 +1190,14 @@ sample estimates:
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
-
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Análise de Variância}
 Notou a relação?
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{summary}\hlstd{(mod)}\hlopt{$}\hlstd{coefficients}
+\hlkwd{summary}\hlstd{(mod)}\hlopt{$}\hlstd{coefficients}
 \end{alltt}
 \begin{verbatim}
                Estimate Std. Error t value   Pr(>|t|)
@@ -1013,20 +1205,20 @@ Notou a relação?
 especielaranja    4.216     1.1104  3.7968 2.1042e-04
 \end{verbatim}
 \begin{alltt}
-\hlstd{> }\hlstd{teste}\hlopt{$}\hlstd{p.value}
+\hlstd{teste}\hlopt{$}\hlstd{p.value}
 \end{alltt}
 \begin{verbatim}
 [1] 2.1352e-04
 \end{verbatim}
 \begin{alltt}
-\hlstd{> }\hlstd{teste}\hlopt{$}\hlstd{estimate}
+\hlstd{teste}\hlopt{$}\hlstd{estimate}
 \end{alltt}
 \begin{verbatim}
    mean in group azul mean in group laranja 
                29.869                34.085 
 \end{verbatim}
 \begin{alltt}
-\hlstd{> }\hlkwd{diff}\hlstd{(teste}\hlopt{$}\hlstd{estimate)}
+\hlkwd{diff}\hlstd{(teste}\hlopt{$}\hlstd{estimate)}
 \end{alltt}
 \begin{verbatim}
 mean in group laranja 
@@ -1034,7 +1226,6 @@ mean in group laranja
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
-
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Análise de Variância}
@@ -1044,9 +1235,9 @@ A ANOVA vai testar apenas a hipótese inicial
   &H_1: \mu_A \neq \mu_L
 \end{align*}
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlkwd{anova}\hlstd{(mod)}
+\hlkwd{anova}\hlstd{(mod)}
 \end{alltt}
 \begin{verbatim}
 Analysis of Variance Table
@@ -1060,7 +1251,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
-
 Aqui a única conclusão é de que os $\mu_i$ não são iguais (mas você
 não sabe quanto e nem quais!)
 \end{frame}
@@ -1070,10 +1260,10 @@ Se olharmos apenas o resultado da ANOVA, podemos prosseguir com a
 análise fazendo um teste \textit{a posteriori} para verificarmos quais
 são os grupos que diferem entre si. Um deles é o teste de Tukey
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{mod.anova} \hlkwb{<-} \hlkwd{aov}\hlstd{(CL} \hlopt{~} \hlstd{especie,} \hlkwc{data} \hlstd{= dados)}
-\hlstd{> }\hlkwd{TukeyHSD}\hlstd{(mod.anova)}
+\hlstd{mod.anova} \hlkwb{<-} \hlkwd{aov}\hlstd{(CL} \hlopt{~} \hlstd{especie,} \hlkwc{data} \hlstd{= dados)}
+\hlkwd{TukeyHSD}\hlstd{(mod.anova)}
 \end{alltt}
 \begin{verbatim}
   Tukey multiple comparisons of means
@@ -1087,7 +1277,6 @@ laranja-azul 4.216 2.0224 6.4096 0.00021
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
-
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Análise de Variância}
@@ -1135,14 +1324,14 @@ de regressão, deram o nome de \textbf{Modelos Lineares
 
 \begin{frame}[fragile=singleslide]{Modelos Lineares Generalizados}
 Os MLGs são formados por três componentes:
-\begin{enumerate}
+\begin{compactenum}
 \item \textbf{Componente aleatório}: a variável resposta do modelo, com
   distribuição pertencente à família de distribuições exponencial.
 \item \textbf{Componente sistemático}: as variáveis explicativas, que
   entram na forma de uma estrutura linear.
 \item \textbf{Função de ligação}: função que liga os componentes
   aleatório e sistemático.
-\end{enumerate}
+\end{compactenum}
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Modelos Lineares Generalizados}
@@ -1190,11 +1379,11 @@ Link & \texttt{binomial} & \texttt{poisson} & \texttt{negative} &
 \begin{frame}[fragile=singleslide]{Modelos Lineares Generalizados}
 Para ajustar um MLG usamos a função \texttt{glm()}
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{> }\hlstd{mod.glm} \hlkwb{<-} \hlkwd{glm}\hlstd{(CL} \hlopt{~} \hlstd{especie,} \hlkwc{data} \hlstd{= dados,}
-\hlstd{  }               \hlkwc{family} \hlstd{=} \hlkwd{gaussian}\hlstd{(}\hlkwc{link} \hlstd{=} \hlstr{"identity"}\hlstd{))}
-\hlstd{> }\hlkwd{summary}\hlstd{(mod.glm)}
+\hlstd{mod.glm} \hlkwb{<-} \hlkwd{glm}\hlstd{(CL} \hlopt{~} \hlstd{especie,} \hlkwc{data} \hlstd{= dados,}
+               \hlkwc{family} \hlstd{=} \hlkwd{gaussian}\hlstd{(}\hlkwc{link} \hlstd{=} \hlstr{"identity"}\hlstd{))}
+\hlkwd{summary}\hlstd{(mod.glm)}
 \end{alltt}
 \begin{verbatim}
 
@@ -1223,7 +1412,6 @@ Number of Fisher Scoring iterations: 2
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
-
 \end{frame}
 
 \begin{frame}[fragile=singleslide]{Modelos Lineares Generalizados}
@@ -1233,223 +1421,14 @@ Quando existe mais de uma variável resposta ($y$)? \textbf{Métodos
 
 \begin{frame}[fragile=singleslide]{Exercícios}
 Com o objeto \texttt{dados}
-\begin{enumerate}
+\begin{compactenum}[(1)]
 \item Faça um boxplot de CW por sexo
 \item Faça um teste-t para testar se existe diferença entre as médias de
   CW para machos e fêmeas
 \item Ajuste um modelo linear para testar essa mesma hipótese
 \item Faça uma ANOVA e o teste de Tukey
-\end{enumerate}
+\end{compactenum}
 Qual sua conclusão?
 \end{frame}
-
-
-
-% \section[ANOVA]{Análise de Variância}
-
-% \begin{frame}[fragile=singleslide]{Análise de Variância}
-% Definição: $y_{ij}$ representa a observação $j$ do grupo $i$;
-% $\bar{y}_{i}$ é a média do grupo $i$; $\bar{y}$ é a média geral de todas
-% as observações. As observações podem ser decompostas em
-% \begin{equation*}
-%   y_{ij} = \quad \bar{y} \quad + \quad (\bar{y}_{i} - \bar{y}) \quad + \quad
-%   (y_{ij} - \bar{y}_{i})
-% \end{equation*}
-% que corresponde ao modelo
-% \begin{equation*}
-%   y_{ij} = \quad \mu \quad + \quad \alpha_i \quad + \quad \epsilon_{ij},
-%   \qquad \epsilon_{ij} \sim N(0, \sigma^2)
-% \end{equation*}
-% A hipótese a ser testada de que todos os grupos são iguais (\textit{i.e}
-% médias iguais) implica que todos os $\alpha_{i}$ são zero:
-% \begin{align*}
-%   &H_0: \alpha_1 = \alpha_2 = \cdots = \alpha_n = 0 \\
-%   &H_1: \textsf{pelo menos um}\ \alpha_i\ \textsf{é diferente dos demais}
-% \end{align*}
-% \end{frame}
-
-% \begin{frame}[fragile=singleslide]{Análise de Variância}
-% Voltando ao exemplo da diferença de CL entre as duas espécies
-% <<>>=
-% with(dados, tapply(CL, especie, summary))
-% @
-% \end{frame}
-
-% \begin{frame}[fragile=singleslide]{Análise de Variância}
-% <<out.width=".6\\textwidth">>=
-% boxplot(CL ~ especie, data = dados)
-% @
-% \end{frame}
-
-% \begin{frame}[fragile=singleslide]{Análise de Variância}
-% Podemos ajustar um modelo linear entre CL e espécie
-% <<size="footnotesize">>=
-% mod <- lm(CL ~ especie, data = dados)
-% summary(mod)
-% @
-% \end{frame}
-
-% \begin{frame}[fragile=singleslide]{Análise de Variância}
-% Você lembra do teste-t feito anteriormente?
-% <<size="footnotesize">>=
-% teste <- t.test(CL ~ especie, data = dados, mu = 0,
-%                 alternative = "two.sided", conf.level = 0.95)
-% teste
-% @
-% \end{frame}
-
-% \begin{frame}[fragile=singleslide]{Análise de Variância}
-% Notou a relação?
-% <<size="footnotesize", echo=-c(1,2,7)>>=
-% sci <- getOption("scipen")
-% options(scipen = -1)
-% summary(mod)$coefficients
-% teste$p.value
-% teste$estimate
-% diff(teste$estimate)
-% options(scipen = sci)
-% @
-% \end{frame}
-
-% \begin{frame}[fragile=singleslide]{Análise de Variância}
-% A ANOVA vai testar apenas a hipótese inicial
-% \begin{align*}
-%   &H_0: \alpha_A = \alpha_L = 0 \\
-%   &H_1: \alpha_A \neq \alpha_L \neq 0
-% \end{align*}
-% <<>>=
-% anova(mod)
-% @
-% Aqui a única conclusão é de que os $\alpha_i$ não são iguais (mas você
-% não sabe quanto e nem quais!)
-% \end{frame}
-
-% \begin{frame}[fragile=singleslide]{Exercícios}
-% Com o objeto \texttt{dados}
-% \begin{enumerate}
-% \item Faça um boxplot de CW por sexo
-% \item Faça um teste-t para testar se existe diferença entre as médias de
-%   CW para machos e fêmeas
-% \item Ajuste um modelo linear para testar essa mesma hipótese
-% \item Faça uma ANOVA e tire suas conclusões
-% \end{enumerate}
-% \end{frame}
-
-
-
-% \begin{frame}[fragile=singleslide]{Análise de Variância}
-% Teste de Bartlett (homocedasticidade)
-% \begin{verbatim}
-% > bartlett.test(dados$comp, dados$area)
-
-%         Bartlett test of homogeneity of variances
-
-% data:  dados$comp and dados$area
-% Bartlett's K-squared = 1.5921, df = 2, p-value = 0.4511
-% \end{verbatim}
-% \end{frame}
-
-% \begin{frame}[fragile=singleslide]{Análise de Variância}
-% ANOVA para testar se as médias de comprimento entre as áreas são iguais:
-% \begin{verbatim}
-% > mod.comp <- lm(comp ~ area, data=dados)
-% > tab.anova <- anova(mod.comp)
-% > tab.anova
-% Analysis of Variance Table
-
-% Response: comp
-%            Df Sum Sq Mean Sq F value    Pr(>F)
-% area        2 413.50  206.75  37.647 5.432e-14 ***
-% Residuals 151 829.25    5.49
-% ---
-% Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-% \end{verbatim}
-% \end{frame}
-
-% \begin{frame}[fragile=singleslide]{Análise de Variância}
-% Para acessar os componentes da ANOVA:
-% \begin{verbatim}
-% > names(tab.anova)
-% [1] "Df"      "Sum Sq"  "Mean Sq" "F value" "Pr(>F)"
-% \end{verbatim}
-% Coeficiente de explicação:
-% \begin{verbatim}
-% > tab.anova$"Sum Sq"[1]/sum(tab.anova$"Sum Sq")
-% [1] 0.3327264
-% \end{verbatim}
-% \end{frame}
-
-% \begin{frame}[fragile=singleslide]{Análise de Variância}{ANOVA com dois fatores}
-% ANOVA com os fatores área e profundidade:
-% \begin{verbatim}
-% > mod.comp2 <- lm(comp ~ area + prof, data=dados)
-% > anova(mod.comp2)
-% Analysis of Variance Table
-
-% Response: comp
-%            Df Sum Sq Mean Sq F value    Pr(>F)
-% area        2 413.50  206.75 37.4324 6.497e-14 ***
-% prof        1   0.77    0.77  0.1394    0.7094
-% Residuals 150 828.48    5.52
-% ---
-% Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-% \end{verbatim}
-% \end{frame}
-
-% \begin{frame}[fragile=singleslide]{Análise de Variância}{ANOVA com dois
-%     fatores}
-% Incluindo interação de segunda ordem:
-% \begin{verbatim}
-% > mod.comp2.i <- lm(comp ~ (area + prof)^2, data=dados)
-% > anova(mod.comp2.i)
-% Analysis of Variance Table
-
-% Response: comp
-%            Df Sum Sq Mean Sq F value    Pr(>F)
-% area        2 413.50  206.75 37.8674 5.237e-14 ***
-% prof        1   0.77    0.77  0.1410    0.7078
-% area:prof   2  20.44   10.22  1.8714    0.1575
-% Residuals 148 808.05    5.46
-% ---
-% Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-% \end{verbatim}
-% \end{frame}
-
-% \begin{frame}[fragile=singleslide]{Análise de Variância}{Teste de Tukey}
-% Para realizar o teste \textit{a posteriori} de Tukey, é necessário usar
-% a função \texttt{aov()} para fazer a ANOVA:
-% \begin{verbatim}
-% > mod.comp2.aov <- aov(comp ~ (area + prof)^2, data=dados)
-% > summary(mod.comp2.aov)
-%              Df Sum Sq Mean Sq F value    Pr(>F)
-% area          2 413.50 206.748 37.8674 5.237e-14 ***
-% prof          1   0.77   0.770  0.1410    0.7078
-% area:prof     2  20.44  10.218  1.8714    0.1575
-% Residuals   148 808.05   5.460
-% ---
-% Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-% > TukeyHSD(mod.comp2.aov)
-
-% > par(mfrow = c(2,2))
-% > plot(TukeyHSD(mod.comp2.aov))
-% > par(mfrow = c(1,1))
-% \end{verbatim}
-% \end{frame}
-
-% \begin{frame}[fragile=singleslide,plain]{Análise de Variância}
-% \begin{verbatim}
-% par(mfrow = c(2,2))
-% plot(mod.comp2.aov)
-% par(mfrow = c(1,1))
-% \end{verbatim}
-% \begin{figure}[htp]
-% \centering
-% %\includegraphics[height=0.9\textheight]{res_aov}
-% \end{figure}
-% \end{frame}
-
-
-
 
 \end{document}
