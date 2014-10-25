@@ -2,9 +2,9 @@
 ##
 ## Manipulação de objetos, otimização e gráficos
 ##
-## Software Carpentry - FURG
-## Rio Grande, RS, Brasil
-## 12 e 13 de maio, 2014
+## Congresso Brasileiro de Oceanografia - CBO 2014
+## Itajaí, SC, Brasil
+## 25 de outubro, 2014
 ##
 ##
 ##======================================================================
@@ -15,7 +15,7 @@ install.packages(c("ggplot2", "plyr"), dependencies = TRUE)
 ##----------------------------------------------------------------------
 
 ## Importa a base de dados
-dados <- read.table("Brasil_LL_1998-2004.csv", header = TRUE,
+dados <- read.table("../dados/Brasil_LL_1998-2004.csv", header = TRUE,
                     sep = ";", dec = ",")
 str(dados)
 
