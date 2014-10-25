@@ -114,7 +114,17 @@ dados$LCPUE.BANDOLIM <- log(dados$CPUE.BANDOLIM)
 mean(dados$LCPUE)
 sd(dados$LCPUE)
 var(dados$LCPUE)
-# a função que criamos anteriormente
+
+## Coeficiente de variação
+help.search("coefficient of variation")
+# podemos criar uma função para calcular o CV
+cv <- function(x) {
+    desv.pad <- sd(x)
+    med <- mean(x)
+    cv <- desv.pad/med
+    return(cv)
+}
+# podemos também salvar essa função em um arquivo cv.R e carregar com
 source("cv.R")
 cv(dados$LCPUE)
 quantile(dados$LCPUE)
