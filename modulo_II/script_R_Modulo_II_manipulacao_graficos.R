@@ -2,9 +2,8 @@
 ##
 ## Manipulação de objetos, otimização e gráficos
 ##
-## Congresso Brasileiro de Oceanografia - CBO 2014
-## Itajaí, SC, Brasil
-## 25 de outubro, 2014
+## IMEF/FURG
+## Novembro, 2014
 ##
 ##
 ##======================================================================
