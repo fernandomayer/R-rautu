@@ -147,6 +147,9 @@ with(dados, tapply(LCPUE, FROTA, var))
 with(dados, tapply(LCPUE, list(FROTA, TRIM), mean))
 with(dados, tapply(LCPUE, list(FROTA, TRIM, ANO), mean))
 
+t.test(LCPUE ~ FROTA, data = dados)
+var.test(LCPUE ~ FROTA, data = dados)
+
 ## A função aggregate() agrega valores utilizando uma função, de
 ## acordo com uma lista de fatores especificados
 aggregate(cbind(LCPUE, LCPUE.BRANCA, LCPUE.BANDOLIM) ~ FROTA,
