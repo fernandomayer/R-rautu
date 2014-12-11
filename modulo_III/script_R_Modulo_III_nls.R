@@ -2,10 +2,7 @@
 ##
 ## Modelos não-lineares
 ##
-## Congresso Brasileiro de Oceanografia - CBO 2014
-## Itajaí, SC, Brasil
-## 25 de outubro, 2014
-##
+## IMEF, 2014
 ##
 ##======================================================================
 
