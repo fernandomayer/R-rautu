@@ -996,8 +996,8 @@ médias iguais) implica que todos os $\mu_{i}$ são iguais:
 
 \begin{frame}[fragile=singleslide]{Análise de Variância}
 Voltando ao exemplo da diferença de CL entre as duas espécies:\\
-$\bar{y}_A = \Sexpr{round(mean(dados$CL[dados$especie=="azul"]),1)}$ e
-$\bar{y}_L = \Sexpr{round(mean(dados$CL[dados$especie=="laranja"]),1)}$
+$\bar{y}_A = \Sexpr{round(mean(dados$CL[dados$especie=="azul"]),2)}$ e
+$\bar{y}_L = \Sexpr{round(mean(dados$CL[dados$especie=="laranja"]),2)}$
 <<>>=
 with(dados, tapply(CL, especie, summary))
 @
