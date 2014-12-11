@@ -153,15 +153,15 @@ As distribuições de probabilidade mais comuns são:
 % use packages: array
 \begin{tabular}{lll}
 \hline
-Distribuição & Nome no \R & Parâmetros \\
+Distribuição & Nome no \R      & Parâmetros          \\
 \hline
-Binomial & \texttt{*binom} & \texttt{size, prob} \\
-$\chi^2$ & \texttt{*chisq} & \texttt{df} \\
+Binomial     & \texttt{*binom} & \texttt{size, prob} \\
+$\chi^2$     & \texttt{*chisq} & \texttt{df}         \\
 
-Normal & \texttt{*norm} & \texttt{mean, sd} \\
-Poisson & \texttt{*pois} & \texttt{lambda} \\
-t & \texttt{*t} & \texttt{df} \\
-Uniforme & \texttt{*unif} & \texttt{min, max}\\
+Normal & \texttt{*norm} & \texttt{mean, sd}                  \\
+Poisson                 & \texttt{*pois} & \texttt{lambda}   \\
+t                       & \texttt{*t}    & \texttt{df}       \\
+Uniforme                & \texttt{*unif} & \texttt{min, max} \\
 \hline
 \end{tabular}
 \end{center}
@@ -176,26 +176,26 @@ Alguns exemplos:
 \hlkwd{qnorm}\hlstd{(}\hlnum{0.025}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
-[1] -1.96
+[1] -1.959964
 \end{verbatim}
 \begin{alltt}
 \hlkwd{qnorm}\hlstd{(}\hlnum{0.975}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
-[1] 1.96
+[1] 1.959964
 \end{verbatim}
 \begin{alltt}
 \hlcom{# valores críticos de t com diferentes G.L.}
 \hlkwd{qt}\hlstd{(}\hlnum{0.025}\hlstd{,} \hlkwc{df} \hlstd{=} \hlnum{9}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
-[1] -2.2622
+[1] -2.262157
 \end{verbatim}
 \begin{alltt}
 \hlkwd{qt}\hlstd{(}\hlnum{0.025}\hlstd{,}\hlkwc{df} \hlstd{=} \hlnum{900}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
-[1] -1.9626
+[1] -1.962603
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -218,16 +218,305 @@ pode ser calculado como:
 \hlstd{xbarra} \hlopt{+} \hlstd{erro} \hlopt{*} \hlkwd{qt}\hlstd{(}\hlnum{0.025}\hlstd{,} \hlkwc{df} \hlstd{= n)}
 \end{alltt}
 \begin{verbatim}
-[1] 69.205
+[1] 69.20481
 \end{verbatim}
 \begin{alltt}
 \hlcom{## Média + erro}
 \hlstd{xbarra} \hlopt{+} \hlstd{erro} \hlopt{*} \hlkwd{qt}\hlstd{(}\hlnum{0.975}\hlstd{,} \hlkwc{df} \hlstd{= n)}
 \end{alltt}
 \begin{verbatim}
-[1] 96.795
+[1] 96.79519
 \end{verbatim}
 \end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]{Modelo Bernoulli}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{dbinom}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{0}\hlopt{:}\hlnum{1}\hlstd{,} \hlkwc{size} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{prob} \hlstd{=} \hlnum{.2}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+[1] 0.8 0.2
+\end{verbatim}
+\begin{alltt}
+\hlkwd{dbinom}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{0}\hlopt{:}\hlnum{1}\hlstd{,} \hlkwc{size} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{prob} \hlstd{=} \hlnum{.5}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+[1] 0.5 0.5
+\end{verbatim}
+\begin{alltt}
+\hlkwd{dbinom}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{0}\hlopt{:}\hlnum{1}\hlstd{,} \hlkwc{size} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{prob} \hlstd{=} \hlnum{.7}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+[1] 0.3 0.7
+\end{verbatim}
+\begin{alltt}
+\hlkwd{dbinom}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{0}\hlopt{:}\hlnum{1}\hlstd{,} \hlkwc{size} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{prob} \hlstd{=} \hlnum{.9}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+[1] 0.1 0.9
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]{Modelo Bernoulli}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{par}\hlstd{(}\hlkwc{mfrow}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,}\hlnum{2}\hlstd{))}
+\hlkwd{plot}\hlstd{(}\hlnum{0}\hlopt{:}\hlnum{1}\hlstd{,} \hlkwd{dbinom}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{0}\hlopt{:}\hlnum{1}\hlstd{,} \hlkwc{size} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{prob} \hlstd{=} \hlnum{.2}\hlstd{),} \hlkwc{type} \hlstd{=} \hlstr{"h"}\hlstd{,}
+     \hlkwc{xlab} \hlstd{=} \hlstr{"X"}\hlstd{,} \hlkwc{ylab} \hlstd{=} \hlstr{"P[X = x]"}\hlstd{,} \hlkwc{main} \hlstd{=} \hlstr{"p = 0.2"}\hlstd{,}
+     \hlkwc{ylim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{1}\hlstd{))}
+\hlkwd{plot}\hlstd{(}\hlnum{0}\hlopt{:}\hlnum{1}\hlstd{,} \hlkwd{dbinom}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{0}\hlopt{:}\hlnum{1}\hlstd{,} \hlkwc{size} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{prob} \hlstd{=} \hlnum{.5}\hlstd{),} \hlkwc{type} \hlstd{=} \hlstr{"h"}\hlstd{,}
+     \hlkwc{xlab} \hlstd{=} \hlstr{"X"}\hlstd{,} \hlkwc{ylab} \hlstd{=} \hlstr{"P[X = x]"}\hlstd{,} \hlkwc{main} \hlstd{=} \hlstr{"p = 0.5"}\hlstd{,}
+     \hlkwc{ylim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{1}\hlstd{))}
+\hlkwd{plot}\hlstd{(}\hlnum{0}\hlopt{:}\hlnum{1}\hlstd{,} \hlkwd{dbinom}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{0}\hlopt{:}\hlnum{1}\hlstd{,} \hlkwc{size} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{prob} \hlstd{=} \hlnum{.7}\hlstd{),} \hlkwc{type} \hlstd{=} \hlstr{"h"}\hlstd{,}
+     \hlkwc{xlab} \hlstd{=} \hlstr{"X"}\hlstd{,} \hlkwc{ylab} \hlstd{=} \hlstr{"P[X = x]"}\hlstd{,} \hlkwc{main} \hlstd{=} \hlstr{"p = 0.7"}\hlstd{,}
+     \hlkwc{ylim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{1}\hlstd{))}
+\hlkwd{plot}\hlstd{(}\hlnum{0}\hlopt{:}\hlnum{1}\hlstd{,} \hlkwd{dbinom}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{0}\hlopt{:}\hlnum{1}\hlstd{,} \hlkwc{size} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{prob} \hlstd{=} \hlnum{.9}\hlstd{),} \hlkwc{type} \hlstd{=} \hlstr{"h"}\hlstd{,}
+     \hlkwc{xlab} \hlstd{=} \hlstr{"X"}\hlstd{,} \hlkwc{ylab} \hlstd{=} \hlstr{"P[X = x]"}\hlstd{,} \hlkwc{main} \hlstd{=} \hlstr{"p = 0.9"}\hlstd{,}
+     \hlkwc{ylim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{1}\hlstd{))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]{Modelo Bernoulli}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/unnamed-chunk-5-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]{Modelo binomial}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{dbinom}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{0}\hlopt{:}\hlnum{5}\hlstd{,} \hlkwc{size} \hlstd{=} \hlnum{5}\hlstd{,} \hlkwc{prob} \hlstd{=} \hlnum{.2}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+[1] 0.32768 0.40960 0.20480 0.05120 0.00640 0.00032
+\end{verbatim}
+\begin{alltt}
+\hlkwd{dbinom}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{0}\hlopt{:}\hlnum{5}\hlstd{,} \hlkwc{size} \hlstd{=} \hlnum{5}\hlstd{,} \hlkwc{prob} \hlstd{=} \hlnum{.5}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+[1] 0.03125 0.15625 0.31250 0.31250 0.15625 0.03125
+\end{verbatim}
+\begin{alltt}
+\hlkwd{dbinom}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{0}\hlopt{:}\hlnum{5}\hlstd{,} \hlkwc{size} \hlstd{=} \hlnum{5}\hlstd{,} \hlkwc{prob} \hlstd{=} \hlnum{.7}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+[1] 0.00243 0.02835 0.13230 0.30870 0.36015 0.16807
+\end{verbatim}
+\begin{alltt}
+\hlkwd{dbinom}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{0}\hlopt{:}\hlnum{5}\hlstd{,} \hlkwc{size} \hlstd{=} \hlnum{5}\hlstd{,} \hlkwc{prob} \hlstd{=} \hlnum{.9}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+[1] 0.00001 0.00045 0.00810 0.07290 0.32805 0.59049
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]{Modelo binomial}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{par}\hlstd{(}\hlkwc{mfrow}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,}\hlnum{2}\hlstd{))}
+\hlkwd{plot}\hlstd{(}\hlnum{0}\hlopt{:}\hlnum{10}\hlstd{,} \hlkwd{dbinom}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{0}\hlopt{:}\hlnum{10}\hlstd{,} \hlkwc{size} \hlstd{=} \hlnum{10}\hlstd{,} \hlkwc{prob} \hlstd{=} \hlnum{.2}\hlstd{),} \hlkwc{type} \hlstd{=} \hlstr{"h"}\hlstd{,}
+     \hlkwc{xlab} \hlstd{=} \hlstr{"X"}\hlstd{,} \hlkwc{ylab} \hlstd{=} \hlstr{"P[X = x]"}\hlstd{,} \hlkwc{main} \hlstd{=} \hlstr{"n = 10, p = 0.2"}\hlstd{,}
+     \hlkwc{ylim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{.5}\hlstd{))}
+\hlkwd{plot}\hlstd{(}\hlnum{0}\hlopt{:}\hlnum{10}\hlstd{,} \hlkwd{dbinom}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{0}\hlopt{:}\hlnum{10}\hlstd{,} \hlkwc{size} \hlstd{=} \hlnum{10}\hlstd{,} \hlkwc{prob} \hlstd{=} \hlnum{.5}\hlstd{),} \hlkwc{type} \hlstd{=} \hlstr{"h"}\hlstd{,}
+     \hlkwc{xlab} \hlstd{=} \hlstr{"X"}\hlstd{,} \hlkwc{ylab} \hlstd{=} \hlstr{"P[X = x]"}\hlstd{,} \hlkwc{main} \hlstd{=} \hlstr{"n = 10, p = 0.5"}\hlstd{,}
+     \hlkwc{ylim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{.5}\hlstd{))}
+\hlkwd{plot}\hlstd{(}\hlnum{0}\hlopt{:}\hlnum{10}\hlstd{,} \hlkwd{dbinom}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{0}\hlopt{:}\hlnum{10}\hlstd{,} \hlkwc{size} \hlstd{=} \hlnum{10}\hlstd{,} \hlkwc{prob} \hlstd{=} \hlnum{.7}\hlstd{),} \hlkwc{type} \hlstd{=} \hlstr{"h"}\hlstd{,}
+     \hlkwc{xlab} \hlstd{=} \hlstr{"X"}\hlstd{,} \hlkwc{ylab} \hlstd{=} \hlstr{"P[X = x]"}\hlstd{,} \hlkwc{main} \hlstd{=} \hlstr{"n = 10, p = 0.7"}\hlstd{,}
+     \hlkwc{ylim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{.5}\hlstd{))}
+\hlkwd{plot}\hlstd{(}\hlnum{0}\hlopt{:}\hlnum{10}\hlstd{,} \hlkwd{dbinom}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{0}\hlopt{:}\hlnum{10}\hlstd{,} \hlkwc{size} \hlstd{=} \hlnum{10}\hlstd{,} \hlkwc{prob} \hlstd{=} \hlnum{.9}\hlstd{),} \hlkwc{type} \hlstd{=} \hlstr{"h"}\hlstd{,}
+     \hlkwc{xlab} \hlstd{=} \hlstr{"X"}\hlstd{,} \hlkwc{ylab} \hlstd{=} \hlstr{"P[X = x]"}\hlstd{,} \hlkwc{main} \hlstd{=} \hlstr{"n = 10, p = 0.9"}\hlstd{,}
+     \hlkwc{ylim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{.5}\hlstd{))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]{Modelo binomial}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/unnamed-chunk-8-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]{Modelo Poisson}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{dpois}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{0}\hlopt{:}\hlnum{10}\hlstd{,} \hlkwc{lambda} \hlstd{=} \hlnum{1}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+ [1] 3.678794e-01 3.678794e-01 1.839397e-01 6.131324e-02
+ [5] 1.532831e-02 3.065662e-03 5.109437e-04 7.299195e-05
+ [9] 9.123994e-06 1.013777e-06 1.013777e-07
+\end{verbatim}
+\begin{alltt}
+\hlkwd{dpois}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{0}\hlopt{:}\hlnum{10}\hlstd{,} \hlkwc{lambda} \hlstd{=} \hlnum{5}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+ [1] 0.006737947 0.033689735 0.084224337 0.140373896 0.175467370
+ [6] 0.175467370 0.146222808 0.104444863 0.065278039 0.036265577
+[11] 0.018132789
+\end{verbatim}
+\begin{alltt}
+\hlkwd{dpois}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{0}\hlopt{:}\hlnum{10}\hlstd{,} \hlkwc{lambda} \hlstd{=} \hlnum{10}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+ [1] 4.539993e-05 4.539993e-04 2.269996e-03 7.566655e-03
+ [5] 1.891664e-02 3.783327e-02 6.305546e-02 9.007923e-02
+ [9] 1.125990e-01 1.251100e-01 1.251100e-01
+\end{verbatim}
+\begin{alltt}
+\hlkwd{dpois}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{0}\hlopt{:}\hlnum{10}\hlstd{,} \hlkwc{lambda} \hlstd{=} \hlnum{15}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+ [1] 3.059023e-07 4.588535e-06 3.441401e-05 1.720701e-04
+ [5] 6.452627e-04 1.935788e-03 4.839470e-03 1.037029e-02
+ [9] 1.944430e-02 3.240717e-02 4.861075e-02
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]{Modelo Poisson}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{par}\hlstd{(}\hlkwc{mfrow}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,}\hlnum{2}\hlstd{))}
+\hlkwd{plot}\hlstd{(}\hlnum{0}\hlopt{:}\hlnum{30}\hlstd{,} \hlkwd{dpois}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{0}\hlopt{:}\hlnum{30}\hlstd{,} \hlkwc{lambda} \hlstd{=} \hlnum{1}\hlstd{),} \hlkwc{type} \hlstd{=} \hlstr{"h"}\hlstd{,}
+     \hlkwc{xlab} \hlstd{=} \hlstr{"X"}\hlstd{,} \hlkwc{ylab} \hlstd{=} \hlstr{"P[X = x]"}\hlstd{,} \hlkwc{main} \hlstd{=} \hlkwd{expression}\hlstd{(mu} \hlopt{==} \hlnum{1}\hlstd{),}
+     \hlkwc{ylim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{.4}\hlstd{))}
+\hlkwd{plot}\hlstd{(}\hlnum{0}\hlopt{:}\hlnum{30}\hlstd{,} \hlkwd{dpois}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{0}\hlopt{:}\hlnum{30}\hlstd{,} \hlkwc{lambda} \hlstd{=} \hlnum{5}\hlstd{),} \hlkwc{type} \hlstd{=} \hlstr{"h"}\hlstd{,}
+     \hlkwc{xlab} \hlstd{=} \hlstr{"X"}\hlstd{,} \hlkwc{ylab} \hlstd{=} \hlstr{"P[X = x]"}\hlstd{,} \hlkwc{main} \hlstd{=} \hlkwd{expression}\hlstd{(mu} \hlopt{==} \hlnum{5}\hlstd{),}
+     \hlkwc{ylim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{.4}\hlstd{))}
+\hlkwd{plot}\hlstd{(}\hlnum{0}\hlopt{:}\hlnum{30}\hlstd{,} \hlkwd{dpois}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{0}\hlopt{:}\hlnum{30}\hlstd{,} \hlkwc{lambda} \hlstd{=} \hlnum{10}\hlstd{),} \hlkwc{type} \hlstd{=} \hlstr{"h"}\hlstd{,}
+     \hlkwc{xlab} \hlstd{=} \hlstr{"X"}\hlstd{,} \hlkwc{ylab} \hlstd{=} \hlstr{"P[X = x]"}\hlstd{,} \hlkwc{main} \hlstd{=} \hlkwd{expression}\hlstd{(mu} \hlopt{==} \hlnum{10}\hlstd{),}
+     \hlkwc{ylim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{.4}\hlstd{))}
+\hlkwd{plot}\hlstd{(}\hlnum{0}\hlopt{:}\hlnum{30}\hlstd{,} \hlkwd{dpois}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{0}\hlopt{:}\hlnum{30}\hlstd{,} \hlkwc{lambda} \hlstd{=} \hlnum{15}\hlstd{),} \hlkwc{type} \hlstd{=} \hlstr{"h"}\hlstd{,}
+     \hlkwc{xlab} \hlstd{=} \hlstr{"X"}\hlstd{,} \hlkwc{ylab} \hlstd{=} \hlstr{"P[X = x]"}\hlstd{,} \hlkwc{main} \hlstd{=} \hlkwd{expression}\hlstd{(mu} \hlopt{==} \hlnum{15}\hlstd{),}
+     \hlkwc{ylim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{.4}\hlstd{))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]{Modelo Poisson}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/unnamed-chunk-11-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]{Modelo normal}
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{dnorm}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{40}\hlopt{:}\hlnum{60}\hlstd{,} \hlkwc{mean} \hlstd{=} \hlnum{50}\hlstd{,} \hlkwc{sd} \hlstd{=} \hlnum{5}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+ [1] 0.01079819 0.01579003 0.02218417 0.02994549 0.03883721
+ [6] 0.04839414 0.05793831 0.06664492 0.07365403 0.07820854
+[11] 0.07978846 0.07820854 0.07365403 0.06664492 0.05793831
+[16] 0.04839414 0.03883721 0.02994549 0.02218417 0.01579003
+[21] 0.01079819
+\end{verbatim}
+\begin{alltt}
+\hlkwd{dnorm}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{40}\hlopt{:}\hlnum{60}\hlstd{,} \hlkwc{mean} \hlstd{=} \hlnum{50}\hlstd{,} \hlkwc{sd} \hlstd{=} \hlnum{10}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+ [1] 0.02419707 0.02660852 0.02896916 0.03122539 0.03332246
+ [6] 0.03520653 0.03682701 0.03813878 0.03910427 0.03969525
+[11] 0.03989423 0.03969525 0.03910427 0.03813878 0.03682701
+[16] 0.03520653 0.03332246 0.03122539 0.02896916 0.02660852
+[21] 0.02419707
+\end{verbatim}
+\begin{alltt}
+\hlkwd{dnorm}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{90}\hlopt{:}\hlnum{110}\hlstd{,} \hlkwc{mean} \hlstd{=} \hlnum{100}\hlstd{,} \hlkwc{sd} \hlstd{=} \hlnum{5}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+ [1] 0.01079819 0.01579003 0.02218417 0.02994549 0.03883721
+ [6] 0.04839414 0.05793831 0.06664492 0.07365403 0.07820854
+[11] 0.07978846 0.07820854 0.07365403 0.06664492 0.05793831
+[16] 0.04839414 0.03883721 0.02994549 0.02218417 0.01579003
+[21] 0.01079819
+\end{verbatim}
+\begin{alltt}
+\hlkwd{dnorm}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{190}\hlopt{:}\hlnum{210}\hlstd{,} \hlkwc{mean} \hlstd{=} \hlnum{200}\hlstd{,} \hlkwc{sd} \hlstd{=} \hlnum{5}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+ [1] 0.01079819 0.01579003 0.02218417 0.02994549 0.03883721
+ [6] 0.04839414 0.05793831 0.06664492 0.07365403 0.07820854
+[11] 0.07978846 0.07820854 0.07365403 0.06664492 0.05793831
+[16] 0.04839414 0.03883721 0.02994549 0.02218417 0.01579003
+[21] 0.01079819
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]{Modelo normal}
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{par}\hlstd{(}\hlkwc{mfrow}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,}\hlnum{2}\hlstd{))}
+\hlkwd{plot}\hlstd{(}\hlkwd{seq}\hlstd{(}\hlnum{10}\hlstd{,} \hlnum{90}\hlstd{,} \hlkwc{length}\hlstd{=}\hlnum{100}\hlstd{),} \hlkwc{type} \hlstd{=} \hlstr{"l"}\hlstd{,} \hlkwc{xlab} \hlstd{=} \hlstr{"X"}\hlstd{,} \hlkwc{ylab} \hlstd{=} \hlstr{"f(x)"}\hlstd{,}
+     \hlkwc{y} \hlstd{=} \hlkwd{dnorm}\hlstd{(}\hlkwc{x} \hlstd{=} \hlkwd{seq}\hlstd{(}\hlnum{10}\hlstd{,} \hlnum{90}\hlstd{,} \hlkwc{length}\hlstd{=}\hlnum{100}\hlstd{),} \hlkwc{mean} \hlstd{=} \hlnum{50}\hlstd{,} \hlkwc{sd} \hlstd{=} \hlnum{5}\hlstd{),}
+     \hlkwc{main} \hlstd{=} \hlkwd{expression}\hlstd{(}\hlkwd{list}\hlstd{(mu} \hlopt{==} \hlnum{50}\hlstd{, sigma}\hlopt{^}\hlnum{2} \hlopt{==} \hlnum{25}\hlstd{)))}
+\hlkwd{plot}\hlstd{(}\hlkwd{seq}\hlstd{(}\hlnum{10}\hlstd{,} \hlnum{90}\hlstd{,} \hlkwc{length}\hlstd{=}\hlnum{100}\hlstd{),} \hlkwc{type} \hlstd{=} \hlstr{"l"}\hlstd{,} \hlkwc{xlab} \hlstd{=} \hlstr{"X"}\hlstd{,} \hlkwc{ylab} \hlstd{=} \hlstr{"f(x)"}\hlstd{,}
+     \hlkwc{y} \hlstd{=} \hlkwd{dnorm}\hlstd{(}\hlkwc{x} \hlstd{=} \hlkwd{seq}\hlstd{(}\hlnum{10}\hlstd{,} \hlnum{90}\hlstd{,} \hlkwc{length}\hlstd{=}\hlnum{100}\hlstd{),} \hlkwc{mean} \hlstd{=} \hlnum{50}\hlstd{,} \hlkwc{sd} \hlstd{=} \hlnum{10}\hlstd{),}
+     \hlkwc{main} \hlstd{=} \hlkwd{expression}\hlstd{(}\hlkwd{list}\hlstd{(mu} \hlopt{==} \hlnum{50}\hlstd{, sigma}\hlopt{^}\hlnum{2} \hlopt{==} \hlnum{100}\hlstd{)))}
+\hlkwd{plot}\hlstd{(}\hlkwd{seq}\hlstd{(}\hlnum{70}\hlstd{,} \hlnum{130}\hlstd{,} \hlkwc{length}\hlstd{=}\hlnum{100}\hlstd{),} \hlkwc{type} \hlstd{=} \hlstr{"l"}\hlstd{,} \hlkwc{xlab} \hlstd{=} \hlstr{"X"}\hlstd{,} \hlkwc{ylab} \hlstd{=} \hlstr{"f(x)"}\hlstd{,}
+     \hlkwc{y} \hlstd{=} \hlkwd{dnorm}\hlstd{(}\hlkwc{x} \hlstd{=} \hlkwd{seq}\hlstd{(}\hlnum{70}\hlstd{,} \hlnum{130}\hlstd{,} \hlkwc{length}\hlstd{=}\hlnum{100}\hlstd{),} \hlkwc{mean} \hlstd{=} \hlnum{100}\hlstd{,} \hlkwc{sd} \hlstd{=} \hlnum{5}\hlstd{),}
+     \hlkwc{main} \hlstd{=} \hlkwd{expression}\hlstd{(}\hlkwd{list}\hlstd{(mu} \hlopt{==} \hlnum{100}\hlstd{, sigma}\hlopt{^}\hlnum{2} \hlopt{==} \hlnum{25}\hlstd{)))}
+\hlkwd{plot}\hlstd{(}\hlkwd{seq}\hlstd{(}\hlnum{170}\hlstd{,} \hlnum{230}\hlstd{,} \hlkwc{length}\hlstd{=}\hlnum{100}\hlstd{),} \hlkwc{type} \hlstd{=} \hlstr{"l"}\hlstd{,} \hlkwc{xlab} \hlstd{=} \hlstr{"X"}\hlstd{,} \hlkwc{ylab} \hlstd{=} \hlstr{"f(x)"}\hlstd{,}
+     \hlkwc{y} \hlstd{=} \hlkwd{dnorm}\hlstd{(}\hlkwc{x} \hlstd{=} \hlkwd{seq}\hlstd{(}\hlnum{170}\hlstd{,} \hlnum{230}\hlstd{,} \hlkwc{length}\hlstd{=}\hlnum{100}\hlstd{),} \hlkwc{mean} \hlstd{=} \hlnum{200}\hlstd{,} \hlkwc{sd} \hlstd{=} \hlnum{5}\hlstd{),}
+     \hlkwc{main} \hlstd{=} \hlkwd{expression}\hlstd{(}\hlkwd{list}\hlstd{(mu} \hlopt{==} \hlnum{200}\hlstd{, sigma}\hlopt{^}\hlnum{2} \hlopt{==} \hlnum{25}\hlstd{)))}
+\hlkwd{par}\hlstd{(}\hlkwc{mfrow}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{1}\hlstd{))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]{Modelo normal}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/unnamed-chunk-14-1} 
+
+}
+
+
+
 \end{knitrout}
 \end{frame}
 
@@ -265,7 +554,7 @@ pode ser calculado como:
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=.6\textwidth]{figure/unnamed-chunk-4-1} 
+{\centering \includegraphics[width=.6\textwidth]{figure/unnamed-chunk-16-1} 
 
 }
 
@@ -286,7 +575,7 @@ Procedimentos gerais para um teste de hipótese
   significância $\rightarrow$ $t_{crit}$
 \item Calcula a \textbf{estatística de teste}, sob a hipótese nula
   \begin{equation*}
-    t_{calc} = \frac{\bar{y} - \mu_0}{s/\sqrt{n}}
+    t_{calc} = \frac{\bar{x} - \mu_0}{s/\sqrt{n}}
   \end{equation*}
 \item Rejeitar a hipótese nula se a estatística de teste calculada
   estiver dentro da região de rejeição ($t_{calc} > t_{crit}$)
@@ -326,10 +615,10 @@ data:  dados$CL
 t = 3.4627, df = 155, p-value = 0.0006913
 alternative hypothesis: true mean is not equal to 30
 95 percent confidence interval:
- 30.861 33.147
+ 30.86071 33.14698
 sample estimates:
 mean of x 
-   32.004 
+ 32.00385 
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -350,21 +639,21 @@ mean of x
 \hlstd{(tcalc} \hlkwb{<-} \hlstd{(xbarra} \hlopt{-} \hlstd{mu0)}\hlopt{/}\hlstd{(dp}\hlopt{/}\hlkwd{sqrt}\hlstd{(n)))}
 \end{alltt}
 \begin{verbatim}
-[1] 3.4627
+[1] 3.462731
 \end{verbatim}
 \begin{alltt}
 \hlcom{# t critico (não é apresentado no resultado)}
 \hlkwd{qt}\hlstd{(}\hlnum{0.025}\hlstd{,} \hlkwc{df} \hlstd{= n} \hlopt{-} \hlnum{1}\hlstd{,} \hlkwc{lower.tail} \hlstd{=} \hlnum{FALSE}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
-[1] 1.9754
+[1] 1.975387
 \end{verbatim}
 \begin{alltt}
 \hlcom{# valor p (multiplicado por 2 pois o teste é bilateral)}
 \hlkwd{pt}\hlstd{(tcalc,} \hlkwc{df} \hlstd{= n} \hlopt{-} \hlnum{1}\hlstd{,} \hlkwc{lower.tail} \hlstd{=} \hlnum{FALSE}\hlstd{)} \hlopt{*} \hlnum{2}
 \end{alltt}
 \begin{verbatim}
-[1] 0.00069135
+[1] 0.000691346
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -390,14 +679,14 @@ referências
 \hlstd{teste}\hlopt{$}\hlstd{statistic}
 \end{alltt}
 \begin{verbatim}
-     t 
-3.4627 
+       t 
+3.462731 
 \end{verbatim}
 \begin{alltt}
 \hlstd{teste}\hlopt{$}\hlstd{p.value}
 \end{alltt}
 \begin{verbatim}
-[1] 0.00069135
+[1] 0.000691346
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -406,8 +695,8 @@ referências
 \begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para uma
     amostra}
   \begin{itemize}
-  \item Testar a hipótese de que a média ($\mu$) de CL é menor do que 30
-    mm (com 95\% de confiança)
+  \item Testar a hipótese de que a média ($\mu$) de CL é menor ou igual
+    a 30 mm (com 95\% de confiança)
   \item As hipóteses são
     \begin{align*}
       H_0: \mu \leq 30 \\
@@ -432,10 +721,10 @@ data:  dados$CL
 t = 3.4627, df = 155, p-value = 0.0003457
 alternative hypothesis: true mean is greater than 30
 95 percent confidence interval:
- 31.046    Inf
+ 31.04626      Inf
 sample estimates:
 mean of x 
-   32.004 
+ 32.00385 
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -444,8 +733,8 @@ mean of x
 \begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para uma
     amostra}
   \begin{itemize}
-  \item Testar a hipótese de que a média ($\mu$) de CL é maior do que 30
-    mm (com 95\% de confiança)
+  \item Testar a hipótese de que a média ($\mu$) de CL é maior ou igual
+    a 30 mm (com 95\% de confiança)
   \item As hipóteses são
     \begin{align*}
       H_0: \mu \geq 30 \\
@@ -470,12 +759,40 @@ data:  dados$CL
 t = 3.4627, df = 155, p-value = 0.9997
 alternative hypothesis: true mean is less than 30
 95 percent confidence interval:
-   -Inf 32.961
+     -Inf 32.96143
 sample estimates:
 mean of x 
-   32.004 
+ 32.00385 
 \end{verbatim}
 \end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile]{Testes de hipótese}{Teste-t para duas amostras}
+Faça dois histogramas lado-a-lado da medida CL para cada uma das
+espécies.
+
+\end{frame}
+
+\begin{frame}[fragile]{Testes de hipótese}{Teste-t para duas amostras}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{par}\hlstd{(}\hlkwc{mfrow} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{))}
+\hlkwd{hist}\hlstd{(dados}\hlopt{$}\hlstd{CL[dados}\hlopt{$}\hlstd{especie} \hlopt{==} \hlstr{"azul"}\hlstd{],} \hlkwc{main} \hlstd{=} \hlstr{"Azul"}\hlstd{,}
+     \hlkwc{xlab} \hlstd{=} \hlstr{"CL (mm)"}\hlstd{,} \hlkwc{ylab} \hlstd{=} \hlstr{"Frequência"}\hlstd{,} \hlkwc{xlim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{10}\hlstd{,} \hlnum{50}\hlstd{))}
+\hlkwd{hist}\hlstd{(dados}\hlopt{$}\hlstd{CL[dados}\hlopt{$}\hlstd{especie} \hlopt{==} \hlstr{"laranja"}\hlstd{],} \hlkwc{main} \hlstd{=} \hlstr{"Laranja"}\hlstd{,}
+     \hlkwc{xlab} \hlstd{=} \hlstr{"CL (mm)"}\hlstd{,} \hlkwc{ylab} \hlstd{=} \hlstr{"Frequência"}\hlstd{,} \hlkwc{xlim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{10}\hlstd{,} \hlnum{50}\hlstd{))}
+\hlkwd{par}\hlstd{(}\hlkwc{mfrow} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{1}\hlstd{))}
+\end{alltt}
+\end{kframe}
+
+{\centering \includegraphics[width=.6\textwidth]{figure/unnamed-chunk-23-1} 
+
+}
+
+
+
 \end{knitrout}
 \end{frame}
 
@@ -488,7 +805,7 @@ mean of x
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=.6\textwidth]{figure/unnamed-chunk-10-1} 
+{\centering \includegraphics[width=.6\textwidth]{figure/unnamed-chunk-24-1} 
 
 }
 
@@ -506,11 +823,11 @@ mean of x
 \begin{verbatim}
 $azul
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   14.7    24.6    30.1    29.9    34.5    47.1 
+  14.70   24.60   30.10   29.87   34.50   47.10 
 
 $laranja
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   16.7    29.4    34.5    34.1    39.2    47.6 
+  16.70   29.40   34.50   34.08   39.25   47.60 
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -542,13 +859,13 @@ Existem evidências de que uma espécie é maior do que a outra?
 	Welch Two Sample t-test
 
 data:  CL by especie
-t = -3.7935, df = 152.73, p-value = 0.0002135
+t = -3.7935, df = 152.732, p-value = 0.0002135
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -6.4116 -2.0204
+ -6.411592 -2.020366
 sample estimates:
    mean in group azul mean in group laranja 
-               29.869                34.085 
+             29.86883              34.08481 
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -558,7 +875,7 @@ sample estimates:
   \begin{itemize}
   \item Testar a hipótese de que a \textbf{diferença} entre a média de
     CL da espécie azul ($\mu_A$) e a média de CL da espécie laranja
-    ($\mu_L$) é \textbf{menor} do que 0 (zero) (com 95\% de confiança)
+    ($\mu_L$) é \textbf{menor} ou iual a 0 (zero) (com 95\% de confiança)
   \item Em outras palavras: ``O CL médio é menor para a espécie azul?''
   \item As hipóteses são
     \begin{align*}
@@ -580,13 +897,13 @@ sample estimates:
 	Welch Two Sample t-test
 
 data:  CL by especie
-t = -3.7935, df = 152.73, p-value = 0.9999
+t = -3.7935, df = 152.732, p-value = 0.9999
 alternative hypothesis: true difference in means is greater than 0
 95 percent confidence interval:
- -6.0552     Inf
+ -6.055151       Inf
 sample estimates:
    mean in group azul mean in group laranja 
-               29.869                34.085 
+             29.86883              34.08481 
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -628,7 +945,7 @@ Vamos analisar a relação que existe entre CL e CW
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=.6\textwidth]{figure/unnamed-chunk-14-1} 
+{\centering \includegraphics[width=.6\textwidth]{figure/unnamed-chunk-28-1} 
 
 }
 
@@ -822,7 +1139,7 @@ lm(formula = CW ~ CL, data = dados)
 
 Coefficients:
 (Intercept)           CL  
-       1.19         1.10  
+      1.187        1.097  
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -840,19 +1157,39 @@ Call:
 lm(formula = CW ~ CL, data = dados)
 
 Residuals:
-   Min     1Q Median     3Q    Max 
--1.776 -0.570  0.110  0.463  1.827 
+    Min      1Q  Median      3Q     Max 
+-1.7762 -0.5699  0.1098  0.4629  1.8273 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
-(Intercept)   1.1869     0.2853    4.16  5.3e-05 ***
-CL            1.0975     0.0087  126.17  < 2e-16 ***
+(Intercept) 1.186950   0.285340    4.16 5.28e-05 ***
+CL          1.097451   0.008698  126.17  < 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.783 on 154 degrees of freedom
-Multiple R-squared:  0.99,	Adjusted R-squared:  0.99 
-F-statistic: 1.59e+04 on 1 and 154 DF,  p-value: <2e-16
+Residual standard error: 0.7827 on 154 degrees of freedom
+Multiple R-squared:  0.9904,	Adjusted R-squared:  0.9904 
+F-statistic: 1.592e+04 on 1 and 154 DF,  p-value: < 2.2e-16
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Regressão}{Tabela de Análise de Variância}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{anova}\hlstd{(mod)}
+\end{alltt}
+\begin{verbatim}
+Analysis of Variance Table
+
+Response: CW
+           Df Sum Sq Mean Sq F value    Pr(>F)    
+CL          1 9752.6  9752.6   15919 < 2.2e-16 ***
+Residuals 154   94.3     0.6                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -869,8 +1206,8 @@ F-statistic: 1.59e+04 on 1 and 154 DF,  p-value: <2e-16
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=.49\textwidth]{figure/unnamed-chunk-17-1} 
-\includegraphics[width=.49\textwidth]{figure/unnamed-chunk-17-2} 
+{\centering \includegraphics[width=.49\textwidth]{figure/unnamed-chunk-32-1} 
+\includegraphics[width=.49\textwidth]{figure/unnamed-chunk-32-2} 
 
 }
 
@@ -889,7 +1226,7 @@ F-statistic: 1.59e+04 on 1 and 154 DF,  p-value: <2e-16
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=.6\textwidth]{figure/unnamed-chunk-18-1} 
+{\centering \includegraphics[width=.6\textwidth]{figure/unnamed-chunk-33-1} 
 
 }
 
@@ -919,6 +1256,51 @@ Acessando os componentes do objeto \texttt{mod}:
  [4] "coefficients"  "aliased"       "sigma"        
  [7] "df"            "r.squared"     "adj.r.squared"
 [10] "fstatistic"    "cov.unscaled" 
+\end{verbatim}
+\begin{alltt}
+\hlkwd{names}\hlstd{(}\hlkwd{anova}\hlstd{(mod))}
+\end{alltt}
+\begin{verbatim}
+[1] "Df"      "Sum Sq"  "Mean Sq" "F value" "Pr(>F)" 
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Regressão}
+  Veja que o \texttt{Residual standard error: 0.7827} é o estimador do
+  desvio-padrão residual $\hat{\sigma}^{2}_{e} = \frac{\text{SQRes}}{n-2}$,
+  ou seja,
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{sqrt}\hlstd{(}\hlkwd{anova}\hlstd{(mod)}\hlopt{$}\hlstd{Sum[}\hlnum{2}\hlstd{]}\hlopt{/}\hlkwd{anova}\hlstd{(mod)}\hlopt{$}\hlstd{Df[}\hlnum{2}\hlstd{])}
+\end{alltt}
+\begin{verbatim}
+[1] 0.7827079
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+e que \texttt{F-statistic: 1.592e+04} (15920) é o mesmo valor de
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{anova}\hlstd{(mod)}\hlopt{$}\hlstd{F[}\hlnum{1}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+[1] 15919.11
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+que testa a mesma hipótese da ANOVA. De fato, o valor de $t^2$ para
+$\beta_1$ no sumário do modelo é
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{summary}\hlstd{(mod)}\hlopt{$}\hlstd{coef[}\hlnum{2}\hlstd{,}\hlnum{3}\hlstd{]}\hlopt{^}\hlnum{2}
+\end{alltt}
+\begin{verbatim}
+[1] 15919.11
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -964,9 +1346,9 @@ Acessando os componentes do objeto \texttt{mod}:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.33\textwidth]{figure/unnamed-chunk-20-1} 
-\includegraphics[width=.33\textwidth]{figure/unnamed-chunk-20-2} 
-\includegraphics[width=.33\textwidth]{figure/unnamed-chunk-20-3} 
+{\centering \includegraphics[width=.33\textwidth]{figure/unnamed-chunk-38-1} 
+\includegraphics[width=.33\textwidth]{figure/unnamed-chunk-38-2} 
+\includegraphics[width=.33\textwidth]{figure/unnamed-chunk-38-3} 
 
 }
 
@@ -991,9 +1373,70 @@ Acessando os componentes do objeto \texttt{mod}:
 
 \begin{frame}[fragile]{Correlação}
 \begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
-{\centering \includegraphics[width=\maxwidth]{figure/unnamed-chunk-21-1} 
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error in eval(expr, envir, enclos): cannot open file '/home/fernando/GitHub/R-rautu/modulo\_III/cache/unnamed-chunk-37\_824087cf2446487e126124bd49a5aeb6.rdb': No such file or directory}}
+
+{\ttfamily\noindent\color{warningcolor}{Warning: restarting interrupted promise evaluation}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error in eval(expr, envir, enclos): cannot open file '/home/fernando/GitHub/R-rautu/modulo\_III/cache/unnamed-chunk-37\_824087cf2446487e126124bd49a5aeb6.rdb': No such file or directory}}
+
+{\ttfamily\noindent\color{warningcolor}{Warning: restarting interrupted promise evaluation}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error in eval(expr, envir, enclos): cannot open file '/home/fernando/GitHub/R-rautu/modulo\_III/cache/unnamed-chunk-37\_824087cf2446487e126124bd49a5aeb6.rdb': No such file or directory}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error in do.call(expression, lis): cannot open file '/home/fernando/GitHub/R-rautu/modulo\_III/cache/unnamed-chunk-37\_824087cf2446487e126124bd49a5aeb6.rdb': No such file or directory}}
+
+{\ttfamily\noindent\color{warningcolor}{Warning: restarting interrupted promise evaluation}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error in eval(expr, envir, enclos): cannot open file '/home/fernando/GitHub/R-rautu/modulo\_III/cache/unnamed-chunk-37\_824087cf2446487e126124bd49a5aeb6.rdb': No such file or directory}}
+
+{\ttfamily\noindent\color{warningcolor}{Warning: restarting interrupted promise evaluation}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error in eval(expr, envir, enclos): cannot open file '/home/fernando/GitHub/R-rautu/modulo\_III/cache/unnamed-chunk-37\_824087cf2446487e126124bd49a5aeb6.rdb': No such file or directory}}
+
+{\ttfamily\noindent\color{warningcolor}{Warning: restarting interrupted promise evaluation}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error in eval(expr, envir, enclos): cannot open file '/home/fernando/GitHub/R-rautu/modulo\_III/cache/unnamed-chunk-37\_824087cf2446487e126124bd49a5aeb6.rdb': No such file or directory}}
+
+{\ttfamily\noindent\color{warningcolor}{Warning in do.call(expression, lis): restarting interrupted promise evaluation}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error in do.call(expression, lis): cannot open file '/home/fernando/GitHub/R-rautu/modulo\_III/cache/unnamed-chunk-37\_824087cf2446487e126124bd49a5aeb6.rdb': No such file or directory}}
+
+{\ttfamily\noindent\color{warningcolor}{Warning: restarting interrupted promise evaluation}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error in eval(expr, envir, enclos): cannot open file '/home/fernando/GitHub/R-rautu/modulo\_III/cache/unnamed-chunk-37\_824087cf2446487e126124bd49a5aeb6.rdb': No such file or directory}}
+
+{\ttfamily\noindent\color{warningcolor}{Warning: restarting interrupted promise evaluation}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error in eval(expr, envir, enclos): cannot open file '/home/fernando/GitHub/R-rautu/modulo\_III/cache/unnamed-chunk-37\_824087cf2446487e126124bd49a5aeb6.rdb': No such file or directory}}
+
+{\ttfamily\noindent\color{warningcolor}{Warning: restarting interrupted promise evaluation}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error in eval(expr, envir, enclos): cannot open file '/home/fernando/GitHub/R-rautu/modulo\_III/cache/unnamed-chunk-37\_824087cf2446487e126124bd49a5aeb6.rdb': No such file or directory}}
+
+{\ttfamily\noindent\color{warningcolor}{Warning in do.call(expression, lis): restarting interrupted promise evaluation}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error in do.call(expression, lis): cannot open file '/home/fernando/GitHub/R-rautu/modulo\_III/cache/unnamed-chunk-37\_824087cf2446487e126124bd49a5aeb6.rdb': No such file or directory}}
+
+{\ttfamily\noindent\color{warningcolor}{Warning: restarting interrupted promise evaluation}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error in eval(expr, envir, enclos): cannot open file '/home/fernando/GitHub/R-rautu/modulo\_III/cache/unnamed-chunk-37\_824087cf2446487e126124bd49a5aeb6.rdb': No such file or directory}}
+
+{\ttfamily\noindent\color{warningcolor}{Warning: restarting interrupted promise evaluation}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error in eval(expr, envir, enclos): cannot open file '/home/fernando/GitHub/R-rautu/modulo\_III/cache/unnamed-chunk-37\_824087cf2446487e126124bd49a5aeb6.rdb': No such file or directory}}
+
+{\ttfamily\noindent\color{warningcolor}{Warning: restarting interrupted promise evaluation}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error in eval(expr, envir, enclos): cannot open file '/home/fernando/GitHub/R-rautu/modulo\_III/cache/unnamed-chunk-37\_824087cf2446487e126124bd49a5aeb6.rdb': No such file or directory}}
+
+{\ttfamily\noindent\color{warningcolor}{Warning in do.call(expression, lis): restarting interrupted promise evaluation}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error in do.call(expression, lis): cannot open file '/home/fernando/GitHub/R-rautu/modulo\_III/cache/unnamed-chunk-37\_824087cf2446487e126124bd49a5aeb6.rdb': No such file or directory}}\end{kframe}
+
+{\centering \includegraphics[width=\maxwidth]{figure/unnamed-chunk-39-1} 
 
 }
 
@@ -1068,11 +1511,11 @@ $\bar{y}_L = 34.1$
 \begin{verbatim}
 $azul
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   14.7    24.6    30.1    29.9    34.5    47.1 
+  14.70   24.60   30.10   29.87   34.50   47.10 
 
 $laranja
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   16.7    29.4    34.5    34.1    39.2    47.6 
+  16.70   29.40   34.50   34.08   39.25   47.60 
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -1083,7 +1526,7 @@ Média geral $\bar{y} = 32$
 \hlkwd{mean}\hlstd{(dados}\hlopt{$}\hlstd{CL)}
 \end{alltt}
 \begin{verbatim}
-[1] 32.004
+[1] 32.00385
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -1098,7 +1541,7 @@ Média geral $\bar{y} = 32$
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=.6\textwidth]{figure/unnamed-chunk-24-1} 
+{\centering \includegraphics[width=.6\textwidth]{figure/unnamed-chunk-42-1} 
 
 }
 
@@ -1112,7 +1555,7 @@ Geometricamente
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.7\textwidth]{figure/unnamed-chunk-25-1} 
+{\centering \includegraphics[width=.7\textwidth]{figure/unnamed-chunk-43-1} 
 
 }
 
@@ -1135,19 +1578,19 @@ Call:
 lm(formula = CL ~ especie, data = dados)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--17.385  -5.019   0.273   5.019  17.231 
+     Min       1Q   Median       3Q      Max 
+-17.3848  -5.0188   0.2732   5.0192  17.2312 
 
 Coefficients:
                Estimate Std. Error t value Pr(>|t|)    
-(Intercept)       29.87       0.79    37.8  < 2e-16 ***
-especielaranja     4.22       1.11     3.8  0.00021 ***
+(Intercept)     29.8688     0.7902  37.799  < 2e-16 ***
+especielaranja   4.2160     1.1104   3.797  0.00021 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 6.93 on 154 degrees of freedom
-Multiple R-squared:  0.0856,	Adjusted R-squared:  0.0797 
-F-statistic: 14.4 on 1 and 154 DF,  p-value: 0.00021
+Residual standard error: 6.934 on 154 degrees of freedom
+Multiple R-squared:  0.08559,	Adjusted R-squared:  0.07966 
+F-statistic: 14.42 on 1 and 154 DF,  p-value: 0.0002104
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -1158,7 +1601,7 @@ Ajustando o modelo
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.7\textwidth]{figure/unnamed-chunk-27-1} 
+{\centering \includegraphics[width=.7\textwidth]{figure/unnamed-chunk-45-1} 
 
 }
 
@@ -1181,13 +1624,13 @@ Você lembra do teste-t feito anteriormente?
 	Welch Two Sample t-test
 
 data:  CL by especie
-t = -3.7935, df = 152.73, p-value = 0.0002135
+t = -3.7935, df = 152.732, p-value = 0.0002135
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -6.4116 -2.0204
+ -6.411592 -2.020366
 sample estimates:
    mean in group azul mean in group laranja 
-               29.869                34.085 
+             29.86883              34.08481 
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -1201,29 +1644,29 @@ Notou a relação?
 \hlkwd{summary}\hlstd{(mod)}\hlopt{$}\hlstd{coefficients}
 \end{alltt}
 \begin{verbatim}
-               Estimate Std. Error t value   Pr(>|t|)
-(Intercept)      29.869     0.7902 37.7990 8.1924e-80
-especielaranja    4.216     1.1104  3.7968 2.1042e-04
+                Estimate Std. Error  t value     Pr(>|t|)
+(Intercept)    29.868831  0.7902012 37.79902 8.192364e-80
+especielaranja  4.215979  1.1104178  3.79675 2.104221e-04
 \end{verbatim}
 \begin{alltt}
 \hlstd{teste}\hlopt{$}\hlstd{p.value}
 \end{alltt}
 \begin{verbatim}
-[1] 2.1352e-04
+[1] 2.135202e-04
 \end{verbatim}
 \begin{alltt}
 \hlstd{teste}\hlopt{$}\hlstd{estimate}
 \end{alltt}
 \begin{verbatim}
    mean in group azul mean in group laranja 
-               29.869                34.085 
+             29.86883              34.08481 
 \end{verbatim}
 \begin{alltt}
 \hlkwd{diff}\hlstd{(teste}\hlopt{$}\hlstd{estimate)}
 \end{alltt}
 \begin{verbatim}
 mean in group laranja 
-                4.216 
+             4.215979 
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -1244,9 +1687,9 @@ A ANOVA vai testar apenas a hipótese inicial
 Analysis of Variance Table
 
 Response: CL
-           Df Sum Sq Mean Sq F value  Pr(>F)    
-especie     1    693     693    14.4 0.00021 ***
-Residuals 154   7404      48                    
+           Df Sum Sq Mean Sq F value    Pr(>F)    
+especie     1  693.1  693.09  14.415 0.0002104 ***
+Residuals 154 7404.3   48.08                      
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 \end{verbatim}
@@ -1273,8 +1716,8 @@ são os grupos que diferem entre si. Um deles é o teste de Tukey
 Fit: aov(formula = CL ~ especie, data = dados)
 
 $especie
-              diff    lwr    upr   p adj
-laranja-azul 4.216 2.0224 6.4096 0.00021
+                 diff      lwr      upr     p adj
+laranja-azul 4.215979 2.022362 6.409596 0.0002104
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -1393,21 +1836,21 @@ glm(formula = CL ~ especie, family = gaussian(link = "identity"),
     data = dados)
 
 Deviance Residuals: 
-    Min       1Q   Median       3Q      Max  
--17.385   -5.019    0.273    5.019   17.231  
+     Min        1Q    Median        3Q       Max  
+-17.3848   -5.0188    0.2732    5.0192   17.2312  
 
 Coefficients:
                Estimate Std. Error t value Pr(>|t|)    
-(Intercept)       29.87       0.79    37.8  < 2e-16 ***
-especielaranja     4.22       1.11     3.8  0.00021 ***
+(Intercept)     29.8688     0.7902  37.799  < 2e-16 ***
+especielaranja   4.2160     1.1104   3.797  0.00021 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-(Dispersion parameter for gaussian family taken to be 48.08)
+(Dispersion parameter for gaussian family taken to be 48.08018)
 
     Null deviance: 8097.4  on 155  degrees of freedom
 Residual deviance: 7404.3  on 154  degrees of freedom
-AIC: 1051
+AIC: 1050.9
 
 Number of Fisher Scoring iterations: 2
 \end{verbatim}

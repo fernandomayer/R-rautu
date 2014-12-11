@@ -83,7 +83,7 @@ opts_chunk$set(size = "small",
                fig.height = 5)
 ## thm <- knit_theme$get("beamer3")
 ## knit_theme$set(thm)
-options(width = 65, digits = 5) # continue = "  ")
+options(width = 65, digits = 7, scipen = 0) # continue = "  ")
 ## Use pdfcrop=TRUE nos chunks para reduzir a area do PDF
 knit_hooks$set(pdfcrop = hook_pdfcrop)
 @
@@ -163,6 +163,188 @@ xbarra + erro * qt(0.975, df = n)
 @
 \end{frame}
 
+\begin{frame}[fragile]{Modelo Bernoulli}
+<<>>=
+dbinom(x = 0:1, size = 1, prob = .2)
+dbinom(x = 0:1, size = 1, prob = .5)
+dbinom(x = 0:1, size = 1, prob = .7)
+dbinom(x = 0:1, size = 1, prob = .9)
+@
+\end{frame}
+
+\begin{frame}[fragile]{Modelo Bernoulli}
+<<eval=FALSE, pdfcrop=TRUE>>=
+par(mfrow=c(2,2))
+plot(0:1, dbinom(x = 0:1, size = 1, prob = .2), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "p = 0.2",
+     ylim = c(0,1))
+plot(0:1, dbinom(x = 0:1, size = 1, prob = .5), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "p = 0.5",
+     ylim = c(0,1))
+plot(0:1, dbinom(x = 0:1, size = 1, prob = .7), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "p = 0.7",
+     ylim = c(0,1))
+plot(0:1, dbinom(x = 0:1, size = 1, prob = .9), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "p = 0.9",
+     ylim = c(0,1))
+@
+\end{frame}
+
+\begin{frame}[fragile]{Modelo Bernoulli}
+<<echo=FALSE, pdfcrop=TRUE, fig.width=8, fig.height=6>>=
+par(mfrow=c(2,2))
+plot(0:1, dbinom(x = 0:1, size = 1, prob = .2), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "p = 0.2",
+     ylim = c(0,1))
+plot(0:1, dbinom(x = 0:1, size = 1, prob = .5), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "p = 0.5",
+     ylim = c(0,1))
+plot(0:1, dbinom(x = 0:1, size = 1, prob = .7), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "p = 0.7",
+     ylim = c(0,1))
+plot(0:1, dbinom(x = 0:1, size = 1, prob = .9), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "p = 0.9",
+     ylim = c(0,1))
+@
+\end{frame}
+
+\begin{frame}[fragile]{Modelo binomial}
+<<>>=
+dbinom(x = 0:5, size = 5, prob = .2)
+dbinom(x = 0:5, size = 5, prob = .5)
+dbinom(x = 0:5, size = 5, prob = .7)
+dbinom(x = 0:5, size = 5, prob = .9)
+@
+\end{frame}
+
+\begin{frame}[fragile]{Modelo binomial}
+<<eval=FALSE, pdfcrop=TRUE>>=
+par(mfrow=c(2,2))
+plot(0:10, dbinom(x = 0:10, size = 10, prob = .2), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "n = 10, p = 0.2",
+     ylim = c(0,.5))
+plot(0:10, dbinom(x = 0:10, size = 10, prob = .5), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "n = 10, p = 0.5",
+     ylim = c(0,.5))
+plot(0:10, dbinom(x = 0:10, size = 10, prob = .7), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "n = 10, p = 0.7",
+     ylim = c(0,.5))
+plot(0:10, dbinom(x = 0:10, size = 10, prob = .9), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "n = 10, p = 0.9",
+     ylim = c(0,.5))
+@
+\end{frame}
+
+\begin{frame}[fragile]{Modelo binomial}
+<<echo=FALSE, pdfcrop=TRUE, fig.width=8, fig.height=6>>=
+par(mfrow=c(2,2))
+plot(0:10, dbinom(x = 0:10, size = 10, prob = .2), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "n = 10, p = 0.2",
+     ylim = c(0,.5))
+plot(0:10, dbinom(x = 0:10, size = 10, prob = .5), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "n = 10, p = 0.5",
+     ylim = c(0,.5))
+plot(0:10, dbinom(x = 0:10, size = 10, prob = .7), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "n = 10, p = 0.7",
+     ylim = c(0,.5))
+plot(0:10, dbinom(x = 0:10, size = 10, prob = .9), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "n = 10, p = 0.9",
+     ylim = c(0,.5))
+@
+\end{frame}
+
+\begin{frame}[fragile]{Modelo Poisson}
+<<>>=
+dpois(x = 0:10, lambda = 1)
+dpois(x = 0:10, lambda = 5)
+dpois(x = 0:10, lambda = 10)
+dpois(x = 0:10, lambda = 15)
+@
+\end{frame}
+
+\begin{frame}[fragile]{Modelo Poisson}
+<<eval=FALSE, pdfcrop=TRUE>>=
+par(mfrow=c(2,2))
+plot(0:30, dpois(x = 0:30, lambda = 1), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = expression(mu == 1),
+     ylim = c(0,.4))
+plot(0:30, dpois(x = 0:30, lambda = 5), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = expression(mu == 5),
+     ylim = c(0,.4))
+plot(0:30, dpois(x = 0:30, lambda = 10), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = expression(mu == 10),
+     ylim = c(0,.4))
+plot(0:30, dpois(x = 0:30, lambda = 15), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = expression(mu == 15),
+     ylim = c(0,.4))
+@
+\end{frame}
+
+\begin{frame}[fragile]{Modelo Poisson}
+<<echo=FALSE, pdfcrop=TRUE, fig.width=8, fig.height=6>>=
+par(mfrow=c(2,2))
+plot(0:30, dpois(x = 0:30, lambda = 1), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = expression(mu == 1),
+     ylim = c(0,.4))
+plot(0:30, dpois(x = 0:30, lambda = 5), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = expression(mu == 5),
+     ylim = c(0,.4))
+plot(0:30, dpois(x = 0:30, lambda = 10), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = expression(mu == 10),
+     ylim = c(0,.4))
+plot(0:30, dpois(x = 0:30, lambda = 15), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = expression(mu == 15),
+     ylim = c(0,.4))
+@
+\end{frame}
+
+\begin{frame}[fragile]{Modelo normal}
+<<size="footnotesize">>=
+dnorm(x = 40:60, mean = 50, sd = 5)
+dnorm(x = 40:60, mean = 50, sd = 10)
+dnorm(x = 90:110, mean = 100, sd = 5)
+dnorm(x = 190:210, mean = 200, sd = 5)
+@
+\end{frame}
+
+\begin{frame}[fragile]{Modelo normal}
+<<eval=FALSE, pdfcrop=TRUE, size="footnotesize">>=
+par(mfrow=c(2,2))
+plot(seq(10, 90, length=100), type = "l", xlab = "X", ylab = "f(x)",
+     y = dnorm(x = seq(10, 90, length=100), mean = 50, sd = 5),
+     main = expression(list(mu == 50, sigma^2 == 25)))
+plot(seq(10, 90, length=100), type = "l", xlab = "X", ylab = "f(x)",
+     y = dnorm(x = seq(10, 90, length=100), mean = 50, sd = 10),
+     main = expression(list(mu == 50, sigma^2 == 100)))
+plot(seq(70, 130, length=100), type = "l", xlab = "X", ylab = "f(x)",
+     y = dnorm(x = seq(70, 130, length=100), mean = 100, sd = 5),
+     main = expression(list(mu == 100, sigma^2 == 25)))
+plot(seq(170, 230, length=100), type = "l", xlab = "X", ylab = "f(x)",
+     y = dnorm(x = seq(170, 230, length=100), mean = 200, sd = 5),
+     main = expression(list(mu == 200, sigma^2 == 25)))
+par(mfrow=c(1,1))
+@
+\end{frame}
+
+\begin{frame}[fragile]{Modelo normal}
+<<echo=FALSE, pdfcrop=TRUE, fig.width=8, fig.height=6>>=
+par(mfrow=c(2,2))
+plot(seq(10, 90, length=100), type = "l", xlab = "X", ylab = "f(x)",
+     y = dnorm(x = seq(10, 90, length=100), mean = 50, sd = 5),
+     main = expression(list(mu == 50, sigma^2 == 25)))
+plot(seq(10, 90, length=100), type = "l", xlab = "X", ylab = "f(x)",
+     y = dnorm(x = seq(10, 90, length=100), mean = 50, sd = 10),
+     main = expression(list(mu == 50, sigma^2 == 100)))
+plot(seq(70, 130, length=100), type = "l", xlab = "X", ylab = "f(x)",
+     y = dnorm(x = seq(70, 130, length=100), mean = 100, sd = 5),
+     main = expression(list(mu == 100, sigma^2 == 25)))
+plot(seq(170, 230, length=100), type = "l", xlab = "X", ylab = "f(x)",
+     y = dnorm(x = seq(170, 230, length=100), mean = 200, sd = 5),
+     main = expression(list(mu == 200, sigma^2 == 25)))
+par(mfrow=c(1,1))
+@
+\end{frame}
+
 \section{Inferência}
 
 \begin{frame}[fragile=singleslide]{Base de dados}
@@ -193,7 +375,7 @@ Procedimentos gerais para um teste de hipótese
   significância $\rightarrow$ $t_{crit}$
 \item Calcula a \textbf{estatística de teste}, sob a hipótese nula
   \begin{equation*}
-    t_{calc} = \frac{\bar{y} - \mu_0}{s/\sqrt{n}}
+    t_{calc} = \frac{\bar{x} - \mu_0}{s/\sqrt{n}}
   \end{equation*}
 \item Rejeitar a hipótese nula se a estatística de teste calculada
   estiver dentro da região de rejeição ($t_{calc} > t_{crit}$)
@@ -259,8 +441,8 @@ teste$p.value
 \begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para uma
     amostra}
   \begin{itemize}
-  \item Testar a hipótese de que a média ($\mu$) de CL é menor do que 30
-    mm (com 95\% de confiança)
+  \item Testar a hipótese de que a média ($\mu$) de CL é menor ou igual
+    a 30 mm (com 95\% de confiança)
   \item As hipóteses são
     \begin{align*}
       H_0: \mu \leq 30 \\
@@ -280,8 +462,8 @@ t.test(dados$CL, mu = 30, alternative = "greater",
 \begin{frame}[fragile=singleslide]{Testes de hipótese}{Teste-t para uma
     amostra}
   \begin{itemize}
-  \item Testar a hipótese de que a média ($\mu$) de CL é maior do que 30
-    mm (com 95\% de confiança)
+  \item Testar a hipótese de que a média ($\mu$) de CL é maior ou igual
+    a 30 mm (com 95\% de confiança)
   \item As hipóteses são
     \begin{align*}
       H_0: \mu \geq 30 \\
@@ -295,6 +477,30 @@ t.test(dados$CL, mu = 30, alternative = "greater",
 <<>>=
 t.test(dados$CL, mu = 30, alternative = "less",
        conf.level = 0.95)
+@
+\end{frame}
+
+\begin{frame}[fragile]{Testes de hipótese}{Teste-t para duas amostras}
+Faça dois histogramas lado-a-lado da medida CL para cada uma das
+espécies.
+<<eval=FALSE, echo=FALSE, out.width=".6\\textwidth">>=
+par(mfrow = c(1,2))
+hist(dados$CL[dados$especie == "azul"], main = "Azul",
+     xlab = "CL (mm)", ylab = "Frequência", xlim = c(10, 50))
+hist(dados$CL[dados$especie == "laranja"], main = "Laranja",
+     xlab = "CL (mm)", ylab = "Frequência", xlim = c(10, 50))
+par(mfrow = c(1,1))
+@
+\end{frame}
+
+\begin{frame}[fragile]{Testes de hipótese}{Teste-t para duas amostras}
+<<out.width=".6\\textwidth", fig.width=6, fig.height=5, fig.show="hold">>=
+par(mfrow = c(1,2))
+hist(dados$CL[dados$especie == "azul"], main = "Azul",
+     xlab = "CL (mm)", ylab = "Frequência", xlim = c(10, 50))
+hist(dados$CL[dados$especie == "laranja"], main = "Laranja",
+     xlab = "CL (mm)", ylab = "Frequência", xlim = c(10, 50))
+par(mfrow = c(1,1))
 @
 \end{frame}
 
@@ -336,7 +542,7 @@ t.test(CL ~ especie, data = dados, mu = 0,
   \begin{itemize}
   \item Testar a hipótese de que a \textbf{diferença} entre a média de
     CL da espécie azul ($\mu_A$) e a média de CL da espécie laranja
-    ($\mu_L$) é \textbf{menor} do que 0 (zero) (com 95\% de confiança)
+    ($\mu_L$) é \textbf{menor} ou iual a 0 (zero) (com 95\% de confiança)
   \item Em outras palavras: ``O CL médio é menor para a espécie azul?''
   \item As hipóteses são
     \begin{align*}
@@ -571,6 +777,12 @@ summary(mod)
 @
 \end{frame}
 
+\begin{frame}[fragile=singleslide]{Regressão}{Tabela de Análise de Variância}
+<<>>=
+anova(mod)
+@
+\end{frame}
+
 \begin{frame}[fragile=singleslide]{Regressão}{Ajuste gráfico}
 <<out.width=".49\\textwidth", fig.show="hold">>=
 plot(CW ~ CL, data = dados)
@@ -593,6 +805,25 @@ Acessando os componentes do objeto \texttt{mod}:
 <<>>=
 names(mod)
 names(summary(mod))
+names(anova(mod))
+@
+\end{frame}
+
+\begin{frame}[fragile=singleslide]{Regressão}
+  Veja que o \texttt{Residual standard error: 0.7827} é o estimador do
+  desvio-padrão residual $\hat{\sigma}^{2}_{e} = \frac{\text{SQRes}}{n-2}$,
+  ou seja,
+<<>>=
+sqrt(anova(mod)$Sum[2]/anova(mod)$Df[2])
+@
+e que \texttt{F-statistic: 1.592e+04} (15920) é o mesmo valor de
+<<>>=
+anova(mod)$F[1]
+@
+que testa a mesma hipótese da ANOVA. De fato, o valor de $t^2$ para
+$\beta_1$ no sumário do modelo é
+<<>>=
+summary(mod)$coef[2,3]^2
 @
 \end{frame}
 

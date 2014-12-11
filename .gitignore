@@ -33,9 +33,9 @@
 *.tdo
 
 ## R
+cache/
+figure/
 *.Rhistory
 *.RData
 .#*
-cache/
-figure/
 Rplots.pdf
