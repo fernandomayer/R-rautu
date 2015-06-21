@@ -7,9 +7,9 @@ Autores: Fernando Mayer, Rodrigo Sant'Ana
 
 [Módulo I](modulo_I/): fundamentos da linguagem
 
-Módulo II: Análise descritiva gráficos
+[Módulo II](modulo_II/): Análise descritiva gráficos
 
-Módulo III: Probabilidade, inferência e modelagem
+[Módulo III](modulo_III/): Probabilidade, inferência e modelagem
 
 
 > Material em desenvolvimento
