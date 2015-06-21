@@ -5,7 +5,7 @@ Introdução ao uso do R
 
 Autores: Fernando Mayer, Rodrigo Sant'Ana
 
-Módulo I: fundamentos da linguagem
+[Módulo I](modulo_I/): fundamentos da linguagem
 
 Módulo II: Análise descritiva gráficos
 
